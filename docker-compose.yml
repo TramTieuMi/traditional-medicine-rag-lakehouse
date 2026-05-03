@@ -1,0 +1,164 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  de_psql:
+    image: postgres:15.10-alpine
+    container_name: de_psql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  etl_pipeline:
+    build:
+      context: ./etl_pipeline
+      dockerfile: Dockerfile
+    container_name: etl_pipeline
+    hostname: etl_pipeline
+    working_dir: /opt/dagster/app
+    expose:
+      - "4000"
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+      DAGSTER_PG_USERNAME: ${POSTGRES_USER}
+      DAGSTER_PG_PASSWORD: ${POSTGRES_PASSWORD}
+      DAGSTER_PG_DB: ${POSTGRES_DB}
+      DAGSTER_PG_HOSTNAME: de_psql
+    volumes:
+      - ./etl_pipeline/etl_pipeline:/opt/dagster/app/etl_pipeline
+      - ./data:/opt/dagster/app/data
+      - ./dagster_home:/opt/dagster/dagster_home
+    depends_on:
+      - de_psql
+      - minio
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  dagster:
+    build:
+      context: .
+      dockerfile: docker_image/dagster/Dockerfile
+    container_name: dagster
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./dagster_home:/opt/dagster/dagster_home
+      - ./etl_pipeline:/opt/dagster/app/etl_pipeline
+      - ./workspace.yaml:/opt/dagster/app/workspace.yaml
+    environment:
+      DAGSTER_PG_USERNAME: ${POSTGRES_USER}
+      DAGSTER_PG_PASSWORD: ${POSTGRES_PASSWORD}
+      DAGSTER_PG_DB: ${POSTGRES_DB}
+      DAGSTER_PG_HOSTNAME: de_psql
+    depends_on:
+      - de_psql
+      - minio
+      - etl_pipeline
+    networks:
+      - yhct_network
+    command: >
+      sh -c "
+        sleep 20 &&
+        dagster-daemon run &
+        dagit -h 0.0.0.0 -p 3001 -w /opt/dagster/app/workspace.yaml
+      "
+    restart: unless-stopped
+
+  spark-master:
+    build:
+      context: ./docker_image/spark
+      dockerfile: Dockerfile
+    container_name: spark-master
+    hostname: spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    environment:
+      - SPARK_MODE=master
+    volumes:
+      - ./data:/opt/spark/data
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  spark-worker:
+    build:
+      context: ./docker_image/spark
+      dockerfile: Dockerfile
+    container_name: spark-worker
+    hostname: spark-worker
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+    volumes:
+      - ./data:/opt/spark/data
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  chromadb:
+    image: chromadb/chroma:0.5.0
+    container_name: chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  streamlit:
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    container_name: streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      CHROMA_HOST:     chromadb
+      CHROMA_PORT:     "8000"
+      GROQ_API_KEY:    ${GROQ_API_KEY}
+      MINIO_ENDPOINT:  minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    depends_on:
+      - chromadb
+      - minio
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+networks:
+  yhct_network:
+    driver: bridge
+
+volumes:
+  minio_data:
+  pg_data:
+  chroma_data:

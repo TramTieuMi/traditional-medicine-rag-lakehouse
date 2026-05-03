@@ -1,0 +1,9 @@
+2026-04-28 06:18:28 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - LOGS_CAPTURED - Started capturing logs in process (pid: 84).
+2026-04-28 06:18:28 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - bronze__pdf__bronze_pdf_pages - STEP_START - Started execution of step "bronze__pdf__bronze_pdf_pages".
+2026-04-28 06:18:28 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - bronze__pdf__bronze_pdf_pages - Đang xử lý: Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf
+2026-04-28 06:18:30 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - bronze__pdf__bronze_pdf_pages - ✅ Trích xuất 280 trang | doc_id=pdf_15710597ad84
+2026-04-28 06:18:30 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - bronze__pdf__bronze_pdf_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-04-28 06:18:30 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - bronze__pdf__bronze_pdf_pages - [MinIO] ✅ Đã lưu: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (280 rows)
+2026-04-28 06:18:30 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - bronze__pdf__bronze_pdf_pages - ASSET_MATERIALIZATION - Materialized value bronze pdf bronze_pdf_pages.
+2026-04-28 06:18:30 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - bronze__pdf__bronze_pdf_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-04-28 06:18:30 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 84 - bronze__pdf__bronze_pdf_pages - STEP_SUCCESS - Finished execution of step "bronze__pdf__bronze_pdf_pages" in 1.7s.

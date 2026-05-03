@@ -1,0 +1,57 @@
+2026-04-28 06:18:53 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 253 - LOGS_CAPTURED - Started capturing logs in process (pid: 253).
+2026-04-28 06:18:53 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 253 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-04-28 06:18:53 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (411 rows)
+2026-04-28 06:18:53 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 253 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-04-28 06:18:53 +0000 - dagster - DEBUG - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 253 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-04-28 06:18:53 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - gold__embeddings__gold_embeddings - 📥 Nhận 411 chunks để embed
+2026-04-28 06:18:53 +0000 - dagster - INFO - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...
+2026-04-28 06:18:56 +0000 - dagster - ERROR - __ASSET_JOB - 9b9b9c19-aafd-4df9-86c7-8125d7fa6b2b - 253 - gold__embeddings__gold_embeddings - STEP_FAILURE - Execution of step "gold__embeddings__gold_embeddings" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "gold__embeddings__gold_embeddings"::
+
+ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.
+See the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434
+
+Stack Trace:
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/utils.py", line 57, in op_execution_error_boundary
+    yield
+  File "/usr/local/lib/python3.11/site-packages/dagster/_utils/__init__.py", line 394, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 135, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dagster/app/etl_pipeline/assets/gold_embeddings.py", line 37, in gold_embeddings
+    model = SentenceTransformer(EMBED_MODEL)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/SentenceTransformer.py", line 286, in __init__
+    modules = self._load_sbert_model(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/SentenceTransformer.py", line 1475, in _load_sbert_model
+    module = Transformer(model_name_or_path, cache_dir=cache_folder, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/models/Transformer.py", line 53, in __init__
+    self._load_model(model_name_or_path, config, cache_dir, **model_args)
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/models/Transformer.py", line 84, in _load_model
+    self.auto_model = AutoModel.from_pretrained(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/modeling_utils.py", line 5048, in from_pretrained
+    ) = cls._load_pretrained_model(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/modeling_utils.py", line 5316, in _load_pretrained_model
+    load_state_dict(checkpoint_files[0], map_location="meta", weights_only=weights_only).keys()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/modeling_utils.py", line 508, in load_state_dict
+    check_torch_load_is_safe()
+  File "/usr/local/lib/python3.11/site-packages/transformers/utils/import_utils.py", line 1647, in check_torch_load_is_safe
+    raise ValueError(
+

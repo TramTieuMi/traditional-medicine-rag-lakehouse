@@ -1,0 +1,31 @@
+2026-04-28 06:56:00 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - LOGS_CAPTURED - Started capturing logs in process (pid: 253).
+2026-04-28 06:56:00 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-04-28 06:56:00 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (411 rows)
+2026-04-28 06:56:00 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-04-28 06:56:00 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-04-28 06:56:00 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - 📥 Nhận 411 chunks để embed
+2026-04-28 06:56:00 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...
+2026-04-28 06:56:49 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - ✅ Model loaded!
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-04-28 06:56:49 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - ✅ Kết nối ChromaDB OK | collection='yhct_chunks'
+2026-04-28 06:56:49 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - 📊 Đã có 0 chunks trong ChromaDB
+2026-04-28 06:56:49 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - 🔄 Cần embed thêm: 411 chunks
+2026-04-28 06:57:05 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 32/411 chunks embedded
+2026-04-28 06:57:23 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 64/411 chunks embedded
+2026-04-28 06:57:38 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 96/411 chunks embedded
+2026-04-28 06:57:48 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 128/411 chunks embedded
+2026-04-28 06:57:58 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 160/411 chunks embedded
+2026-04-28 06:58:09 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 192/411 chunks embedded
+2026-04-28 06:58:19 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 224/411 chunks embedded
+2026-04-28 06:58:28 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 256/411 chunks embedded
+2026-04-28 06:58:40 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 288/411 chunks embedded
+2026-04-28 06:58:50 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 320/411 chunks embedded
+2026-04-28 06:59:00 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 352/411 chunks embedded
+2026-04-28 06:59:10 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 384/411 chunks embedded
+2026-04-28 06:59:18 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings -    ✓ 411/411 chunks embedded
+2026-04-28 06:59:18 +0000 - dagster - INFO - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - ✅ Hoàn thành! Tổng ChromaDB: 411 vectors
+2026-04-28 06:59:18 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-04-28 06:59:18 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - gold__embeddings__gold_embeddings - Writing file at: /opt/dagster/dagster_home/local_artifact_storage/storage/gold/embeddings/gold_embeddings using PickledObjectFilesystemIOManager...
+2026-04-28 06:59:18 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - ASSET_MATERIALIZATION - Materialized value gold embeddings gold_embeddings.
+2026-04-28 06:59:18 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+2026-04-28 06:59:18 +0000 - dagster - DEBUG - __ASSET_JOB - 569dcaff-f31d-4d0b-8f3f-1058e8bbf2d1 - 253 - gold__embeddings__gold_embeddings - STEP_SUCCESS - Finished execution of step "gold__embeddings__gold_embeddings" in 3m18s.

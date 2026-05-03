@@ -1,0 +1,26 @@
+2026-05-03 09:18:27 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - LOGS_CAPTURED - Started capturing logs in process (pid: 84).
+2026-05-03 09:18:27 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - bronze__pdf__bronze_pdf_pages - STEP_START - Started execution of step "bronze__pdf__bronze_pdf_pages".
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 📂 Tìm thấy 4 file PDF:
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    └─ 8_ BHYHCT.pdf
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    └─ item_0_PDDT YHCT PHCN. 01.pdf
+2026-05-03 09:18:27 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf ...
+2026-05-03 09:18:30 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    ✅ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang | doc_id=pdf_253c696b5105
+2026-05-03 09:18:30 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: 8_ BHYHCT.pdf ...
+2026-05-03 09:18:31 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    ✅ 8_ BHYHCT.pdf: 101 trang | doc_id=pdf_ed2ba9e1737a
+2026-05-03 09:18:31 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf ...
+2026-05-03 09:18:32 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    ✅ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang | doc_id=pdf_ccb7391465ea
+2026-05-03 09:18:32 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: item_0_PDDT YHCT PHCN. 01.pdf ...
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    ✅ item_0_PDDT YHCT PHCN. 01.pdf: 115 trang | doc_id=pdf_8654b681a08d
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - 
+==================================================
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - ✅ TỔNG KẾT BRONZE:
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    Số file PDF: 4
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    Tổng trang:  1373
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages -    Tổng từ:     223,613
+2026-05-03 09:18:33 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - bronze__pdf__bronze_pdf_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-05-03 09:18:33 +0000 - dagster - INFO - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - bronze__pdf__bronze_pdf_pages - [MinIO] ✅ Đã lưu: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (1373 rows)
+2026-05-03 09:18:33 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - bronze__pdf__bronze_pdf_pages - ASSET_MATERIALIZATION - Materialized value bronze pdf bronze_pdf_pages.
+2026-05-03 09:18:33 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - bronze__pdf__bronze_pdf_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-05-03 09:18:33 +0000 - dagster - DEBUG - __ASSET_JOB - 4e167a6f-ad93-4a03-9a87-5c16a6b376db - 84 - bronze__pdf__bronze_pdf_pages - STEP_SUCCESS - Finished execution of step "bronze__pdf__bronze_pdf_pages" in 6.01s.
