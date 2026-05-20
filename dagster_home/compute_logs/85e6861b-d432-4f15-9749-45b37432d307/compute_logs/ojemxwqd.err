@@ -1,0 +1,13 @@
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - LOGS_CAPTURED - Started capturing logs in process (pid: 190).
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - STEP_START - Started execution of step "gold__chunks__gold_yhct_chunks".
+2026-05-19 08:08:44 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - gold__chunks__gold_yhct_chunks - [MinIO] ✅ Đã đọc: s3://yhct-silver/silver/pdf/silver_filtered_pages.parquet (933 rows)
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - LOADED_INPUT - Loaded input "silver_filtered_pages" using input manager "minio_io_manager", from output "result" of step "silver__pdf__silver_filtered_pages"
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - STEP_INPUT - Got input "silver_filtered_pages" of type "DataFrame". (Type check passed).
+2026-05-19 08:08:44 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - gold__chunks__gold_yhct_chunks - 📥 Nhận 933 trang từ Silver
+2026-05-19 08:08:44 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - gold__chunks__gold_yhct_chunks - ✅ Tạo 1348 chunks từ 933 trang
+2026-05-19 08:08:44 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - gold__chunks__gold_yhct_chunks -    Trung bình: 1.4 chunks/trang
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-05-19 08:08:44 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - gold__chunks__gold_yhct_chunks - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (1348 rows)
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - ASSET_MATERIALIZATION - Materialized value gold chunks gold_yhct_chunks.
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-05-19 08:08:44 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 190 - gold__chunks__gold_yhct_chunks - STEP_SUCCESS - Finished execution of step "gold__chunks__gold_yhct_chunks" in 306ms.

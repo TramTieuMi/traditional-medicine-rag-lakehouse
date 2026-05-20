@@ -1,0 +1,32 @@
+2026-05-19 08:08:38 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - LOGS_CAPTURED - Started capturing logs in process (pid: 137).
+2026-05-19 08:08:38 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - STEP_START - Started execution of step "silver__pdf__silver_filtered_pages".
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã đọc: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (1373 rows)
+2026-05-19 08:08:38 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - LOADED_INPUT - Loaded input "bronze_pdf_pages" using input manager "minio_io_manager", from output "result" of step "bronze__pdf__bronze_pdf_pages"
+2026-05-19 08:08:38 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - STEP_INPUT - Got input "bronze_pdf_pages" of type "DataFrame". (Type check passed).
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages - 📥 Nhận 1373 trang từ Bronze
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    └─ 8_ BHYHCT.pdf: 101 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    └─ item_0_PDDT YHCT PHCN. 01.pdf: 115 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages - 
+==================================================
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages - ✅ TỔNG KẾT SILVER:
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    Giữ lại: 933 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    Loại bỏ: 440 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    Lý do loại:
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ too_short: 416 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ stopword:tài liệu tham khảo: 17 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ stopword:mục lục: 3 trang
+2026-05-19 08:08:38 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ stopword:lưu hành nội bộ: 2 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ stopword:chương trình đào tạo: 1 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ stopword:lời nói đầu: 1 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -    Giữ lại theo file:
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 468 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ 8_ BHYHCT.pdf: 93 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 273 trang
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages -       └─ item_0_PDDT YHCT PHCN. 01.pdf: 99 trang
+2026-05-19 08:08:39 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-05-19 08:08:39 +0000 - dagster - INFO - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã lưu: s3://yhct-silver/silver/pdf/silver_filtered_pages.parquet (933 rows)
+2026-05-19 08:08:39 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - ASSET_MATERIALIZATION - Materialized value silver pdf silver_filtered_pages.
+2026-05-19 08:08:39 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-05-19 08:08:39 +0000 - dagster - DEBUG - __ASSET_JOB - 85e6861b-d432-4f15-9749-45b37432d307 - 137 - silver__pdf__silver_filtered_pages - STEP_SUCCESS - Finished execution of step "silver__pdf__silver_filtered_pages" in 513ms.

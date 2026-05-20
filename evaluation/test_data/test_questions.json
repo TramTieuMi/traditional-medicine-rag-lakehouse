@@ -1,0 +1,212 @@
+[
+  {
+    "id": "TH001",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc nào chữa đau dạ dày theo y học cổ truyền?",
+    "expected_keywords": ["dạ dày", "cam thảo", "bạch truật", "bán hạ", "thang"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH002",
+    "category": "tieu_hoa",
+    "question": "Điều trị táo bón bằng thảo dược như thế nào?",
+    "expected_keywords": ["táo bón", "đại hoàng", "nhuận tràng", "thông tiện"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH003",
+    "category": "tieu_hoa",
+    "question": "Phương pháp chữa tiêu chảy trong y học cổ truyền?",
+    "expected_keywords": ["tiêu chảy", "tỳ", "kiện tỳ", "phục linh"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH004",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc điều trị đầy bụng chướng bụng?",
+    "expected_keywords": ["đầy bụng", "chướng bụng", "hậu phác", "mộc hương", "tiêu thực"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH005",
+    "category": "tieu_hoa",
+    "question": "Chữa buồn nôn nôn mửa bằng thuốc đông y?",
+    "expected_keywords": ["nôn", "buồn nôn", "bán hạ", "sinh khương", "hòa vị"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH006",
+    "category": "tieu_hoa",
+    "question": "Điều trị viêm đại tràng mạn theo YHCT?",
+    "expected_keywords": ["đại tràng", "viêm", "tỳ hư", "kiện tỳ", "bổ"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH007",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc trị ợ chua ợ hơi?",
+    "expected_keywords": ["ợ chua", "vị", "hòa vị", "giáng nghịch"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH008",
+    "category": "tieu_hoa",
+    "question": "Chữa đau bụng cơn theo y học cổ truyền?",
+    "expected_keywords": ["đau bụng", "can", "tỳ", "mộc hương", "bạch thược"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "TH009",
+    "category": "tieu_hoa",
+    "question": "Điều trị viêm gan theo y học cổ truyền?",
+    "expected_keywords": ["viêm gan", "can", "thanh can", "nhân trần", "chi tử"],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "TH010",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc chữa xơ gan cổ trướng?",
+    "expected_keywords": ["xơ gan", "cổ trướng", "can", "lợi thủy", "phục linh"],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "DL001",
+    "category": "duoc_lieu",
+    "question": "Cam thảo có công dụng và liều dùng như thế nào?",
+    "expected_keywords": ["cam thảo", "bổ tỳ", "giải độc", "liều", "gram"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL002",
+    "category": "duoc_lieu",
+    "question": "Bạch truật dùng trong những bài thuốc nào?",
+    "expected_keywords": ["bạch truật", "kiện tỳ", "táo thấp", "bài thuốc"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL003",
+    "category": "duoc_lieu",
+    "question": "Phục linh có tác dụng gì trong y học cổ truyền?",
+    "expected_keywords": ["phục linh", "kiện tỳ", "an thần", "lợi thấp"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL004",
+    "category": "duoc_lieu",
+    "question": "Hoàng kỳ có tác dụng bổ khí như thế nào?",
+    "expected_keywords": ["hoàng kỳ", "bổ khí", "thăng dương", "liều dùng"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL005",
+    "category": "duoc_lieu",
+    "question": "Đương quy dùng trong điều trị bệnh gì?",
+    "expected_keywords": ["đương quy", "bổ huyết", "hoạt huyết", "điều kinh"],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "DL006",
+    "category": "duoc_lieu",
+    "question": "Hoàng liên chữa những bệnh nào theo YHCT?",
+    "expected_keywords": ["hoàng liên", "thanh nhiệt", "táo thấp", "giải độc"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL007",
+    "category": "duoc_lieu",
+    "question": "Sài hồ có công dụng sơ can giải uất như thế nào?",
+    "expected_keywords": ["sài hồ", "can", "giải uất", "sơ can"],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "DL008",
+    "category": "duoc_lieu",
+    "question": "Nhân trần dùng chữa vàng da viêm gan?",
+    "expected_keywords": ["nhân trần", "vàng da", "viêm gan", "thanh nhiệt", "lợi thấp"],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "DL009",
+    "category": "duoc_lieu",
+    "question": "Bán hạ chế trị nôn mửa như thế nào?",
+    "expected_keywords": ["bán hạ", "nôn", "hóa đàm", "giáng nghịch"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "DL010",
+    "category": "duoc_lieu",
+    "question": "Sơn tra có tác dụng tiêu thực như thế nào?",
+    "expected_keywords": ["sơn tra", "tiêu thực", "tiêu hóa", "thịt"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT001",
+    "category": "bai_thuoc",
+    "question": "Bài thuốc Tứ Quân Tử thang gồm những vị nào và chỉ định khi nào?",
+    "expected_keywords": ["tứ quân tử", "nhân sâm", "bạch truật", "phục linh", "cam thảo", "tỳ hư"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT002",
+    "category": "bai_thuoc",
+    "question": "Bài thuốc Lục Quân Tử thang điều trị tỳ vị hư như thế nào?",
+    "expected_keywords": ["lục quân tử", "tỳ vị", "hư", "bán hạ", "trần bì"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT003",
+    "category": "bai_thuoc",
+    "question": "Bài Bình Vị tán điều trị đầy bụng thấp trở?",
+    "expected_keywords": ["bình vị", "thương truật", "hậu phác", "trần bì", "thấp"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT004",
+    "category": "bai_thuoc",
+    "question": "Bài Tiêu Dao tán dùng điều trị can khí uất kết?",
+    "expected_keywords": ["tiêu dao", "can", "uất", "sài hồ", "bạch thược", "bạch truật"],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "BT005",
+    "category": "bai_thuoc",
+    "question": "Bài thuốc Bổ Trung Ích Khí thang có thành phần và công dụng gì?",
+    "expected_keywords": ["bổ trung ích khí", "hoàng kỳ", "nhân sâm", "đương quy", "thăng ma"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT006",
+    "category": "bai_thuoc",
+    "question": "Sâm Linh Bạch Truật tán dùng chữa bệnh gì?",
+    "expected_keywords": ["sâm linh bạch truật", "tỳ hư", "tiêu chảy", "ý dĩ", "liên nhục"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT007",
+    "category": "bai_thuoc",
+    "question": "Bài Ngọc Nữ tiễn điều trị vị âm hư như thế nào?",
+    "expected_keywords": ["ngọc nữ", "vị", "âm hư", "sinh địa", "tri mẫu"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT008",
+    "category": "bai_thuoc",
+    "question": "Hoàng Liên Giải Độc thang điều trị nhiệt độc?",
+    "expected_keywords": ["hoàng liên giải độc", "nhiệt độc", "hoàng liên", "hoàng cầm", "hoàng bá"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT009",
+    "category": "bai_thuoc",
+    "question": "Bài thuốc Đại Hoàng Cam Thảo thang trị táo bón?",
+    "expected_keywords": ["đại hoàng", "cam thảo", "táo bón", "thông tiện", "công hạ"],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "BT010",
+    "category": "bai_thuoc",
+    "question": "Bài Nhân Trần Cao thang điều trị hoàng đản thấp nhiệt?",
+    "expected_keywords": ["nhân trần cao", "hoàng đản", "thấp nhiệt", "chi tử", "đại hoàng"],
+    "expected_tang_phu": "can_dom"
+  }
+]

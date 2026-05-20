@@ -1,0 +1,36 @@
+2026-05-19 06:28:18 +0000 - dagster - DEBUG - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - 82 - LOGS_CAPTURED - Started capturing logs in process (pid: 82).
+2026-05-19 06:28:18 +0000 - dagster - DEBUG - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - 82 - gold__evaluation__gold_evaluation - STEP_START - Started execution of step "gold__evaluation__gold_evaluation".
+2026-05-19 06:28:18 +0000 - dagster - DEBUG - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - gold__evaluation__gold_evaluation - Loading file from: /opt/dagster/dagster_home/local_artifact_storage/storage/gold/embeddings/gold_embeddings using PickledObjectFilesystemIOManager...
+2026-05-19 06:28:18 +0000 - dagster - DEBUG - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - 82 - gold__evaluation__gold_evaluation - LOADED_INPUT - Loaded input "gold_embeddings" using input manager "io_manager"
+2026-05-19 06:28:18 +0000 - dagster - DEBUG - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - 82 - gold__evaluation__gold_evaluation - STEP_INPUT - Got input "gold_embeddings" of type "Any". (Type check passed).
+2026-05-19 06:28:18 +0000 - dagster - INFO - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - gold__evaluation__gold_evaluation - 🤖 Loading embedding model: keepitreal/vietnamese-sbert
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-05-19 06:29:20 +0000 - dagster - ERROR - __ASSET_JOB - c7e46b02-0caa-485a-838e-b6a498f55d3c - 82 - gold__evaluation__gold_evaluation - STEP_FAILURE - Execution of step "gold__evaluation__gold_evaluation" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "gold__evaluation__gold_evaluation"::
+
+TypeError: Client.__init__() got an unexpected keyword argument 'proxies'
+
+Stack Trace:
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/utils.py", line 57, in op_execution_error_boundary
+    yield
+  File "/usr/local/lib/python3.11/site-packages/dagster/_utils/__init__.py", line 394, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 135, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dagster/app/etl_pipeline/assets/gold_evaluation.py", line 131, in gold_evaluation
+    groq  = Groq(api_key=GROQ_API_KEY)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/groq/_client.py", line 99, in __init__
+    super().__init__(
+  File "/usr/local/lib/python3.11/site-packages/groq/_base_client.py", line 824, in __init__
+    self._client = http_client or SyncHttpxClientWrapper(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/groq/_base_client.py", line 722, in __init__
+    super().__init__(**kwargs)
+

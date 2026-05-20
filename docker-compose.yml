@@ -1,6 +1,8 @@
-version: '3.8'
-
 services:
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # STORAGE
+  # ───────────────────────────────────────────────────────────────────────────
   minio:
     image: minio/minio:latest
     container_name: minio
@@ -29,7 +31,67 @@ services:
     networks:
       - yhct_network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # MLFLOW
+  # ───────────────────────────────────────────────────────────────────────────
+  mlflow-init-db:
+    image: postgres:15.10-alpine
+    container_name: mlflow_init_db
+    depends_on:
+      de_psql:
+        condition: service_healthy
+    networks:
+      - yhct_network
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    command: >
+      sh -c "
+        psql -h de_psql -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+             -c 'CREATE DATABASE mlflow;' 2>/dev/null || true &&
+        echo 'mlflow DB ready'
+      "
+    restart: "no"
+
+  mlflow:
+    build:
+      context: ./docker_image/mlflow
+      dockerfile: Dockerfile
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      MLFLOW_BACKEND_STORE_URI: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@de_psql:5432/mlflow
+      MLFLOW_DEFAULT_ARTIFACT_ROOT: s3://yhct-mlflow/artifacts
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
+    depends_on:
+      de_psql:
+        condition: service_healthy
+      mlflow-init-db:
+        condition: service_completed_successfully
+      minio:
+        condition: service_started
+    networks:
+      - yhct_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:5000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # ETL PIPELINE — Dagster gRPC server
+  # ───────────────────────────────────────────────────────────────────────────
   etl_pipeline:
     build:
       context: ./etl_pipeline
@@ -45,17 +107,34 @@ services:
       DAGSTER_PG_PASSWORD: ${POSTGRES_PASSWORD}
       DAGSTER_PG_DB: ${POSTGRES_DB}
       DAGSTER_PG_HOSTNAME: de_psql
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      CHROMA_HOST: chromadb
+      CHROMA_PORT: "8000"
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: ${MINIO_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_KEY}
     volumes:
       - ./etl_pipeline/etl_pipeline:/opt/dagster/app/etl_pipeline
       - ./data:/opt/dagster/app/data
       - ./dagster_home:/opt/dagster/dagster_home
+      - ./evaluation:/opt/dagster/app/evaluation
     depends_on:
-      - de_psql
-      - minio
+      de_psql:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      chromadb:
+        condition: service_started
+      mlflow:
+        condition: service_healthy
     networks:
       - yhct_network
     restart: unless-stopped
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # DAGSTER — Webserver + Daemon
+  # ───────────────────────────────────────────────────────────────────────────
   dagster:
     build:
       context: .
@@ -73,19 +152,24 @@ services:
       DAGSTER_PG_DB: ${POSTGRES_DB}
       DAGSTER_PG_HOSTNAME: de_psql
     depends_on:
-      - de_psql
-      - minio
-      - etl_pipeline
+      de_psql:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      etl_pipeline:
+        condition: service_started
     networks:
       - yhct_network
     command: >
       sh -c "
-        sleep 20 &&
         dagster-daemon run &
         dagit -h 0.0.0.0 -p 3001 -w /opt/dagster/app/workspace.yaml
       "
     restart: unless-stopped
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # SPARK
+  # ───────────────────────────────────────────────────────────────────────────
   spark-master:
     build:
       context: ./docker_image/spark
@@ -122,6 +206,9 @@ services:
       - yhct_network
     restart: unless-stopped
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # CHROMADB
+  # ───────────────────────────────────────────────────────────────────────────
   chromadb:
     image: chromadb/chroma:0.5.0
     container_name: chromadb
@@ -133,6 +220,9 @@ services:
       - yhct_network
     restart: unless-stopped
 
+  # ───────────────────────────────────────────────────────────────────────────
+  # STREAMLIT — Chatbot UI
+  # ───────────────────────────────────────────────────────────────────────────
   streamlit:
     build:
       context: ./streamlit_app
@@ -141,10 +231,10 @@ services:
     ports:
       - "8501:8501"
     environment:
-      CHROMA_HOST:     chromadb
-      CHROMA_PORT:     "8000"
-      GROQ_API_KEY:    ${GROQ_API_KEY}
-      MINIO_ENDPOINT:  minio:9000
+      CHROMA_HOST: chromadb
+      CHROMA_PORT: "8000"
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      MINIO_ENDPOINT: minio:9000
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
     depends_on:
@@ -152,6 +242,69 @@ services:
       - minio
     networks:
       - yhct_network
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SUPERSET — Analytics Dashboard
+  # ───────────────────────────────────────────────────────────────────────────
+  superset-db:
+    image: postgres:15-alpine
+    container_name: superset_db
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_USER: superset
+      POSTGRES_PASSWORD: superset
+    volumes:
+      - superset_db_data:/var/lib/postgresql/data
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  superset-init:
+    image: apache/superset:3.1.0
+    container_name: superset_init
+    environment:
+      SUPERSET_SECRET_KEY: "yhct_superset_secret_2024"
+      SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://superset:superset@superset-db:5432/superset"
+    volumes:
+      - superset_home:/app/superset_home
+      - ./superset_config:/app/pythonpath
+    depends_on:
+      - superset-db
+    networks:
+      - yhct_network
+    command: |
+      bash -c "
+        pip install --quiet duckdb==0.10.0 duckdb-engine boto3 pyarrow &&
+        sleep 10 &&
+        superset db upgrade &&
+        superset fab create-admin --username admin --firstname Admin --lastname YHCT --email admin@yhct.com --password admin123 || true &&
+        superset init &&
+        echo 'SUPERSET INIT DONE!'
+      "
+    restart: "no"
+
+  superset:
+    image: apache/superset:3.1.0
+    container_name: superset
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "yhct_superset_secret_2024"
+      SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://superset:superset@superset-db:5432/superset"
+      SUPERSET_WEBSERVER_PORT: "8088"
+    volumes:
+      - superset_home:/app/superset_home
+      - ./superset_config:/app/pythonpath
+    depends_on:
+      - superset-db
+    networks:
+      - yhct_network
+    command: |
+      bash -c "
+        pip install --quiet duckdb==0.10.0 duckdb-engine boto3 pyarrow &&
+        superset run -h 0.0.0.0 -p 8088 --with-threads
+      "
     restart: unless-stopped
 
 networks:
@@ -162,3 +315,5 @@ volumes:
   minio_data:
   pg_data:
   chroma_data:
+  superset_db_data:
+  superset_home:

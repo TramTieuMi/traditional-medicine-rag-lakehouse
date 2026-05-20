@@ -1,0 +1,24 @@
+2026-05-19 06:07:42 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - LOGS_CAPTURED - Started capturing logs in process (pid: 246).
+2026-05-19 06:07:42 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - STEP_START - Started execution of step "gold__herbs__gold_herb_mentions".
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (1348 rows)
+2026-05-19 06:07:42 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-05-19 06:07:42 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - 📚 Danh sách dược liệu: 104 vị
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - 📥 Nhận 1348 chunks
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - ✅ Tìm thấy 4028 herb mentions
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - 🌿 Top 10 dược liệu:
+  Cam thảo: 331 lần
+  Bạch truật: 182 lần
+  Đương quy: 180 lần
+  Bạch thược: 172 lần
+  Xuyên khung: 154 lần
+  Trần bì: 148 lần
+  Đảng sâm: 145 lần
+  Bán hạ: 142 lần
+  Quế chi: 133 lần
+  Phục linh: 128 lần
+2026-05-19 06:07:42 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-05-19 06:07:42 +0000 - dagster - INFO - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - gold__herbs__gold_herb_mentions - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/herbs/gold_herb_mentions.parquet (4028 rows)
+2026-05-19 06:07:43 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - ASSET_MATERIALIZATION - Materialized value gold herbs gold_herb_mentions.
+2026-05-19 06:07:43 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-05-19 06:07:43 +0000 - dagster - DEBUG - __ASSET_JOB - 0b15c271-208c-44f9-93fd-3a55c3d80150 - 246 - gold__herbs__gold_herb_mentions - STEP_SUCCESS - Finished execution of step "gold__herbs__gold_herb_mentions" in 622ms.
