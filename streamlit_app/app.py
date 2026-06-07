@@ -123,12 +123,15 @@ else:
 question = st.chat_input("Hỏi về bài thuốc, dược liệu, triệu chứng...")
 
 if question:
+    # Lưu lịch sử trước khi append câu hỏi mới (để truyền vào query_rag)
+    history = list(st.session_state.messages)
+
     st.session_state.messages.append({
         "role": "user", "content": question
     })
 
-    with st.spinner("🔍 Đang tìm kiếm trong tài liệu YHCT..."):
-        result = query_rag(question)
+    with st.spinner("💬 Đang suy nghĩ..."):
+        result = query_rag(question, history=history)
 
     st.session_state.messages.append({
         "role":    "assistant",
