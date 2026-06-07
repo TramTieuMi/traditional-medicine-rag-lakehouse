@@ -1,0 +1,20 @@
+2026-06-07 04:22:13 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - LOGS_CAPTURED - Started capturing logs in process (pid: 62).
+2026-06-07 04:22:13 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - bronze__pdf__bronze_pdf_pages - STEP_START - Started execution of step "bronze__pdf__bronze_pdf_pages".
+2026-06-07 04:22:13 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - 📂 Tìm thấy 2 file PDF:
+2026-06-07 04:22:13 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf
+2026-06-07 04:22:13 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf
+2026-06-07 04:22:13 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf ...
+2026-06-07 04:22:14 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    ✅ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang | doc_id=pdf_9e569cd0cab2
+2026-06-07 04:22:14 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf ...
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    ✅ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang | doc_id=pdf_96bc33115c7f
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - 
+==================================================
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - ✅ TỔNG KẾT BRONZE:
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    Số file PDF: 2
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    Tổng trang:  1157
+2026-06-07 04:22:15 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages -    Tổng từ:     140,310
+2026-06-07 04:22:16 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - bronze__pdf__bronze_pdf_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-07 04:22:16 +0000 - dagster - INFO - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - bronze__pdf__bronze_pdf_pages - [MinIO] ✅ Đã lưu: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (1157 rows)
+2026-06-07 04:22:16 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - bronze__pdf__bronze_pdf_pages - ASSET_MATERIALIZATION - Materialized value bronze pdf bronze_pdf_pages.
+2026-06-07 04:22:16 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - bronze__pdf__bronze_pdf_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-07 04:22:16 +0000 - dagster - DEBUG - __ASSET_JOB - 087ed5f2-1a53-4668-8aac-3ad9122e602f - 62 - bronze__pdf__bronze_pdf_pages - STEP_SUCCESS - Finished execution of step "bronze__pdf__bronze_pdf_pages" in 3.06s.
