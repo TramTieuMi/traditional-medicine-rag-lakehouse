@@ -1,0 +1,120 @@
+2026-05-20 16:55:13 +0000 - dagster - DEBUG - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - 404 - LOGS_CAPTURED - Started capturing logs in process (pid: 404).
+2026-05-20 16:55:13 +0000 - dagster - DEBUG - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - 404 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-05-20 16:55:14 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (1348 rows)
+2026-05-20 16:55:14 +0000 - dagster - DEBUG - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - 404 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-05-20 16:55:14 +0000 - dagster - DEBUG - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - 404 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-05-20 16:55:14 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - 📥 Nhận 1348 chunks để embed
+2026-05-20 16:55:14 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...
+2026-05-20 16:55:21 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - ✅ Model loaded!
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-05-20 16:55:22 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - ✅ Kết nối ChromaDB OK | collection='yhct_chunks'
+2026-05-20 16:55:22 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - 📊 Đã có 32 chunks trong ChromaDB
+2026-05-20 16:55:22 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings - 🔄 Cần embed thêm: 1348 chunks
+2026-05-20 16:55:45 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings -    ✓ 32/1348 chunks embedded
+2026-05-20 16:56:07 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings -    ✓ 64/1348 chunks embedded
+2026-05-20 16:56:29 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings -    ✓ 96/1348 chunks embedded
+2026-05-20 16:56:52 +0000 - dagster - INFO - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - gold__embeddings__gold_embeddings -    ✓ 128/1348 chunks embedded
+2026-05-20 16:57:02 +0000 - dagster - ERROR - __ASSET_JOB - 66aa2976-1d1f-451a-8e54-cfec1521d3c7 - 404 - gold__embeddings__gold_embeddings - STEP_FAILURE - Execution of step "gold__embeddings__gold_embeddings" failed.
+
+dagster._core.errors.DagsterExecutionInterruptedError
+
+Stack Trace:
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/execute_plan.py", line 247, in dagster_event_sequence_for_step
+    yield from check.generator(step_events)
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/execute_step.py", line 505, in core_dagster_event_sequence_for_step
+    for user_event in _step_output_error_checked_user_event_sequence(
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/execute_step.py", line 184, in _step_output_error_checked_user_event_sequence
+    for user_event in user_event_sequence:
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/execute_step.py", line 88, in _process_asset_results_to_events
+    for user_event in user_event_sequence:
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute.py", line 188, in execute_core_compute
+    for step_output in _yield_compute_results(step_context, inputs, compute_fn, compute_context):
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute.py", line 157, in _yield_compute_results
+    for event in iterate_with_context(
+  File "/usr/local/lib/python3.11/site-packages/dagster/_utils/__init__.py", line 394, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 135, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dagster/app/etl_pipeline/assets/gold_embeddings.py", line 91, in gold_embeddings
+    vectors = model.encode(texts, show_progress_bar=False).tolist()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/SentenceTransformer.py", line 516, in encode
+    out_features = self.forward(features)
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sentence_transformers/models/Transformer.py", line 117, in forward
+    output_states = self.auto_model(**trans_features, return_dict=False)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/roberta/modeling_roberta.py", line 862, in forward
+    encoder_outputs = self.encoder(
+                      ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/roberta/modeling_roberta.py", line 606, in forward
+    layer_outputs = layer_module(
+                    ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/roberta/modeling_roberta.py", line 543, in forward
+    layer_output = apply_chunking_to_forward(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/pytorch_utils.py", line 257, in apply_chunking_to_forward
+    return forward_fn(*input_tensors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/roberta/modeling_roberta.py", line 552, in feed_forward_chunk
+    layer_output = self.output(intermediate_output, attention_output)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/models/roberta/modeling_roberta.py", line 479, in forward
+    hidden_states = self.dense(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/dagster/_utils/interrupts.py", line 81, in _new_signal_handler
+    raise error_cls()
+
