@@ -1,0 +1,27 @@
+2026-06-07 07:48:04 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - LOGS_CAPTURED - Started capturing logs in process (pid: 106).
+2026-06-07 07:48:04 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - STEP_START - Started execution of step "silver__pdf__silver_filtered_pages".
+2026-06-07 07:48:04 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã đọc: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (1340 rows)
+2026-06-07 07:48:04 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - LOADED_INPUT - Loaded input "bronze_pdf_pages" using input manager "minio_io_manager", from output "result" of step "bronze__pdf__bronze_pdf_pages"
+2026-06-07 07:48:04 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - STEP_INPUT - Got input "bronze_pdf_pages" of type "DataFrame". (Type check passed).
+2026-06-07 07:48:04 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages - 📥 Nhận 1340 trang từ Bronze
+2026-06-07 07:48:04 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang
+2026-06-07 07:48:04 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang
+2026-06-07 07:48:04 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    └─ [Text]Sách Y học cổ truyền của đại học Duy Tân- nguyentruongntan@gmail.com.pdf: 183 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages - 
+==================================================
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages - ✅ TỔNG KẾT SILVER:
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    Giữ lại: 909 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    Loại bỏ: 431 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    Lý do loại:
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ too_short: 424 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ stopword:tài liệu tham khảo: 5 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ stopword:mục lục: 2 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -    Giữ lại theo file:
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 468 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 273 trang
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages -       └─ [Text]Sách Y học cổ truyền của đại học Duy Tân- nguyentruongntan@gmail.com.pdf: 168 trang
+2026-06-07 07:48:05 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-07 07:48:05 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã lưu: s3://yhct-silver/silver/pdf/silver_filtered_pages.parquet (909 rows)
+2026-06-07 07:48:05 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - ASSET_MATERIALIZATION - Materialized value silver pdf silver_filtered_pages.
+2026-06-07 07:48:05 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-07 07:48:05 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 106 - silver__pdf__silver_filtered_pages - STEP_SUCCESS - Finished execution of step "silver__pdf__silver_filtered_pages" in 1.26s.

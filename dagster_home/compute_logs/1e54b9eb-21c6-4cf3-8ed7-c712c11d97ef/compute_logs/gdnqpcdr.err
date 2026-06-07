@@ -1,0 +1,17 @@
+2026-06-07 07:48:47 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - LOGS_CAPTURED - Started capturing logs in process (pid: 191).
+2026-06-07 07:48:47 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - STEP_START - Started execution of step "gold__tang_phu__gold_tang_phu_mentions".
+2026-06-07 07:48:47 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (1218 rows)
+2026-06-07 07:48:47 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-06-07 07:48:47 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-06-07 07:48:47 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions - 📥 Nhận 1218 chunks từ gold_yhct_chunks
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions - ✅ 969 rows | 655 chunks đề cập tạng phủ
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions -    ty_vi: 371 chunks
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions -    phe_dai_trang: 212 chunks
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions -    than: 160 chunks
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions -    can_dom: 115 chunks
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions -    tam_tieu_trang: 111 chunks
+2026-06-07 07:48:50 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-07 07:48:50 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - gold__tang_phu__gold_tang_phu_mentions - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/tang_phu/gold_tang_phu_mentions.parquet (969 rows)
+2026-06-07 07:48:50 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - ASSET_MATERIALIZATION - Materialized value gold tang_phu gold_tang_phu_mentions.
+2026-06-07 07:48:50 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-07 07:48:50 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 191 - gold__tang_phu__gold_tang_phu_mentions - STEP_SUCCESS - Finished execution of step "gold__tang_phu__gold_tang_phu_mentions" in 3.13s.

@@ -1,17 +1,21 @@
 # streamlit_app/pages/2_analytics.py
 
-import streamlit as st
-import polars as pl
-import plotly.express as px
-from minio import Minio
-from io import BytesIO
 import os
+from io import BytesIO
+
+import httpx
+import plotly.express as px
+import polars as pl
+import streamlit as st
+from minio import Minio
 
 st.set_page_config(page_title="YHCT Analytics", page_icon="📊", layout="wide")
 
 MINIO_ENDPOINT   = os.getenv("MINIO_ENDPOINT",   "minio:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY",  "minio")
 MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY",  "minio123")
+DAGSTER_URL      = os.getenv("DAGSTER_URL",        "http://dagster:3001")
+RAW_DATA_DIR     = os.getenv("RAW_DATA_DIR",       "/app/data/raw")
 
 
 @st.cache_data(ttl=300)
@@ -21,10 +25,145 @@ def load_parquet(bucket: str, key: str) -> pl.DataFrame:
     return pl.read_parquet(BytesIO(obj.read()))
 
 
+# ── Dagster helpers ───────────────────────────────────────────────────────────
+def _discover_repo_info() -> tuple[str, str, str] | None:
+    """
+    Query Dagster GraphQL để tự động phát hiện location, repo, và job name.
+    Trả về (location_name, repo_name, job_name) hoặc None nếu lỗi.
+
+    Schema Dagster dùng: repositoriesOrError → RepositoryConnection
+    (không phải repositoryLocationsOrError — field đó không tồn tại trong phiên bản này)
+    """
+    query = """
+    query {
+      repositoriesOrError {
+        ... on RepositoryConnection {
+          nodes {
+            name
+            location { name }
+            pipelines { name }
+          }
+        }
+        ... on PythonError { message }
+      }
+    }
+    """
+    try:
+        r = httpx.post(f"{DAGSTER_URL}/graphql", json={"query": query}, timeout=10)
+        r.raise_for_status()
+        data = r.json()
+        nodes = data["data"]["repositoriesOrError"].get("nodes", [])
+
+        if not nodes:
+            return None
+
+        repo_name = nodes[0]["name"]
+        loc_name  = nodes[0]["location"]["name"]
+        pipelines = [p["name"] for p in nodes[0].get("pipelines", [])]
+
+        # Ưu tiên __ASSET_JOB, fallback sang job đầu tiên tìm được
+        job_name = "__ASSET_JOB" if "__ASSET_JOB" in pipelines else (pipelines[0] if pipelines else "__ASSET_JOB")
+
+        return loc_name, repo_name, job_name
+
+    except Exception:
+        return None
+
+
+def _launch_pipeline(loc_name: str, repo_name: str, job_name: str) -> tuple[str | None, str | None]:
+    """
+    Kích hoạt Dagster pipeline để materialize toàn bộ assets.
+    Trả về (run_id, error_message).
+    """
+    mutation = """
+    mutation LaunchRun($executionParams: ExecutionParams!) {
+      launchRun(executionParams: $executionParams) {
+        ... on LaunchRunSuccess {
+          run { runId status }
+        }
+        ... on PipelineNotFoundError { message }
+        ... on InvalidSubsetError    { message }
+        ... on PythonError           { message }
+      }
+    }
+    """
+    variables = {
+        "executionParams": {
+            "selector": {
+                "repositoryLocationName": loc_name,
+                "repositoryName":         repo_name,
+                "jobName":                job_name,
+            },
+            "executionMetadata": {},
+            "runConfigData":     "{}",
+        }
+    }
+    try:
+        r = httpx.post(
+            f"{DAGSTER_URL}/graphql",
+            json={"query": mutation, "variables": variables},
+            timeout=30,
+        )
+        r.raise_for_status()
+        result = r.json()["data"]["launchRun"]
+
+        if "run" in result:
+            return result["run"]["runId"], None
+        elif "message" in result:
+            return None, result["message"]
+
+    except Exception as e:
+        return None, str(e)
+
+    return None, "Unknown error"
+
+
+def _get_run_status(run_id: str) -> str:
+    """Lấy trạng thái run hiện tại từ Dagster."""
+    query = """
+    query RunStatus($runId: ID!) {
+      runOrError(runId: $runId) {
+        ... on Run          { runId status }
+        ... on RunNotFoundError { message }
+        ... on PythonError      { message }
+      }
+    }
+    """
+    try:
+        r = httpx.post(
+            f"{DAGSTER_URL}/graphql",
+            json={"query": query, "variables": {"runId": run_id}},
+            timeout=10,
+        )
+        r.raise_for_status()
+        run = r.json()["data"]["runOrError"]
+        return run.get("status", "UNKNOWN")
+    except Exception:
+        return "UNKNOWN"
+
+
+def _upload_to_minio(filename: str, data: bytes) -> None:
+    """Upload PDF lên MinIO bucket yhct-docs để dùng cho citation links."""
+    client = Minio(MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, secure=False)
+    if not client.bucket_exists("yhct-docs"):
+        client.make_bucket("yhct-docs")
+    client.put_object(
+        "yhct-docs", filename,
+        BytesIO(data),
+        length=len(data),
+        content_type="application/pdf",
+    )
+
+
+# ── Tabs ─────────────────────────────────────────────────────────────────────
 st.title("📊 YHCT Analytics Dashboard")
 
-tab1, tab2, tab3, tab4 = st.tabs([
-    "🌿 Dược liệu", "🫀 Tạng phủ", "📄 Chunks", "📚 Nguồn tài liệu"
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "🌿 Dược liệu",
+    "🫀 Tạng phủ",
+    "📄 Chunks",
+    "📚 Nguồn tài liệu",
+    "📥 Thêm tài liệu",
 ])
 
 # ── Tab 1: Herb mentions ──────────────────────────────────────────────────────
@@ -62,7 +201,7 @@ with tab2:
         tp_df = load_parquet("yhct-gold", "gold/tang_phu/gold_tang_phu_mentions.parquet")
         tp_counts = (
             tp_df.group_by("tang_phu")
-            .agg(pl.len().alias("count"))   # ← FIX: pl.count() → pl.len()
+            .agg(pl.len().alias("count"))
             .sort("count", descending=True)
         )
 
@@ -118,7 +257,6 @@ with tab3:
         )
         st.plotly_chart(fig_hist, use_container_width=True)
 
-        # Chunks theo nguồn tài liệu
         by_source = (
             chunk_df.group_by("source_file")
             .agg(pl.len().alias("chunks"))
@@ -160,3 +298,145 @@ with tab4:
 
     except Exception as e:
         st.error(f"Lỗi load dữ liệu: {e}")
+
+# ── Tab 5: Upload PDF ─────────────────────────────────────────────────────────
+with tab5:
+    st.subheader("📥 Nhập tài liệu mới vào hệ thống")
+    st.markdown(
+        "Upload file PDF — hệ thống sẽ tự động chạy toàn bộ pipeline "
+        "(Bronze → Silver → Gold → Embeddings) rồi thông báo khi xong."
+    )
+
+    col_upload, col_status = st.columns([1, 1])
+
+    with col_upload:
+        uploaded_file = st.file_uploader(
+            "Chọn file PDF", type=["pdf"], key="pdf_upload",
+            help="File sẽ được lưu vào kho dữ liệu và pipeline tự động chạy.",
+        )
+
+        if uploaded_file:
+            file_bytes   = uploaded_file.getvalue()
+            file_size_kb = len(file_bytes) // 1024
+            st.info(f"**{uploaded_file.name}** · {file_size_kb:,} KB")
+
+            already_exists = os.path.exists(
+                os.path.join(RAW_DATA_DIR, uploaded_file.name)
+            )
+            if already_exists:
+                st.warning(
+                    f"File `{uploaded_file.name}` đã tồn tại trong kho. "
+                    "Upload sẽ ghi đè và chạy lại pipeline."
+                )
+
+            if st.button("🚀 Nhập và xử lý", type="primary"):
+                errors = []
+
+                # 1. Lưu vào thư mục data/raw (shared với etl_pipeline container)
+                with st.spinner("Đang lưu file..."):
+                    try:
+                        os.makedirs(RAW_DATA_DIR, exist_ok=True)
+                        raw_path = os.path.join(RAW_DATA_DIR, uploaded_file.name)
+                        with open(raw_path, "wb") as f:
+                            f.write(file_bytes)
+                        st.success(f"✅ Đã lưu: `{raw_path}`")
+                    except Exception as e:
+                        errors.append(f"Lưu file: {e}")
+                        st.error(f"❌ Không lưu được file: {e}")
+
+                # 2. Upload lên MinIO yhct-docs (cho citation links)
+                with st.spinner("Đang upload lên MinIO..."):
+                    try:
+                        _upload_to_minio(uploaded_file.name, file_bytes)
+                        st.success("✅ Đã upload lên MinIO (yhct-docs)")
+                    except Exception as e:
+                        st.warning(f"⚠ MinIO upload thất bại (không ảnh hưởng pipeline): {e}")
+
+                # 3. Kích hoạt Dagster pipeline
+                if not errors:
+                    with st.spinner("Đang kích hoạt Dagster pipeline..."):
+                        repo_info = _discover_repo_info()
+                        if repo_info is None:
+                            st.error(
+                                "❌ Không kết nối được Dagster tại `"
+                                + DAGSTER_URL + "`. "
+                                "Kiểm tra container dagster đang chạy."
+                            )
+                        else:
+                            loc_name, repo_name, job_name = repo_info
+                            run_id, err = _launch_pipeline(loc_name, repo_name, job_name)
+
+                            if run_id:
+                                st.session_state.dagster_run_id       = run_id
+                                st.session_state.dagster_uploaded_file = uploaded_file.name
+                                st.session_state.dagster_loc          = loc_name
+                                st.session_state.dagster_repo         = repo_name
+                                st.session_state.dagster_job          = job_name
+                                st.rerun()
+                            else:
+                                st.error(f"❌ Pipeline không khởi động được: {err}")
+
+    with col_status:
+        if "dagster_run_id" in st.session_state:
+            run_id   = st.session_state.dagster_run_id
+            filename = st.session_state.get("dagster_uploaded_file", "")
+            status   = _get_run_status(run_id)
+
+            STATUS_INFO = {
+                "SUCCESS":     ("✅", "success"),
+                "FAILURE":     ("❌", "error"),
+                "QUEUED":      ("⏳", "info"),
+                "NOT_STARTED": ("⏳", "info"),
+                "STARTING":    ("🔄", "info"),
+                "STARTED":     ("🔄", "info"),
+                "MANAGED":     ("🔄", "info"),
+                "CANCELING":   ("🛑", "warning"),
+                "CANCELED":    ("🛑", "warning"),
+            }
+            icon, level = STATUS_INFO.get(status, ("❓", "info"))
+
+            st.markdown(f"### {icon} Trạng thái pipeline")
+            st.code(
+                f"File   : {filename}\n"
+                f"Run ID : {run_id}\n"
+                f"Status : {status}\n"
+                f"Dagster: {DAGSTER_URL}"
+            )
+
+            if status == "SUCCESS":
+                load_parquet.clear()   # xóa cache để các tab analytics hiển thị dữ liệu mới
+                st.success(
+                    "🎉 Tài liệu đã được xử lý thành công!\n\n"
+                    "Các tab Analytics đã được cập nhật. "
+                    "Reload trang chatbot để bắt đầu hỏi về tài liệu mới."
+                )
+                if st.button("🗑 Xóa thông báo", key="clear_success"):
+                    for key in ["dagster_run_id", "dagster_uploaded_file",
+                                "dagster_loc", "dagster_repo", "dagster_job"]:
+                        st.session_state.pop(key, None)
+                    st.rerun()
+
+            elif status in ("FAILURE", "CANCELED"):
+                st.error(
+                    f"❌ Pipeline {status.lower()}. "
+                    f"Xem logs chi tiết tại Dagster UI: `{DAGSTER_URL}`"
+                )
+                if st.button("🗑 Xóa thông báo", key="clear_failure"):
+                    for key in ["dagster_run_id", "dagster_uploaded_file",
+                                "dagster_loc", "dagster_repo", "dagster_job"]:
+                        st.session_state.pop(key, None)
+                    st.rerun()
+
+            else:
+                st.info("Pipeline đang chạy... Bấm refresh để cập nhật trạng thái.")
+                if st.button("🔄 Refresh trạng thái", key="refresh_status"):
+                    load_parquet.clear()   # clear cache sẵn khi refresh
+                    st.rerun()
+
+        else:
+            st.markdown("""
+            <div style="padding:40px; text-align:center; color:#aaa; border:1px dashed #ccc; border-radius:12px;">
+                <p style="font-size:32px; margin:0">📂</p>
+                <p>Upload file PDF và bấm <strong>Nhập và xử lý</strong><br>để bắt đầu pipeline tự động.</p>
+            </div>
+            """, unsafe_allow_html=True)

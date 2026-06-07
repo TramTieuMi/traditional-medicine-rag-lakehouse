@@ -1,0 +1,23 @@
+2026-06-07 07:47:38 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - LOGS_CAPTURED - Started capturing logs in process (pid: 62).
+2026-06-07 07:47:38 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - bronze__pdf__bronze_pdf_pages - STEP_START - Started execution of step "bronze__pdf__bronze_pdf_pages".
+2026-06-07 07:47:38 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - 📂 Tìm thấy 3 file PDF:
+2026-06-07 07:47:38 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf
+2026-06-07 07:47:38 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf
+2026-06-07 07:47:38 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    └─ [Text]Sách Y học cổ truyền của đại học Duy Tân- nguyentruongntan@gmail.com.pdf
+2026-06-07 07:47:38 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf ...
+2026-06-07 07:47:39 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    ✅ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang | doc_id=pdf_4ccf39235189
+2026-06-07 07:47:39 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf ...
+2026-06-07 07:47:40 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    ✅ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang | doc_id=pdf_d39d3322ed7a
+2026-06-07 07:47:40 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: [Text]Sách Y học cổ truyền của đại học Duy Tân- nguyentruongntan@gmail.com.pdf ...
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    ✅ [Text]Sách Y học cổ truyền của đại học Duy Tân- nguyentruongntan@gmail.com.pdf: 183 trang | doc_id=pdf_a952bb66474a
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - 
+==================================================
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - ✅ TỔNG KẾT BRONZE:
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    Số file PDF: 3
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    Tổng trang:  1340
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages -    Tổng từ:     197,018
+2026-06-07 07:47:41 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - bronze__pdf__bronze_pdf_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-07 07:47:41 +0000 - dagster - INFO - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - bronze__pdf__bronze_pdf_pages - [MinIO] ✅ Đã lưu: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (1340 rows)
+2026-06-07 07:47:41 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - bronze__pdf__bronze_pdf_pages - ASSET_MATERIALIZATION - Materialized value bronze pdf bronze_pdf_pages.
+2026-06-07 07:47:41 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - bronze__pdf__bronze_pdf_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-07 07:47:41 +0000 - dagster - DEBUG - __ASSET_JOB - 1e54b9eb-21c6-4cf3-8ed7-c712c11d97ef - 62 - bronze__pdf__bronze_pdf_pages - STEP_SUCCESS - Finished execution of step "bronze__pdf__bronze_pdf_pages" in 3.6s.
