@@ -1,0 +1,29 @@
+2026-06-09 05:57:38 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - LOGS_CAPTURED - Started capturing logs in process (pid: 82).
+2026-06-09 05:57:38 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - bronze__pdf__bronze_pdf_pages - STEP_START - Started execution of step "bronze__pdf__bronze_pdf_pages".
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📂 Tìm thấy 5 file PDF:
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    └─ [Text]3033 CÂY THUỐC ĐÔNG Y (TUỆ TĨNH).pdf
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    └─ [Text]380 Bai Thuoc Dong Y Hieu Nghiem.pdf
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    └─ [Text]benh_hoc_va_dieu_tri_dong_y.pdf
+2026-06-09 05:57:38 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf ...
+2026-06-09 05:57:41 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    ✅ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang | doc_id=pdf_790c63ec1c8b
+2026-06-09 05:57:41 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf ...
+2026-06-09 05:57:42 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    ✅ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang | doc_id=pdf_c57634fddd5c
+2026-06-09 05:57:42 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: [Text]3033 CÂY THUỐC ĐÔNG Y (TUỆ TĨNH).pdf ...
+2026-06-09 05:57:57 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    ✅ [Text]3033 CÂY THUỐC ĐÔNG Y (TUỆ TĨNH).pdf: 1361 trang | doc_id=pdf_a59d2b189aeb
+2026-06-09 05:57:57 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: [Text]380 Bai Thuoc Dong Y Hieu Nghiem.pdf ...
+2026-06-09 05:57:58 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    ✅ [Text]380 Bai Thuoc Dong Y Hieu Nghiem.pdf: 188 trang | doc_id=pdf_9e04f61fd878
+2026-06-09 05:57:58 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 📖 Đang xử lý: [Text]benh_hoc_va_dieu_tri_dong_y.pdf ...
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    ✅ [Text]benh_hoc_va_dieu_tri_dong_y.pdf: 259 trang | doc_id=pdf_1b6832c2aadd
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - 
+==================================================
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - ✅ TỔNG KẾT BRONZE:
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    Số file PDF: 5
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    Tổng trang:  2965
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages -    Tổng từ:     1,200,388
+2026-06-09 05:58:05 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - bronze__pdf__bronze_pdf_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-09 05:58:05 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - bronze__pdf__bronze_pdf_pages - [MinIO] ✅ Đã lưu: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (2965 rows)
+2026-06-09 05:58:05 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - bronze__pdf__bronze_pdf_pages - ASSET_MATERIALIZATION - Materialized value bronze pdf bronze_pdf_pages.
+2026-06-09 05:58:05 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - bronze__pdf__bronze_pdf_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-09 05:58:05 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 82 - bronze__pdf__bronze_pdf_pages - STEP_SUCCESS - Finished execution of step "bronze__pdf__bronze_pdf_pages" in 27.08s.

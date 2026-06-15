@@ -1,0 +1,91 @@
+2026-06-09 06:55:45 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - LOGS_CAPTURED - Started capturing logs in process (pid: 448).
+2026-06-09 06:55:45 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - STEP_START - Started execution of step "gold__evaluation__gold_evaluation".
+2026-06-09 06:55:45 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - Loading file from: /opt/dagster/dagster_home/local_artifact_storage/storage/gold/embeddings/gold_embeddings using PickledObjectFilesystemIOManager...
+2026-06-09 06:55:45 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - LOADED_INPUT - Loaded input "gold_embeddings" using input manager "io_manager", from output "result" of step "gold__embeddings__gold_embeddings"
+2026-06-09 06:55:45 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - STEP_INPUT - Got input "gold_embeddings" of type "Any". (Type check passed).
+2026-06-09 06:55:45 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - 🤖 Loading embedding model: keepitreal/vietnamese-sbert
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-06-09 06:55:52 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - ✅ ChromaDB ready — 16566 vectors in collection
+2026-06-09 06:55:53 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - 🧪 Evaluating 22 questions...
+2026-06-09 06:55:53 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [01/22] TH001 — Bài thuốc nào chữa đau dạ dày theo y học cổ truyền?
+2026-06-09 06:55:54 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.558 | prec=1.000 | faith=0.633 | partial
+2026-06-09 06:55:55 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [02/22] TH002 — Điều trị táo bón bằng thảo dược như thế nào?
+2026-06-09 06:55:58 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.631 | prec=0.800 | faith=0.664 | correct
+2026-06-09 06:55:58 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [03/22] TH003 — Phương pháp chữa tiêu chảy trong y học cổ truyền?
+2026-06-09 06:56:02 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.564 | prec=1.000 | faith=0.770 | correct
+2026-06-09 06:56:02 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [04/22] TH004 — Bài thuốc điều trị đầy bụng chướng bụng?
+2026-06-09 06:56:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.563 | prec=0.000 | faith=0.484 | partial
+2026-06-09 06:56:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [05/22] TH005 — Chữa buồn nôn nôn mửa bằng thuốc đông y?
+2026-06-09 06:56:17 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.536 | prec=0.000 | faith=0.339 | partial
+2026-06-09 06:56:17 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [06/22] TH006 — Điều trị viêm đại tràng mạn theo YHCT?
+2026-06-09 06:56:43 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.507 | prec=0.000 | faith=0.766 | correct
+2026-06-09 06:56:44 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [07/22] TH007 — Bài thuốc trị ợ chua ợ hơi?
+2026-06-09 06:57:09 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.452 | prec=1.000 | faith=0.969 | correct
+2026-06-09 06:57:10 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [08/22] TH008 — Điều trị viêm gan theo y học cổ truyền?
+2026-06-09 06:57:33 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.442 | prec=1.000 | faith=0.495 | correct
+2026-06-09 06:57:33 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [09/22] DL001 — Cam thảo có công dụng và liều dùng như thế nào?
+2026-06-09 06:57:59 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.470 | prec=0.000 | faith=0.280 | correct
+2026-06-09 06:57:59 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [10/22] DL002 — Bạch truật dùng trong những bài thuốc nào?
+2026-06-09 06:58:18 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.534 | prec=0.000 | faith=0.674 | correct
+2026-06-09 06:58:19 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [11/22] DL003 — Phục linh có tác dụng gì trong y học cổ truyền?
+2026-06-09 06:58:28 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.445 | prec=0.000 | faith=0.444 | correct
+2026-06-09 06:58:29 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [12/22] DL004 — Hoàng kỳ có tác dụng bổ khí như thế nào?
+2026-06-09 06:58:35 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.555 | prec=1.000 | faith=0.476 | correct
+2026-06-09 06:58:36 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [13/22] DL005 — Sài hồ có công dụng sơ can giải uất như thế nào?
+2026-06-09 06:58:52 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.512 | prec=1.000 | faith=0.951 | correct
+2026-06-09 06:58:52 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [14/22] DL006 — Nhân trần dùng chữa vàng da viêm gan?
+2026-06-09 06:59:14 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.455 | prec=0.000 | faith=0.793 | correct
+2026-06-09 06:59:15 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [15/22] DL007 — Sơn tra có tác dụng tiêu thực như thế nào?
+2026-06-09 06:59:30 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.457 | prec=0.000 | faith=0.211 | correct
+2026-06-09 06:59:30 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [16/22] BT001 — Bài thuốc Tứ Quân Tử thang gồm những vị nào?
+2026-06-09 06:59:48 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.693 | prec=1.000 | faith=0.846 | correct
+2026-06-09 06:59:48 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [17/22] BT002 — Bài thuốc Lục Quân Tử thang điều trị tỳ vị hư?
+2026-06-09 07:00:01 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.734 | prec=0.000 | faith=0.892 | correct
+2026-06-09 07:00:02 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [18/22] BT003 — Bài Bình Vị tán điều trị đầy bụng thấp trở?
+2026-06-09 07:00:12 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.667 | prec=0.000 | faith=0.366 | partial
+2026-06-09 07:00:12 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [19/22] BT004 — Bài Tiêu Dao tán dùng điều trị can khí uất kết?
+2026-06-09 07:00:20 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.691 | prec=1.000 | faith=0.414 | correct
+2026-06-09 07:00:21 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [20/22] BT005 — Bài thuốc Bổ Trung Ích Khí thang có công dụng gì?
+2026-06-09 07:00:26 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.644 | prec=0.000 | faith=0.377 | partial
+2026-06-09 07:00:27 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [21/22] BT006 — Sâm Linh Bạch Truật tán dùng chữa bệnh gì?
+2026-06-09 07:00:41 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.674 | prec=0.800 | faith=0.857 | correct
+2026-06-09 07:00:41 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   [22/22] BT007 — Bài Tiêu Dao tán kết hợp với Tứ Vật thang điều trị gì?
+2026-06-09 07:01:03 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -      sim=0.559 | prec=1.000 | faith=0.873 | correct
+2026/06/09 07:01:03 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+2026-06-09 07:01:04 +0000 - dagster - WARNING - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - ⚠️  MLflow error (non-fatal): No module named 'boto3'
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - 
+=======================================================
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - 📊 EVALUATION SUMMARY
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - =======================================================
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Questions evaluated : 22
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg Precision@5     : 0.4818
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg MRR             : 0.4773
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg nDCG@5          : 0.4787
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg Faithfulness    : 0.6170
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg ROUGE-L         : 0.3006
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Zero-result rate    : 0.0%
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Correct rate        : 77.3%
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   Avg response time   : 13561 ms
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation -   MLflow UI           : http://mlflow:5000
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - =======================================================
+2026-06-09 07:01:04 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-09 07:01:04 +0000 - dagster - INFO - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - gold__evaluation__gold_evaluation - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/evaluation/gold_evaluation.parquet (22 rows)
+2026-06-09 07:01:04 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - ASSET_MATERIALIZATION - Materialized value gold evaluation gold_evaluation.
+2026-06-09 07:01:04 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-09 07:01:04 +0000 - dagster - DEBUG - __ASSET_JOB - 5fbd49cf-7ad1-4172-92e6-2272db7009ab - 448 - gold__evaluation__gold_evaluation - STEP_SUCCESS - Finished execution of step "gold__evaluation__gold_evaluation" in 5m19s.

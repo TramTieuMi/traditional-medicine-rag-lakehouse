@@ -1,0 +1,7 @@
+2026-06-08 15:33:04 +0000 - dagster - DEBUG - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - 398 - LOGS_CAPTURED - Started capturing logs in process (pid: 398).
+2026-06-08 15:33:04 +0000 - dagster - DEBUG - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - 398 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-06-08 15:33:04 +0000 - dagster - INFO - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (6686 rows)
+2026-06-08 15:33:05 +0000 - dagster - DEBUG - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - 398 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-06-08 15:33:05 +0000 - dagster - DEBUG - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - 398 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-06-08 15:33:05 +0000 - dagster - INFO - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - gold__embeddings__gold_embeddings - 📥 Nhận 6686 chunks để embed
+2026-06-08 15:33:05 +0000 - dagster - INFO - __ASSET_JOB - abe5633c-749b-4ce5-b8e4-5f6848d9910c - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...

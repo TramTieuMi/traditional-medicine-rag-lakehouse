@@ -1,0 +1,34 @@
+2026-06-08 15:26:38 +0000 - dagster - DEBUG - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - 246 - LOGS_CAPTURED - Started capturing logs in process (pid: 246).
+2026-06-08 15:26:38 +0000 - dagster - DEBUG - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - 246 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-06-08 15:26:38 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (6686 rows)
+2026-06-08 15:26:38 +0000 - dagster - DEBUG - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - 246 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-06-08 15:26:38 +0000 - dagster - DEBUG - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - 246 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-06-08 15:26:38 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - 📥 Nhận 6686 chunks để embed
+2026-06-08 15:26:38 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...
+2026-06-08 15:27:17 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - ✅ Model loaded!
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-06-08 15:27:17 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - ✅ Kết nối ChromaDB OK | collection='yhct_chunks'
+2026-06-08 15:27:19 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - 📊 Đã có 9176 chunks trong ChromaDB
+2026-06-08 15:27:19 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings - 🔄 Cần embed thêm: 6686 chunks
+2026-06-08 15:27:35 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 32/6686 chunks embedded
+2026-06-08 15:27:44 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 64/6686 chunks embedded
+2026-06-08 15:27:52 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 96/6686 chunks embedded
+2026-06-08 15:28:01 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 128/6686 chunks embedded
+2026-06-08 15:28:09 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 160/6686 chunks embedded
+2026-06-08 15:28:18 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 192/6686 chunks embedded
+2026-06-08 15:28:26 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 224/6686 chunks embedded
+2026-06-08 15:28:34 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 256/6686 chunks embedded
+2026-06-08 15:28:44 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 288/6686 chunks embedded
+2026-06-08 15:28:53 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 320/6686 chunks embedded
+2026-06-08 15:29:02 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 352/6686 chunks embedded
+2026-06-08 15:29:11 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 384/6686 chunks embedded
+2026-06-08 15:29:20 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 416/6686 chunks embedded
+2026-06-08 15:29:29 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 448/6686 chunks embedded
+2026-06-08 15:29:38 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 480/6686 chunks embedded
+2026-06-08 15:29:46 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 512/6686 chunks embedded
+2026-06-08 15:29:55 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 544/6686 chunks embedded
+2026-06-08 15:30:04 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 576/6686 chunks embedded
+2026-06-08 15:30:13 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 608/6686 chunks embedded
+2026-06-08 15:30:23 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 640/6686 chunks embedded
+2026-06-08 15:30:33 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 672/6686 chunks embedded
+2026-06-08 15:30:45 +0000 - dagster - INFO - __ASSET_JOB - 898295aa-de0c-424c-86b3-da9ea9d49011 - gold__embeddings__gold_embeddings -    ✓ 704/6686 chunks embedded
