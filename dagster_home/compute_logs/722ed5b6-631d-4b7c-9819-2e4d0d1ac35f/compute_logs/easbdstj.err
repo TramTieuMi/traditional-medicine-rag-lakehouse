@@ -1,0 +1,33 @@
+2026-06-15 15:36:05 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - LOGS_CAPTURED - Started capturing logs in process (pid: 843).
+2026-06-15 15:36:05 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - STEP_START - Started execution of step "silver__pdf__silver_filtered_pages".
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã đọc: s3://yhct-bronze/bronze/pdf/bronze_pdf_pages.parquet (3446 rows)
+2026-06-15 15:36:06 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - LOADED_INPUT - Loaded input "bronze_pdf_pages" using input manager "minio_io_manager", from output "result" of step "bronze__pdf__bronze_pdf_pages"
+2026-06-15 15:36:06 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - STEP_INPUT - Got input "bronze_pdf_pages" of type "DataFrame". (Type check passed).
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages - 📥 Nhận 3446 trang từ Bronze
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 877 trang
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 280 trang
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ [Text]3033 CÂY THUỐC ĐÔNG Y (TUỆ TĨNH).pdf: 1361 trang
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ [Text]380 Bai Thuoc Dong Y Hieu Nghiem.pdf: 188 trang
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ [Text]benh_hoc_va_dieu_tri_dong_y.pdf: 259 trang
+2026-06-15 15:36:06 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    └─ bai giang y hoc co truyen.pdf: 481 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages - 
+==================================================
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages - ✅ TỔNG KẾT SILVER:
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    Giữ lại: 2471 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    Loại bỏ: 975 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    Lý do loại:
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ too_short: 956 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ no_yhct_keyword: 13 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ stopword:tài liệu tham khảo: 4 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ stopword:mục lục: 2 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -    Giữ lại theo file:
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ 250-bai-thuoc-dong-y-co-truyen-chon-loc.pdf: 468 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ Cay_Thuoc_Vi_Thuoc_Phong_Va_Chua_Benh_Tieu_Hoa.pdf: 273 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ [Text]3033 CÂY THUỐC ĐÔNG Y (TUỆ TĨNH).pdf: 1297 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ [Text]380 Bai Thuoc Dong Y Hieu Nghiem.pdf: 187 trang
+2026-06-15 15:36:07 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages -       └─ [Text]benh_hoc_va_dieu_tri_dong_y.pdf: 246 trang
+2026-06-15 15:36:08 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-15 15:36:08 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - silver__pdf__silver_filtered_pages - [MinIO] ✅ Đã lưu: s3://yhct-silver/silver/pdf/silver_filtered_pages.parquet (2471 rows)
+2026-06-15 15:36:08 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - ASSET_MATERIALIZATION - Materialized value silver pdf silver_filtered_pages.
+2026-06-15 15:36:08 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-15 15:36:08 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 843 - silver__pdf__silver_filtered_pages - STEP_SUCCESS - Finished execution of step "silver__pdf__silver_filtered_pages" in 2.41s.

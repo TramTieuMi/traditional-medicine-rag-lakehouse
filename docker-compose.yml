@@ -90,6 +90,36 @@ services:
       start_period: 20s
 
   # ───────────────────────────────────────────────────────────────────────────
+  # APACHE SPARK — Distributed processing cho Silver layer
+  # ───────────────────────────────────────────────────────────────────────────
+  spark-master:
+    image: apache/spark:3.5.1
+    container_name: spark-master
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
+    ports:
+      - "8080:8080"   # Spark Master Web UI
+      - "7077:7077"   # Spark Master port
+    environment:
+      SPARK_NO_DAEMONIZE: "true"
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  spark-worker:
+    image: apache/spark:3.5.1
+    container_name: spark-worker
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
+    environment:
+      SPARK_NO_DAEMONIZE: "true"
+      SPARK_WORKER_MEMORY: "1g"
+      SPARK_WORKER_CORES: "2"
+    depends_on:
+      - spark-master
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────────────────────────────────
   # ETL PIPELINE — Dagster gRPC server
   # ───────────────────────────────────────────────────────────────────────────
   etl_pipeline:
@@ -108,6 +138,7 @@ services:
       DAGSTER_PG_DB: ${POSTGRES_DB}
       DAGSTER_PG_HOSTNAME: de_psql
       GROQ_API_KEY: ${GROQ_API_KEY}
+      SPARK_MASTER_URL: spark://spark-master:7077
       CHROMA_HOST: chromadb
       CHROMA_PORT: "8000"
       MLFLOW_TRACKING_URI: http://mlflow:5000
@@ -128,6 +159,8 @@ services:
         condition: service_started
       mlflow:
         condition: service_healthy
+      spark-master:
+        condition: service_started
     networks:
       - yhct_network
     restart: unless-stopped

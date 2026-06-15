@@ -1,0 +1,8 @@
+2026-06-15 15:07:18 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - LOGS_CAPTURED - Started capturing logs in process (pid: 63).
+2026-06-15 15:07:19 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - gold__events__gold_mongodb_events - STEP_START - Started execution of step "gold__events__gold_mongodb_events".
+2026-06-15 15:07:19 +0000 - dagster - INFO - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - gold__events__gold_mongodb_events - ✅ Đã đồng bộ 44 sự kiện từ MongoDB.
+2026-06-15 15:07:19 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - gold__events__gold_mongodb_events - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-15 15:07:19 +0000 - dagster - INFO - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - gold__events__gold_mongodb_events - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/events/gold_mongodb_events.parquet (44 rows)
+2026-06-15 15:07:19 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - gold__events__gold_mongodb_events - ASSET_MATERIALIZATION - Materialized value gold events gold_mongodb_events.
+2026-06-15 15:07:19 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - gold__events__gold_mongodb_events - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-15 15:07:19 +0000 - dagster - DEBUG - __ASSET_JOB - 95079f09-65f7-47dc-b025-5c5199907c2b - 63 - gold__events__gold_mongodb_events - STEP_SUCCESS - Finished execution of step "gold__events__gold_mongodb_events" in 364ms.

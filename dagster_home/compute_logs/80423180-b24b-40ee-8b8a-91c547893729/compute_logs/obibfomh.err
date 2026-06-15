@@ -1,0 +1,8 @@
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - LOGS_CAPTURED - Started capturing logs in process (pid: 70).
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - gold__users__gold_mongodb_users - STEP_START - Started execution of step "gold__users__gold_mongodb_users".
+2026-06-15 15:21:46 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__users__gold_mongodb_users - ✅ Đã đồng bộ 1 người dùng từ MongoDB.
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - gold__users__gold_mongodb_users - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-15 15:21:46 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__users__gold_mongodb_users - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/users/gold_mongodb_users.parquet (1 rows)
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - gold__users__gold_mongodb_users - ASSET_MATERIALIZATION - Materialized value gold users gold_mongodb_users.
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - gold__users__gold_mongodb_users - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-15 15:21:46 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 70 - gold__users__gold_mongodb_users - STEP_SUCCESS - Finished execution of step "gold__users__gold_mongodb_users" in 296ms.

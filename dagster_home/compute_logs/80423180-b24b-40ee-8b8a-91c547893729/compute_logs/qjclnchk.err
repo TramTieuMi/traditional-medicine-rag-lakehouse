@@ -1,0 +1,118 @@
+2026-06-15 15:23:06 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 311 - LOGS_CAPTURED - Started capturing logs in process (pid: 311).
+2026-06-15 15:23:06 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 311 - gold__embeddings__gold_embeddings - STEP_START - Started execution of step "gold__embeddings__gold_embeddings".
+2026-06-15 15:23:07 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (7178 rows)
+2026-06-15 15:23:07 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 311 - gold__embeddings__gold_embeddings - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-06-15 15:23:07 +0000 - dagster - DEBUG - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - 311 - gold__embeddings__gold_embeddings - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-06-15 15:23:07 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - 📥 Nhận 7178 chunks để embed
+2026-06-15 15:23:07 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - 🤖 Loading model: keepitreal/vietnamese-sbert ...
+2026-06-15 15:23:35 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - ✅ Model loaded!
+Failed to send telemetry event ClientStartEvent: capture() takes 1 positional argument but 3 were given
+2026-06-15 15:23:36 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - ✅ Kết nối ChromaDB OK | collection='yhct_chunks'
+2026-06-15 15:23:40 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - 📊 Đã có 4264 chunks trong ChromaDB
+2026-06-15 15:23:40 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings - 🔄 Cần embed thêm: 6058 chunks
+2026-06-15 15:24:03 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 32/6058 chunks embedded
+2026-06-15 15:24:16 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 64/6058 chunks embedded
+2026-06-15 15:24:30 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 96/6058 chunks embedded
+2026-06-15 15:24:45 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 128/6058 chunks embedded
+2026-06-15 15:25:00 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 160/6058 chunks embedded
+2026-06-15 15:25:12 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 192/6058 chunks embedded
+2026-06-15 15:25:26 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 224/6058 chunks embedded
+2026-06-15 15:25:42 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 256/6058 chunks embedded
+2026-06-15 15:25:55 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 288/6058 chunks embedded
+2026-06-15 15:26:08 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 320/6058 chunks embedded
+2026-06-15 15:26:21 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 352/6058 chunks embedded
+2026-06-15 15:26:35 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 384/6058 chunks embedded
+2026-06-15 15:26:47 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 416/6058 chunks embedded
+2026-06-15 15:27:03 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 448/6058 chunks embedded
+2026-06-15 15:27:16 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 480/6058 chunks embedded
+2026-06-15 15:27:28 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 512/6058 chunks embedded
+2026-06-15 15:27:42 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 544/6058 chunks embedded
+2026-06-15 15:27:57 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 576/6058 chunks embedded
+2026-06-15 15:28:09 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 608/6058 chunks embedded
+2026-06-15 15:28:24 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 640/6058 chunks embedded
+2026-06-15 15:28:39 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 672/6058 chunks embedded
+2026-06-15 15:28:52 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 704/6058 chunks embedded
+2026-06-15 15:29:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 736/6058 chunks embedded
+2026-06-15 15:29:18 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 768/6058 chunks embedded
+2026-06-15 15:29:32 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 800/6058 chunks embedded
+2026-06-15 15:29:48 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 832/6058 chunks embedded
+2026-06-15 15:30:01 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 864/6058 chunks embedded
+2026-06-15 15:30:15 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 896/6058 chunks embedded
+2026-06-15 15:30:27 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 928/6058 chunks embedded
+2026-06-15 15:30:41 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 960/6058 chunks embedded
+2026-06-15 15:30:53 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 992/6058 chunks embedded
+2026-06-15 15:31:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1024/6058 chunks embedded
+2026-06-15 15:31:21 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1056/6058 chunks embedded
+2026-06-15 15:31:34 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1088/6058 chunks embedded
+2026-06-15 15:31:48 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1120/6058 chunks embedded
+2026-06-15 15:32:01 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1152/6058 chunks embedded
+2026-06-15 15:32:13 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1184/6058 chunks embedded
+2026-06-15 15:32:27 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1216/6058 chunks embedded
+2026-06-15 15:32:40 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1248/6058 chunks embedded
+2026-06-15 15:32:53 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1280/6058 chunks embedded
+2026-06-15 15:33:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1312/6058 chunks embedded
+2026-06-15 15:33:22 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1344/6058 chunks embedded
+2026-06-15 15:33:44 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1376/6058 chunks embedded
+2026-06-15 15:34:18 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1408/6058 chunks embedded
+2026-06-15 15:34:51 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1440/6058 chunks embedded
+2026-06-15 15:35:23 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1472/6058 chunks embedded
+2026-06-15 15:35:42 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1504/6058 chunks embedded
+2026-06-15 15:36:02 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1536/6058 chunks embedded
+2026-06-15 15:36:22 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1568/6058 chunks embedded
+2026-06-15 15:36:46 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1600/6058 chunks embedded
+2026-06-15 15:37:17 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1632/6058 chunks embedded
+2026-06-15 15:38:02 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1664/6058 chunks embedded
+2026-06-15 15:38:40 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1696/6058 chunks embedded
+2026-06-15 15:39:18 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1728/6058 chunks embedded
+2026-06-15 15:39:58 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1760/6058 chunks embedded
+2026-06-15 15:40:34 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1792/6058 chunks embedded
+2026-06-15 15:41:09 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1824/6058 chunks embedded
+2026-06-15 15:41:51 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1856/6058 chunks embedded
+2026-06-15 15:42:28 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1888/6058 chunks embedded
+2026-06-15 15:43:09 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1920/6058 chunks embedded
+2026-06-15 15:43:49 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1952/6058 chunks embedded
+2026-06-15 15:44:31 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 1984/6058 chunks embedded
+2026-06-15 15:45:10 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2016/6058 chunks embedded
+2026-06-15 15:45:50 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2048/6058 chunks embedded
+2026-06-15 15:46:35 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2080/6058 chunks embedded
+2026-06-15 15:47:14 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2112/6058 chunks embedded
+2026-06-15 15:47:53 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2144/6058 chunks embedded
+2026-06-15 15:48:32 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2176/6058 chunks embedded
+2026-06-15 15:49:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2208/6058 chunks embedded
+2026-06-15 15:49:47 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2240/6058 chunks embedded
+2026-06-15 15:50:21 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2272/6058 chunks embedded
+2026-06-15 15:50:53 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2304/6058 chunks embedded
+2026-06-15 15:51:30 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2336/6058 chunks embedded
+2026-06-15 15:52:08 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2368/6058 chunks embedded
+2026-06-15 15:52:50 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2400/6058 chunks embedded
+2026-06-15 15:53:39 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2432/6058 chunks embedded
+2026-06-15 15:54:31 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2464/6058 chunks embedded
+2026-06-15 15:55:25 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2496/6058 chunks embedded
+2026-06-15 15:56:15 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2528/6058 chunks embedded
+2026-06-15 15:57:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2560/6058 chunks embedded
+2026-06-15 15:58:00 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2592/6058 chunks embedded
+2026-06-15 15:58:53 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2624/6058 chunks embedded
+2026-06-15 15:59:55 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2656/6058 chunks embedded
+2026-06-15 16:01:10 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2688/6058 chunks embedded
+2026-06-15 16:02:01 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2720/6058 chunks embedded
+2026-06-15 16:03:07 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2752/6058 chunks embedded
+2026-06-15 16:04:12 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2784/6058 chunks embedded
+2026-06-15 16:05:14 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2816/6058 chunks embedded
+2026-06-15 16:06:07 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2848/6058 chunks embedded
+2026-06-15 16:06:57 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2880/6058 chunks embedded
+2026-06-15 16:08:02 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2912/6058 chunks embedded
+2026-06-15 16:09:06 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2944/6058 chunks embedded
+2026-06-15 16:09:57 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 2976/6058 chunks embedded
+2026-06-15 16:10:49 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3008/6058 chunks embedded
+2026-06-15 16:11:26 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3040/6058 chunks embedded
+2026-06-15 16:11:59 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3072/6058 chunks embedded
+2026-06-15 16:12:27 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3104/6058 chunks embedded
+2026-06-15 16:12:55 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3136/6058 chunks embedded
+2026-06-15 16:13:26 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3168/6058 chunks embedded
+2026-06-15 16:13:54 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3200/6058 chunks embedded
+2026-06-15 16:14:24 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3232/6058 chunks embedded
+2026-06-15 16:14:55 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3264/6058 chunks embedded
+2026-06-15 16:15:24 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3296/6058 chunks embedded
+2026-06-15 16:16:02 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3328/6058 chunks embedded
+2026-06-15 16:16:41 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3360/6058 chunks embedded
+2026-06-15 16:17:18 +0000 - dagster - INFO - __ASSET_JOB - 80423180-b24b-40ee-8b8a-91c547893729 - gold__embeddings__gold_embeddings -    ✓ 3392/6058 chunks embedded

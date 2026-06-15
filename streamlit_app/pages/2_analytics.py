@@ -299,20 +299,26 @@ with tab4:
     except Exception as e:
         st.error(f"Lỗi load dữ liệu: {e}")
 
-# ── Tab 5: Upload PDF ─────────────────────────────────────────────────────────
+# ── Tab 5: Upload PDF (sensor-driven) ────────────────────────────────────────
 with tab5:
     st.subheader("📥 Nhập tài liệu mới vào hệ thống")
     st.markdown(
-        "Upload file PDF — hệ thống sẽ tự động chạy toàn bộ pipeline "
-        "(Bronze → Silver → Gold → Embeddings) rồi thông báo khi xong."
+        "Upload file PDF — **Dagster Sensor** sẽ tự phát hiện trong vòng 30 giây "
+        "và kích hoạt toàn bộ pipeline (Bronze → Silver → Gold → Embeddings) mà không cần thao tác thêm."
+    )
+    st.info(
+        "**Cơ chế hoạt động:** `new_pdf_sensor` poll thư mục `data/raw/` mỗi 30 giây. "
+        "Khi phát hiện file mới → tự động trigger `__ASSET_JOB`.",
+        icon="🤖",
     )
 
     col_upload, col_status = st.columns([1, 1])
 
     with col_upload:
+        st.markdown("#### 1. Chọn và lưu file")
         uploaded_file = st.file_uploader(
             "Chọn file PDF", type=["pdf"], key="pdf_upload",
-            help="File sẽ được lưu vào kho dữ liệu và pipeline tự động chạy.",
+            help="File được lưu vào data/raw/ — sensor sẽ tự phát hiện và chạy pipeline.",
         )
 
         if uploaded_file:
@@ -320,123 +326,93 @@ with tab5:
             file_size_kb = len(file_bytes) // 1024
             st.info(f"**{uploaded_file.name}** · {file_size_kb:,} KB")
 
-            already_exists = os.path.exists(
-                os.path.join(RAW_DATA_DIR, uploaded_file.name)
-            )
+            already_exists = os.path.exists(os.path.join(RAW_DATA_DIR, uploaded_file.name))
             if already_exists:
-                st.warning(
-                    f"File `{uploaded_file.name}` đã tồn tại trong kho. "
-                    "Upload sẽ ghi đè và chạy lại pipeline."
+                st.warning("File đã tồn tại — upload sẽ ghi đè, sensor sẽ trigger lại pipeline.")
+
+            if st.button("💾 Lưu vào hệ thống", type="primary"):
+                # Lưu vào filesystem (shared với etl_pipeline container qua volume mount)
+                try:
+                    os.makedirs(RAW_DATA_DIR, exist_ok=True)
+                    with open(os.path.join(RAW_DATA_DIR, uploaded_file.name), "wb") as f:
+                        f.write(file_bytes)
+                    st.success(f"✅ Đã lưu vào `{RAW_DATA_DIR}/{uploaded_file.name}`")
+                except Exception as e:
+                    st.error(f"❌ Lỗi lưu file: {e}")
+                    st.stop()
+
+                # Upload lên MinIO yhct-docs cho citation links
+                try:
+                    _upload_to_minio(uploaded_file.name, file_bytes)
+                    st.success("✅ Đã lưu lên MinIO (yhct-docs) cho citation links")
+                except Exception as e:
+                    st.warning(f"⚠ MinIO upload thất bại (không ảnh hưởng pipeline): {e}")
+
+                st.success(
+                    "🤖 **Sensor sẽ tự động phát hiện và kích hoạt pipeline trong ~30 giây.**\n\n"
+                    "Theo dõi trạng thái ở cột bên phải."
                 )
-
-            if st.button("🚀 Nhập và xử lý", type="primary"):
-                errors = []
-
-                # 1. Lưu vào thư mục data/raw (shared với etl_pipeline container)
-                with st.spinner("Đang lưu file..."):
-                    try:
-                        os.makedirs(RAW_DATA_DIR, exist_ok=True)
-                        raw_path = os.path.join(RAW_DATA_DIR, uploaded_file.name)
-                        with open(raw_path, "wb") as f:
-                            f.write(file_bytes)
-                        st.success(f"✅ Đã lưu: `{raw_path}`")
-                    except Exception as e:
-                        errors.append(f"Lưu file: {e}")
-                        st.error(f"❌ Không lưu được file: {e}")
-
-                # 2. Upload lên MinIO yhct-docs (cho citation links)
-                with st.spinner("Đang upload lên MinIO..."):
-                    try:
-                        _upload_to_minio(uploaded_file.name, file_bytes)
-                        st.success("✅ Đã upload lên MinIO (yhct-docs)")
-                    except Exception as e:
-                        st.warning(f"⚠ MinIO upload thất bại (không ảnh hưởng pipeline): {e}")
-
-                # 3. Kích hoạt Dagster pipeline
-                if not errors:
-                    with st.spinner("Đang kích hoạt Dagster pipeline..."):
-                        repo_info = _discover_repo_info()
-                        if repo_info is None:
-                            st.error(
-                                "❌ Không kết nối được Dagster tại `"
-                                + DAGSTER_URL + "`. "
-                                "Kiểm tra container dagster đang chạy."
-                            )
-                        else:
-                            loc_name, repo_name, job_name = repo_info
-                            run_id, err = _launch_pipeline(loc_name, repo_name, job_name)
-
-                            if run_id:
-                                st.session_state.dagster_run_id       = run_id
-                                st.session_state.dagster_uploaded_file = uploaded_file.name
-                                st.session_state.dagster_loc          = loc_name
-                                st.session_state.dagster_repo         = repo_name
-                                st.session_state.dagster_job          = job_name
-                                st.rerun()
-                            else:
-                                st.error(f"❌ Pipeline không khởi động được: {err}")
 
     with col_status:
-        if "dagster_run_id" in st.session_state:
-            run_id   = st.session_state.dagster_run_id
-            filename = st.session_state.get("dagster_uploaded_file", "")
-            status   = _get_run_status(run_id)
+        st.markdown("#### 2. Theo dõi pipeline")
 
-            STATUS_INFO = {
-                "SUCCESS":     ("✅", "success"),
-                "FAILURE":     ("❌", "error"),
-                "QUEUED":      ("⏳", "info"),
-                "NOT_STARTED": ("⏳", "info"),
-                "STARTING":    ("🔄", "info"),
-                "STARTED":     ("🔄", "info"),
-                "MANAGED":     ("🔄", "info"),
-                "CANCELING":   ("🛑", "warning"),
-                "CANCELED":    ("🛑", "warning"),
+        # Lấy các run gần nhất từ Dagster
+        def _get_recent_runs(limit: int = 5) -> list[dict]:
+            q = """
+            query RecentRuns($limit: Int!) {
+              runsOrError(limit: $limit) {
+                ... on Runs {
+                  results {
+                    runId status startTime endTime
+                    tags { key value }
+                  }
+                }
+              }
             }
-            icon, level = STATUS_INFO.get(status, ("❓", "info"))
-
-            st.markdown(f"### {icon} Trạng thái pipeline")
-            st.code(
-                f"File   : {filename}\n"
-                f"Run ID : {run_id}\n"
-                f"Status : {status}\n"
-                f"Dagster: {DAGSTER_URL}"
-            )
-
-            if status == "SUCCESS":
-                load_parquet.clear()   # xóa cache để các tab analytics hiển thị dữ liệu mới
-                st.success(
-                    "🎉 Tài liệu đã được xử lý thành công!\n\n"
-                    "Các tab Analytics đã được cập nhật. "
-                    "Reload trang chatbot để bắt đầu hỏi về tài liệu mới."
+            """
+            try:
+                r = httpx.post(
+                    f"{DAGSTER_URL}/graphql",
+                    json={"query": q, "variables": {"limit": limit}},
+                    timeout=10,
                 )
-                if st.button("🗑 Xóa thông báo", key="clear_success"):
-                    for key in ["dagster_run_id", "dagster_uploaded_file",
-                                "dagster_loc", "dagster_repo", "dagster_job"]:
-                        st.session_state.pop(key, None)
-                    st.rerun()
+                return r.json()["data"]["runsOrError"].get("results", [])
+            except Exception:
+                return []
 
-            elif status in ("FAILURE", "CANCELED"):
-                st.error(
-                    f"❌ Pipeline {status.lower()}. "
-                    f"Xem logs chi tiết tại Dagster UI: `{DAGSTER_URL}`"
-                )
-                if st.button("🗑 Xóa thông báo", key="clear_failure"):
-                    for key in ["dagster_run_id", "dagster_uploaded_file",
-                                "dagster_loc", "dagster_repo", "dagster_job"]:
-                        st.session_state.pop(key, None)
-                    st.rerun()
+        if st.button("🔄 Refresh", key="refresh_runs"):
+            load_parquet.clear()
+            st.rerun()
 
-            else:
-                st.info("Pipeline đang chạy... Bấm refresh để cập nhật trạng thái.")
-                if st.button("🔄 Refresh trạng thái", key="refresh_status"):
-                    load_parquet.clear()   # clear cache sẵn khi refresh
-                    st.rerun()
-
+        runs = _get_recent_runs(limit=5)
+        if not runs:
+            st.info("Chưa có run nào. Upload file PDF để bắt đầu.")
         else:
-            st.markdown("""
-            <div style="padding:40px; text-align:center; color:#aaa; border:1px dashed #ccc; border-radius:12px;">
-                <p style="font-size:32px; margin:0">📂</p>
-                <p>Upload file PDF và bấm <strong>Nhập và xử lý</strong><br>để bắt đầu pipeline tự động.</p>
-            </div>
-            """, unsafe_allow_html=True)
+            import datetime
+            STATUS_ICON = {
+                "SUCCESS": "✅", "FAILURE": "❌", "STARTED": "🔄",
+                "QUEUED": "⏳", "NOT_STARTED": "⏳", "STARTING": "🔄",
+                "CANCELED": "🛑", "CANCELING": "🛑",
+            }
+            for run in runs:
+                icon   = STATUS_ICON.get(run["status"], "❓")
+                start  = (datetime.datetime.fromtimestamp(run["startTime"]).strftime("%H:%M:%S")
+                          if run["startTime"] else "—")
+                end    = (datetime.datetime.fromtimestamp(run["endTime"]).strftime("%H:%M:%S")
+                          if run["endTime"] else "đang chạy")
+                # Lấy tag triggered_by và new_files nếu có
+                tags   = {t["key"]: t["value"] for t in run.get("tags", [])}
+                by     = tags.get("triggered_by", "manual")
+                files  = tags.get("new_files", "")
+
+                label = f"{icon} `{run['runId'][:8]}` · {start} → {end} · _{by}_"
+                with st.expander(label, expanded=(run["status"] in ("STARTED", "QUEUED"))):
+                    st.write(f"**Status:** {run['status']}")
+                    st.write(f"**Trigger:** {by}")
+                    if files:
+                        st.write(f"**File mới:** {files}")
+                    st.write(f"**Run ID:** `{run['runId']}`")
+                    if run["status"] == "SUCCESS":
+                        load_parquet.clear()
+                    if run["status"] in ("STARTED", "QUEUED"):
+                        st.info("Pipeline đang chạy...")

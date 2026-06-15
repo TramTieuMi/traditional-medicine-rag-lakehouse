@@ -1,0 +1,48 @@
+2026-06-15 15:37:39 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - LOGS_CAPTURED - Started capturing logs in process (pid: 1035).
+2026-06-15 15:37:39 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - STEP_START - Started execution of step "gold__herbs__gold_herb_mentions".
+2026-06-15 15:37:42 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - [MinIO] ✅ Đã đọc: s3://yhct-gold/gold/chunks/gold_yhct_chunks.parquet (6686 rows)
+2026-06-15 15:37:42 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - LOADED_INPUT - Loaded input "gold_yhct_chunks" using input manager "minio_io_manager", from output "result" of step "gold__chunks__gold_yhct_chunks"
+2026-06-15 15:37:42 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - STEP_INPUT - Got input "gold_yhct_chunks" of type "DataFrame". (Type check passed).
+2026-06-15 15:37:44 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - 📥 Nhận 6686 chunks từ gold_yhct_chunks
+2026-06-15 15:37:44 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - 🔍 Bước 1: LLM discovery – xây vocabulary từ nội dung PDF...
+2026-06-15 15:37:47 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Chunks có trigger keywords: 2747 / 6686
+2026-06-15 15:37:47 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Đã sample còn 150 chunks để gửi LLM
+2026-06-15 15:38:02 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 1: +21 herbs → vocab tạm = 21
+2026-06-15 15:38:15 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 2: +26 herbs → vocab tạm = 40
+2026-06-15 15:38:25 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 3: +31 herbs → vocab tạm = 65
+2026-06-15 15:38:40 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 4: +36 herbs → vocab tạm = 81
+2026-06-15 15:38:55 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 5: +38 herbs → vocab tạm = 105
+2026-06-15 15:39:22 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 6: +0 herbs → vocab tạm = 105
+2026-06-15 15:39:51 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 7: +16 herbs → vocab tạm = 120
+2026-06-15 15:40:05 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 8: +18 herbs → vocab tạm = 132
+2026-06-15 15:40:17 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 9: +10 herbs → vocab tạm = 140
+2026-06-15 15:40:31 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 10: +8 herbs → vocab tạm = 144
+2026-06-15 15:40:58 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 11: +18 herbs → vocab tạm = 162
+2026-06-15 15:41:28 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 12: +0 herbs → vocab tạm = 162
+2026-06-15 15:41:42 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 13: +16 herbs → vocab tạm = 171
+2026-06-15 15:41:55 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 14: +9 herbs → vocab tạm = 172
+2026-06-15 15:42:09 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 15: +19 herbs → vocab tạm = 188
+2026-06-15 15:42:24 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 16: +17 herbs → vocab tạm = 199
+2026-06-15 15:42:52 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 17: +0 herbs → vocab tạm = 199
+2026-06-15 15:43:20 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 18: +0 herbs → vocab tạm = 199
+2026-06-15 15:43:47 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 19: +0 herbs → vocab tạm = 199
+2026-06-15 15:44:15 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 20: +0 herbs → vocab tạm = 199
+2026-06-15 15:44:43 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 21: +0 herbs → vocab tạm = 199
+2026-06-15 15:44:59 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 22: +5 herbs → vocab tạm = 204
+2026-06-15 15:45:12 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 23: +10 herbs → vocab tạm = 214
+2026-06-15 15:45:43 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 24: +21 herbs → vocab tạm = 233
+2026-06-15 15:45:59 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 25: +21 herbs → vocab tạm = 254
+2026-06-15 15:46:13 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 26: +28 herbs → vocab tạm = 270
+2026-06-15 15:46:25 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 27: +37 herbs → vocab tạm = 289
+2026-06-15 15:46:40 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 28: +42 herbs → vocab tạm = 309
+2026-06-15 15:46:55 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 29: +34 herbs → vocab tạm = 329
+2026-06-15 15:47:10 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Batch 30: +55 herbs → vocab tạm = 357
+2026-06-15 15:47:11 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - ✅ Vocabulary cuối: 356 dược liệu (sau lọc noise từ 357 raw)
+2026-06-15 15:47:11 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions -    Mẫu: ['```json', 'a giao', 'acori graminei', 'aganosma acuminata', 'ainsliaea latifolia', 'an cung ngưu hoàng hoàn', 'anh túc xác', 'aristolochia', 'ba chẽ', 'ba kích thiên', 'baliospermi', 'berberin', 'bào khương', 'bán hạ', 'bát trân thang']
+2026-06-15 15:47:11 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - 🔎 Bước 2: Regex scan toàn bộ chunks...
+2026-06-15 15:47:32 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - ✅ Kết quả: 14083 rows | 345 herbs | 4037 chunks | 30 LLM calls
+2026-06-15 15:47:34 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-15 15:47:34 +0000 - dagster - INFO - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - gold__herbs__gold_herb_mentions - [MinIO] ✅ Đã lưu: s3://yhct-gold/gold/herbs/gold_herb_mentions.parquet (14083 rows)
+2026-06-15 15:47:34 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - ASSET_MATERIALIZATION - Materialized value gold herbs gold_herb_mentions.
+2026-06-15 15:47:34 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-15 15:47:34 +0000 - dagster - DEBUG - __ASSET_JOB - 722ed5b6-631d-4b7c-9819-2e4d0d1ac35f - 1035 - gold__herbs__gold_herb_mentions - STEP_SUCCESS - Finished execution of step "gold__herbs__gold_herb_mentions" in 9m55s.
