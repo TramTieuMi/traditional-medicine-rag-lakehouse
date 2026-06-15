@@ -1,0 +1,8 @@
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - LOGS_CAPTURED - Started capturing logs in process (pid: 83).
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - gold__sessions__gold_mongodb_sessions - STEP_START - Started execution of step "gold__sessions__gold_mongodb_sessions".
+2026-06-15 12:29:31 +0000 - dagster - INFO - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - gold__sessions__gold_mongodb_sessions - ✅ Đã đồng bộ 0 phiên chat từ MongoDB.
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - gold__sessions__gold_mongodb_sessions - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-06-15 12:29:31 +0000 - dagster - WARNING - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - gold__sessions__gold_mongodb_sessions - DataFrame rỗng, bỏ qua việc lưu vào MinIO.
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - gold__sessions__gold_mongodb_sessions - ASSET_MATERIALIZATION - Materialized value gold sessions gold_mongodb_sessions.
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - gold__sessions__gold_mongodb_sessions - HANDLED_OUTPUT - Handled output "result" using IO manager "minio_io_manager"
+2026-06-15 12:29:31 +0000 - dagster - DEBUG - __ASSET_JOB - abca26bc-9b86-4706-81f4-e59e4a0c57bc - 83 - gold__sessions__gold_mongodb_sessions - STEP_SUCCESS - Finished execution of step "gold__sessions__gold_mongodb_sessions" in 199ms.

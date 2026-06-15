@@ -66,6 +66,30 @@ def init_duckdb():
     """)
     print("✅ gold_tang_phu_mentions")
     
+    con.execute("""
+        CREATE OR REPLACE VIEW gold_users AS
+        SELECT * FROM read_parquet(
+            's3://yhct-gold/gold/users/gold_mongodb_users.parquet'
+        );
+    """)
+    print("✅ gold_users")
+
+    con.execute("""
+        CREATE OR REPLACE VIEW gold_sessions AS
+        SELECT * FROM read_parquet(
+            's3://yhct-gold/gold/sessions/gold_mongodb_sessions.parquet'
+        );
+    """)
+    print("✅ gold_sessions")
+
+    con.execute("""
+        CREATE OR REPLACE VIEW gold_events AS
+        SELECT * FROM read_parquet(
+            's3://yhct-gold/gold/events/gold_mongodb_events.parquet'
+        );
+    """)
+    print("✅ gold_events")
+    
     # Tạo các bảng analytics tổng hợp
     con.execute("""
         CREATE OR REPLACE TABLE herb_summary AS

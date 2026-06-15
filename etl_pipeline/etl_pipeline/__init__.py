@@ -8,6 +8,7 @@ from .assets.gold_embeddings         import gold_embeddings
 from .assets.gold_evaluation         import gold_evaluation
 from .assets.gold_herb_mentions      import gold_herb_mentions
 from .assets.gold_tang_phu_mentions  import gold_tang_phu_mentions
+from .assets.gold_mongodb_sync       import gold_mongodb_users, gold_mongodb_sessions, gold_mongodb_events
 from .resources.minio_io_manager     import MinIOIOManager
 
 MINIO_CONFIG = {
@@ -28,6 +29,9 @@ defs = Definitions(
         gold_evaluation,
         gold_herb_mentions,
         gold_tang_phu_mentions,
+        gold_mongodb_users,
+        gold_mongodb_sessions,
+        gold_mongodb_events,
     ],
     resources={
         "minio_io_manager": MinIOIOManager(MINIO_CONFIG),

@@ -65,7 +65,7 @@ services:
       dockerfile: Dockerfile
     container_name: mlflow
     ports:
-      - "5000:5000"
+      - "5002:5000"
     environment:
       MLFLOW_BACKEND_STORE_URI: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@de_psql:5432/mlflow
       MLFLOW_DEFAULT_ARTIFACT_ROOT: s3://yhct-mlflow/artifacts
@@ -167,44 +167,6 @@ services:
       "
     restart: unless-stopped
 
-  # ───────────────────────────────────────────────────────────────────────────
-  # SPARK
-  # ───────────────────────────────────────────────────────────────────────────
-  spark-master:
-    build:
-      context: ./docker_image/spark
-      dockerfile: Dockerfile
-    container_name: spark-master
-    hostname: spark-master
-    ports:
-      - "8080:8080"
-      - "7077:7077"
-    environment:
-      - SPARK_MODE=master
-    volumes:
-      - ./data:/opt/spark/data
-    networks:
-      - yhct_network
-    restart: unless-stopped
-
-  spark-worker:
-    build:
-      context: ./docker_image/spark
-      dockerfile: Dockerfile
-    container_name: spark-worker
-    hostname: spark-worker
-    depends_on:
-      - spark-master
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=2G
-      - SPARK_WORKER_CORES=2
-    volumes:
-      - ./data:/opt/spark/data
-    networks:
-      - yhct_network
-    restart: unless-stopped
 
   # ───────────────────────────────────────────────────────────────────────────
   # CHROMADB
@@ -246,6 +208,85 @@ services:
       - chromadb
       - minio
       - dagster
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # MONGODB & REDIS
+  # ───────────────────────────────────────────────────────────────────────────
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # YHCT CUSTOM WEB PORTAL (AI Chatbot & Analytics Backend/Frontend/AI-Service)
+  # ───────────────────────────────────────────────────────────────────────────
+  ai-service:
+    build:
+      context: ./ai_service
+      dockerfile: Dockerfile
+    container_name: ai-service
+    ports:
+      - "8001:8000"
+    environment:
+      CHROMA_HOST: chromadb
+      CHROMA_PORT: "8000"
+      GROQ_API_KEY: ${GROQ_API_KEY}
+    depends_on:
+      - chromadb
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://mongodb:27017/yhct_db
+      REDIS_URL: redis://redis:6379
+      AI_SERVICE_URL: http://ai-service:8000/api/chat
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_yhct_2026}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-super_secret_refresh_key_yhct_2026}
+    depends_on:
+      - mongodb
+      - redis
+      - ai-service
+    networks:
+      - yhct_network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_BACKEND_URL: http://localhost:5000
+      VITE_MINIO_PUBLIC_URL: ${MINIO_PUBLIC_URL:-http://localhost:9000}
     networks:
       - yhct_network
     restart: unless-stopped
@@ -323,3 +364,4 @@ volumes:
   chroma_data:
   superset_db_data:
   superset_home:
+  mongo_data:
