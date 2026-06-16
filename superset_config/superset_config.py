@@ -17,3 +17,13 @@ FEATURE_FLAGS = {
     "ENABLE_TEMPLATE_PROCESSING": True,
     "DASHBOARD_NATIVE_FILTERS":   True,
 }
+
+# Pre-load DuckDB extensions in the parent process to avoid concurrent loading race conditions in worker threads
+try:
+    import duckdb
+    con = duckdb.connect('/app/superset_home/yhct.duckdb')
+    con.execute("INSTALL httpfs; LOAD httpfs; INSTALL json; LOAD json;")
+    con.close()
+    print("🦆 DuckDB extensions httpfs & json pre-loaded in parent process successfully!")
+except Exception as e:
+    print("⚠️ Warning: Could not pre-load DuckDB extensions:", e)

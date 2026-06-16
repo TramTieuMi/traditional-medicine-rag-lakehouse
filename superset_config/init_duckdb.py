@@ -90,6 +90,53 @@ def init_duckdb():
     """)
     print("✅ gold_events")
     
+    try: con.execute("DROP TABLE IF EXISTS gold_user_engagement;")
+    except Exception: pass
+    try: con.execute("DROP VIEW IF EXISTS gold_user_engagement;")
+    except Exception: pass
+    con.execute("""
+        CREATE TABLE gold_user_engagement AS
+        SELECT 
+            CAST(date AS DATE) AS date,
+            total_active_users,
+            new_registered_users,
+            total_page_views,
+            average_session_duration_sec,
+            bounce_rate_pct,
+            device_desktop_pct,
+            device_mobile_pct,
+            retention_rate_pct,
+            updated_at
+        FROM read_parquet(
+            's3://yhct-gold/gold/mongodb/gold_user_engagement.parquet'
+        );
+    """)
+    print("✅ gold_user_engagement")
+    
+    try: con.execute("DROP TABLE IF EXISTS gold_chat_performance;")
+    except Exception: pass
+    try: con.execute("DROP VIEW IF EXISTS gold_chat_performance;")
+    except Exception: pass
+    con.execute("""
+        CREATE TABLE gold_chat_performance AS
+        SELECT * FROM read_parquet(
+            's3://yhct-gold/gold/mongodb/gold_chat_performance.parquet'
+        );
+    """)
+    print("✅ gold_chat_performance")
+    
+    try: con.execute("DROP TABLE IF EXISTS gold_medical_insights;")
+    except Exception: pass
+    try: con.execute("DROP VIEW IF EXISTS gold_medical_insights;")
+    except Exception: pass
+    con.execute("""
+        CREATE TABLE gold_medical_insights AS
+        SELECT * FROM read_parquet(
+            's3://yhct-gold/gold/mongodb/gold_medical_insights.parquet'
+        );
+    """)
+    print("✅ gold_medical_insights")
+    
     # Tạo các bảng analytics tổng hợp
     con.execute("""
         CREATE OR REPLACE TABLE herb_summary AS

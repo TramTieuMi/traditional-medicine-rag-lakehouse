@@ -207,6 +207,44 @@ def health_check():
     except Exception as e:
         return {"status": "unhealthy", "error": str(e)}
 
+def _reformulate_query(question: str, history: List[ChatMessage]) -> str:
+    """Sử dụng LLM để viết lại câu hỏi hội thoại và lịch sử thành câu hỏi tìm kiếm độc lập."""
+    if not history:
+        return question
+
+    # Lấy tối đa 4 tin nhắn gần nhất làm ngữ cảnh viết lại
+    hist_str = ""
+    for msg in history[-4:]:
+        role_name = "User" if msg.role == "user" else "Assistant"
+        hist_str += f"{role_name}: {msg.content}\n"
+
+    prompt = (
+        "Bạn là trợ lý ảo chuyên viết lại câu hỏi hội thoại thành câu hỏi tìm kiếm độc lập.\n"
+        "Nhiệm vụ: Dựa vào lịch sử hội thoại và câu hỏi mới nhất, hãy viết lại thành một câu hỏi tìm kiếm "
+        "đầy đủ, rõ ràng và độc lập (không cần đại từ nhân xưng hay từ thay thế như 'nó', 'đó', 'họ', 'ở đây').\n"
+        "Yêu cầu: CHỈ trả về câu hỏi đã được viết lại, không giải thích gì thêm.\n\n"
+        f"Lịch sử hội thoại:\n{hist_str}\n"
+        f"Câu hỏi mới nhất: {question}\n\n"
+        "Câu hỏi viết lại:"
+    )
+
+    try:
+        resp = get_groq().chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[
+                {"role": "system", "content": "You are a query rewriter."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.0,
+            max_tokens=100,
+        )
+        rewritten = resp.choices[0].message.content.strip()
+        rewritten = rewritten.strip('"\'')
+        return rewritten
+    except Exception:
+        # Fallback về câu hỏi gốc nếu gọi LLM lỗi
+        return question
+
 # ── Main Chat API Endpoint ────────────────────────────────────────────────────
 @app.post("/api/chat", response_model=ChatResponse)
 def api_chat(payload: ChatRequest):
@@ -227,7 +265,9 @@ def api_chat(payload: ChatRequest):
     # 2. Truy vấn RAG nếu cần thiết
     if use_rag:
         try:
-            q_vec = get_model().encode([question])[0].tolist()
+            # Viết lại câu hỏi thành câu tìm kiếm độc lập dựa trên ngữ cảnh lịch sử
+            search_query = _reformulate_query(question, history)
+            q_vec = get_model().encode([search_query])[0].tolist()
             results = get_collection().query(
                 query_embeddings=[q_vec],
                 n_results=TOP_K,

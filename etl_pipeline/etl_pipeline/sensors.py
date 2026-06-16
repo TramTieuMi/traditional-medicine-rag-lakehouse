@@ -16,12 +16,21 @@ from dagster import (
     define_asset_job,
     sensor,
 )
+from pymongo import MongoClient
+import os
 
 # Job rõ ràng để schedule có thể attach vào (không dùng implicit __ASSET_JOB)
 all_assets_job = define_asset_job(
     name="all_assets_job",
     selection=AssetSelection.all(),
     description="Chạy toàn bộ pipeline: Bronze → Silver → Gold → Embeddings",
+)
+
+# Job chạy riêng biệt cho User Data Lakehouse
+user_lakehouse_job = define_asset_job(
+    name="user_lakehouse_job",
+    selection=AssetSelection.groups("user_lakehouse"),
+    description="Chạy pipeline User Data Lakehouse: Bronze → Silver → Gold",
 )
 
 RAW_DIR           = Path("/opt/dagster/app/data/raw")
@@ -99,3 +108,62 @@ daily_pipeline_schedule = ScheduleDefinition(
         "và metrics được cập nhật tự động."
     ),
 )
+
+
+@sensor(
+    job=user_lakehouse_job,
+    minimum_interval_seconds=900,  # 15 phút
+    description="Kiểm tra thay đổi dữ liệu trên MongoDB và trigger chạy pipeline User Lakehouse",
+)
+def mongodb_change_sensor(context: SensorEvaluationContext):
+    last_ts = context.cursor if context.cursor else "1970-01-01T00:00:00.000000"
+    
+    from datetime import datetime
+    try:
+        last_dt = datetime.fromisoformat(last_ts.replace("Z", "+00:00"))
+    except Exception:
+        last_dt = datetime(1970, 1, 1)
+        
+    mongo_uri = os.getenv("MONGO_URI", "mongodb://mongodb:27017/yhct_db")
+    client = MongoClient(mongo_uri)
+    db = client.get_database()
+    
+    collections_to_check = {
+        "users": "created_at",
+        "conversations": "start_time",
+        "analyticsevents": "timestamp",
+        "medicalentitylogs": "timestamp"
+    }
+    
+    max_found_dt = last_dt
+    has_new_data = False
+    
+    for col_name, ts_field in collections_to_check.items():
+        col = db.get_collection(col_name)
+        new_doc = col.find_one({ts_field: {"$gt": last_dt}}, sort=[(ts_field, -1)])
+        if new_doc:
+            has_new_data = True
+            val = new_doc[ts_field]
+            # MongoDB Date is returned as a timezone-naive datetime (usually UTC) or timezone-aware depending on settings.
+            # Let's ensure both are naive for clean comparison.
+            if val.tzinfo is not None:
+                val = val.replace(tzinfo=None)
+            if last_dt.tzinfo is not None:
+                last_dt = last_dt.replace(tzinfo=None)
+                
+            if val > max_found_dt.replace(tzinfo=None):
+                max_found_dt = val
+                
+    client.close()
+    
+    if not has_new_data:
+        yield SkipReason("Không có dữ liệu mới trên MongoDB kể từ lần cuối kiểm tra.")
+        return
+        
+    new_cursor_val = max_found_dt.isoformat()
+    context.update_cursor(new_cursor_val)
+    
+    yield RunRequest(
+        run_key=f"mongodb_sync_{new_cursor_val.replace(':', '_')}",
+        tags={"triggered_by": "mongodb_change_sensor", "last_timestamp": new_cursor_val}
+    )

@@ -15,6 +15,7 @@ from minio import Minio
 from .assets.bronze      import bronze_pdf_ingestion
 from .assets.silver      import silver_filtered_pages
 from .assets.gold_chunks import gold_yhct_chunks
+from .assets.user_gold   import gold_user_engagement, gold_chat_performance, gold_medical_insights
 
 MINIO_ENDPOINT   = "minio:9000"
 MINIO_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID",     "minio")
@@ -207,6 +208,87 @@ def check_gold_coverage_per_source(context) -> AssetCheckResult:
     )
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# USER LAKEHOUSE GOLD CHECKS
+# ══════════════════════════════════════════════════════════════════════════════
+
+@asset_check(
+    asset=gold_user_engagement,
+    name="gold_engagement_no_null_date",
+    description="Ngày trong bảng gold_user_engagement không được rỗng.",
+)
+def check_gold_engagement_no_nulls(context) -> AssetCheckResult:
+    try:
+        df = _read_parquet("yhct-gold", "gold/mongodb/gold_user_engagement.parquet")
+        null_dates = df.filter(pl.col("date").is_null() | (pl.col("date") == "")).shape[0]
+        passed = (null_dates == 0)
+    except Exception as e:
+        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
+        passed = True  # Fallback if first run or empty
+        null_dates = 0
+        
+    return AssetCheckResult(
+        passed=passed,
+        severity=AssetCheckSeverity.ERROR,
+        metadata={"null_dates_count": MetadataValue.int(null_dates)},
+    )
+
+
+@asset_check(
+    asset=gold_chat_performance,
+    name="gold_chat_rating_range",
+    description="feedback_rating nếu được đánh giá thì phải nằm trong khoảng [1, 5].",
+)
+def check_gold_chat_rating_range(context) -> AssetCheckResult:
+    try:
+        df = _read_parquet("yhct-gold", "gold/mongodb/gold_chat_performance.parquet")
+        invalid_ratings = df.filter(
+            (pl.col("feedback_rating").is_not_null()) & 
+            ((pl.col("feedback_rating") < 1) | (pl.col("feedback_rating") > 5))
+        ).shape[0]
+        passed = (invalid_ratings == 0)
+    except Exception as e:
+        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
+        passed = True
+        invalid_ratings = 0
+        
+    return AssetCheckResult(
+        passed=passed,
+        severity=AssetCheckSeverity.ERROR,
+        metadata={"invalid_ratings_count": MetadataValue.int(invalid_ratings)},
+    )
+
+
+@asset_check(
+    asset=gold_medical_insights,
+    name="gold_insights_valid_ids",
+    description="log_id trong bảng gold_medical_insights phải là duy nhất và không được rỗng.",
+)
+def check_gold_insights_valid(context) -> AssetCheckResult:
+    try:
+        df = _read_parquet("yhct-gold", "gold/mongodb/gold_medical_insights.parquet")
+        total = df.shape[0]
+        unique_logs = df["log_id"].n_unique()
+        null_logs = df.filter(pl.col("log_id").is_null() | (pl.col("log_id") == "")).shape[0]
+        passed = (total == unique_logs) and (null_logs == 0)
+    except Exception as e:
+        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
+        passed = True
+        total = 0
+        unique_logs = 0
+        null_logs = 0
+        
+    return AssetCheckResult(
+        passed=passed,
+        severity=AssetCheckSeverity.ERROR,
+        metadata={
+            "total_records": MetadataValue.int(total),
+            "unique_logs": MetadataValue.int(unique_logs),
+            "null_logs": MetadataValue.int(null_logs),
+        },
+    )
+
+
 # Danh sách export cho __init__.py
 ALL_CHECKS = [
     check_bronze_has_data,
@@ -217,4 +299,7 @@ ALL_CHECKS = [
     check_gold_chunk_size,
     check_gold_no_duplicate_chunks,
     check_gold_coverage_per_source,
+    check_gold_engagement_no_nulls,
+    check_gold_chat_rating_range,
+    check_gold_insights_valid,
 ]

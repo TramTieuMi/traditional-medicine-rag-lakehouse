@@ -48,6 +48,8 @@ router.post('/message', auth, async (req, res) => {
       cleanedHistory.push({ role: 'assistant', content: msg.ai_response });
     });
 
+    console.log(`[Chat API] session_id: ${activeSessionId}, history length: ${cleanedHistory.length}`);
+
     // Gọi FastAPI AI Service
     let aiResponse;
     try {

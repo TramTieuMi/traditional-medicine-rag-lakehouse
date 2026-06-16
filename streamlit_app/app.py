@@ -115,7 +115,7 @@ def _build_sources_html(sources: list, sims: list, metadatas: list) -> str:
         book_name = _book_display_name(sf)
         pdf_url   = f"{MINIO_PUBLIC_URL}/yhct-docs/{sf}"
         parts.append(
-            f'<a href="{pdf_url}" target="_blank" class="source-tag">'
+            f'<a href="{pdf_url}" download="{sf}" target="_blank" class="source-tag">'
             f'📚 {book_name} · tr.{", ".join(pages_sorted)}'
             f'</a>'
         )

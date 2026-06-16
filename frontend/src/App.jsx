@@ -12,6 +12,109 @@ import {
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 const MINIO_PUBLIC_URL = import.meta.env.VITE_MINIO_PUBLIC_URL || 'http://localhost:9000';
 
+// Simple custom Markdown parser to format AI responses nicely
+const renderMarkdown = (text) => {
+  if (!text) return null;
+  
+  // Split by double newlines to find paragraphs/blocks
+  const blocks = text.split(/\n\n+/);
+  
+  const parseInline = (str) => {
+    const parts = [];
+    let curIdx = 0;
+    const boldRegex = /\*\*([^*]+)\*\*/g;
+    let match;
+    
+    while ((match = boldRegex.exec(str)) !== null) {
+      if (match.index > curIdx) {
+        parts.push(str.substring(curIdx, match.index));
+      }
+      parts.push(<strong key={match.index}>{match[1]}</strong>);
+      curIdx = boldRegex.lastIndex;
+    }
+    
+    if (curIdx < str.length) {
+      parts.push(str.substring(curIdx));
+    }
+    return parts.length > 0 ? parts : str;
+  };
+
+  return blocks.map((block, idx) => {
+    const trimmed = block.trim();
+    if (!trimmed) return null;
+
+    // Check if it is a heading: ### Heading or similar
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const headingText = headingMatch[2];
+      const HeadingTag = `h${level}`;
+      return <HeadingTag key={idx} className={`markdown-h${level} markdown-heading`}>{parseInline(headingText)}</HeadingTag>;
+    }
+
+    // Check if it is a bold heading block: **Heading** (alone)
+    const boldTitleMatch = trimmed.match(/^\*\*([^*]+)\*\*$/);
+    if (boldTitleMatch) {
+      return <h4 key={idx} className="markdown-heading">{boldTitleMatch[1]}</h4>;
+    }
+
+    // Check if it is inline heading with block content: **Heading**\nContent
+    const boldTitleWithContentMatch = trimmed.match(/^\*\*([^*]+)\*\*\s*\n([\s\S]+)$/);
+    if (boldTitleWithContentMatch) {
+      const title = boldTitleWithContentMatch[1];
+      const content = boldTitleWithContentMatch[2];
+      
+      const lines = content.split('\n');
+      const hasList = lines.some(l => l.trim().startsWith('- ') || l.trim().startsWith('* '));
+      
+      return (
+        <div key={idx} className="markdown-section">
+          <h4 className="markdown-heading">{title}</h4>
+          {hasList ? (
+            <div className="markdown-list-wrapper">
+              {lines.map((line, lIdx) => {
+                const lineTrimmed = line.trim();
+                if (lineTrimmed.startsWith('- ') || lineTrimmed.startsWith('* ')) {
+                  return (
+                    <ul key={lIdx} className="markdown-list">
+                      <li>{parseInline(lineTrimmed.replace(/^[-*]\s+/, ''))}</li>
+                    </ul>
+                  );
+                }
+                return <p key={lIdx} className="markdown-paragraph">{parseInline(line)}</p>;
+              })}
+            </div>
+          ) : (
+            <p className="markdown-paragraph">{parseInline(content)}</p>
+          )}
+        </div>
+      );
+    }
+
+    // Check if it is a list block (lines starting with - or * or digit.)
+    const lines = trimmed.split('\n');
+    const isList = lines.every(line => {
+      const lineTrimmed = line.trim();
+      return lineTrimmed.startsWith('- ') || lineTrimmed.startsWith('* ') || /^\d+\.\s+/.test(lineTrimmed);
+    });
+
+    if (isList) {
+      return (
+        <ul key={idx} className="markdown-list">
+          {lines.map((line, lIdx) => {
+            const lineTrimmed = line.trim();
+            const cleanText = lineTrimmed.replace(/^[-*]\s+/, '').replace(/^\d+\.\s+/, '');
+            return <li key={lIdx}>{parseInline(cleanText)}</li>;
+          })}
+        </ul>
+      );
+    }
+
+    // Normal paragraph
+    return <p key={idx} className="markdown-paragraph">{parseInline(trimmed)}</p>;
+  });
+};
+
 function App() {
   // Navigation & Authentication states
   const [user, setUser] = useState(null);
@@ -34,6 +137,12 @@ function App() {
   
   // Feedback rating states
   const [sessionRating, setSessionRating] = useState(null);
+
+  // Change password states
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [changePasswordMessage, setChangePasswordMessage] = useState('');
+  const [changePasswordError, setChangePasswordError] = useState('');
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -318,6 +427,44 @@ function App() {
     }
   };
 
+  // Đổi mật khẩu người dùng
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setChangePasswordError('');
+    setChangePasswordMessage('');
+
+    if (newPassword.length < 6) {
+      setChangePasswordError('Mật khẩu mới phải từ 6 ký tự trở lên.');
+      return;
+    }
+
+    const token = localStorage.getItem('accessToken');
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/auth/change-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          old_password: oldPassword,
+          new_password: newPassword
+        })
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        setChangePasswordMessage(data.message || 'Đổi mật khẩu thành công!');
+        setOldPassword('');
+        setNewPassword('');
+      } else {
+        setChangePasswordError(data.message || 'Lỗi khi đổi mật khẩu.');
+      }
+    } catch (err) {
+      setChangePasswordError('Không thể kết nối tới server.');
+    }
+  };
+
   // ── RENDER 1: Trang Đăng Nhập ───────────────────────────────────────────────
   if (page === 'login') {
     return (
@@ -525,6 +672,10 @@ function App() {
                 style={{ flex: 1, padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: '0.8rem' }}
                 onClick={() => {
                   setPage(page === 'profile' ? 'chat' : 'profile');
+                  setOldPassword('');
+                  setNewPassword('');
+                  setChangePasswordMessage('');
+                  setChangePasswordError('');
                   tracker.trackClick('click_toggle_profile');
                 }}
               >
@@ -592,6 +743,42 @@ function App() {
                   <span>{sessions.length} phiên đã ghi nhận</span>
                 </div>
               </div>
+
+              {/* Form đổi mật khẩu */}
+              <div style={{ marginTop: 32, borderTop: '1.5px solid hsl(var(--border-light))', paddingTop: 24 }}>
+                <h3 style={{ fontSize: '1.2rem', color: 'hsl(var(--text-main))', marginBottom: 16 }}>Đổi mật khẩu</h3>
+                
+                {changePasswordMessage && <div style={{ color: '#10b981', fontSize: '0.85rem', marginBottom: 16 }}>{changePasswordMessage}</div>}
+                {changePasswordError && <div style={{ color: '#e63946', fontSize: '0.85rem', marginBottom: 16 }}>{changePasswordError}</div>}
+                
+                <form onSubmit={handleChangePassword} style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 400 }}>
+                  <div className="input-group" style={{ marginBottom: 0 }}>
+                    <label className="input-label">Mật khẩu cũ</label>
+                    <input 
+                      type="password" 
+                      className="input-field" 
+                      value={oldPassword} 
+                      onChange={(e) => setOldPassword(e.target.value)} 
+                      placeholder="Nhập mật khẩu cũ"
+                      required
+                    />
+                  </div>
+                  <div className="input-group" style={{ marginBottom: 0 }}>
+                    <label className="input-label">Mật khẩu mới</label>
+                    <input 
+                      type="password" 
+                      className="input-field" 
+                      value={newPassword} 
+                      onChange={(e) => setNewPassword(e.target.value)} 
+                      placeholder="Nhập mật khẩu mới"
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn-primary" style={{ width: 'fit-content', marginTop: 8 }}>
+                    Cập nhật mật khẩu
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         ) : (
@@ -655,31 +842,45 @@ function App() {
                     {msg.ai_response && msg.ai_response !== '...' && (
                       <div className="message-bubble-row assistant">
                         <div className="bubble">
-                          <p style={{ whiteSpace: 'pre-wrap' }}>{msg.ai_response}</p>
+                          <div className="ai-markdown-content">{renderMarkdown(msg.ai_response)}</div>
                           
                           {/* Hiển thị metadata / nguồn PDF khi có phản hồi của AI */}
                           {msg.sources && msg.sources.length > 0 && (
                             <div className="message-metadata">
                               <h5 className="sources-title">Nguồn Tài liệu Tham khảo:</h5>
                               <div className="sources-container">
-                                {msg.metadatas && msg.metadatas.map((meta, mIdx) => {
-                                  const sourceFile = meta.source || msg.sources[mIdx];
-                                  const pageNum = meta.page_num || '?';
-                                  const pdfUrl = `${MINIO_PUBLIC_URL}/yhct-docs/${sourceFile}`;
-                                  const bookName = sourceFile.replace('.pdf', '').replace(/_/g, ' ').toUpperCase();
+                                {(() => {
+                                  const seen = new Set();
+                                  const uniqueMetadatas = [];
                                   
-                                  return (
-                                    <a 
-                                      key={mIdx}
-                                      href={pdfUrl}
-                                      target="_blank" 
-                                      rel="noopener noreferrer" 
-                                      className="source-badge"
-                                    >
-                                      📚 {bookName} (tr.{pageNum})
-                                    </a>
-                                  );
-                                })}
+                                  (msg.metadatas || []).forEach((meta, mIdx) => {
+                                    const sourceFile = meta.source || (msg.sources && msg.sources[mIdx]) || '';
+                                    const pageNum = meta.page_num || '?';
+                                    const key = `${sourceFile}__${pageNum}`;
+                                    if (!seen.has(key)) {
+                                      seen.add(key);
+                                      uniqueMetadatas.push({ ...meta, sourceFile, pageNum });
+                                    }
+                                  });
+
+                                  return uniqueMetadatas.map((meta, idx) => {
+                                    const pdfUrl = `${MINIO_PUBLIC_URL}/yhct-docs/${meta.sourceFile}`;
+                                    const bookName = meta.sourceFile.replace('.pdf', '').replace(/_/g, ' ').toUpperCase();
+                                    
+                                    return (
+                                      <a 
+                                        key={idx}
+                                        href={pdfUrl}
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="source-badge"
+                                        download={meta.sourceFile}
+                                      >
+                                        📚 {bookName} (tr.{meta.pageNum})
+                                      </a>
+                                    );
+                                  });
+                                })()}
                               </div>
                               {msg.elapsed_ms > 0 && (
                                 <div style={{ fontSize: '0.7rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
@@ -709,7 +910,7 @@ function App() {
             </div>
 
             {/* Đánh giá session ở dưới cùng khi có hội thoại */}
-            {activeSessionId && messages.length > 0 && (
+            {activeSessionId && messages.length > 0 && !sessionRating && (
               <div style={{ backgroundColor: 'hsl(var(--bg-card))', padding: '10px 32px', borderTop: '1px solid hsl(var(--border-light))', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: '0.85rem', color: 'hsl(var(--text-muted))' }}>Bạn có hài lòng với câu trả lời của Trợ lý AI?</span>
                 <div className="feedback-section">

@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_yhct_2026';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'super_secret_refresh_key_yhct_2026';
@@ -115,6 +116,37 @@ router.post('/refresh', async (req, res) => {
     res.json({ accessToken });
   } catch (err) {
     res.status(403).json({ message: 'Invalid or expired refresh token.' });
+  }
+});
+
+// Change Password
+router.post('/change-password', auth, async (req, res) => {
+  try {
+    const { old_password, new_password } = req.body;
+    const user_id = req.user.id;
+
+    if (!old_password || !new_password) {
+      return res.status(400).json({ message: 'Vui lòng cung cấp mật khẩu cũ và mật khẩu mới.' });
+    }
+
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).json({ message: 'Không tìm thấy thông tin người dùng.' });
+    }
+
+    const isMatch = await bcrypt.compare(old_password, user.password_hash);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Mật khẩu cũ không chính xác.' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password_hash = await bcrypt.hash(new_password, salt);
+    await user.save();
+
+    res.json({ message: 'Đổi mật khẩu thành công!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Lỗi server khi đổi mật khẩu.' });
   }
 });
 
