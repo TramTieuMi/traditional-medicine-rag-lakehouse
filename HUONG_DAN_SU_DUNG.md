@@ -293,8 +293,8 @@ docker compose up --build -d etl_pipeline
 ### Superset không thấy data mới
 
 ```bash
-# Reinit DuckDB views từ MinIO
-docker compose exec superset python /app/pythonpath/init_duckdb.py
+# Kiểm tra lại pipeline Dagster đã ghi dữ liệu vào PostgreSQL chưa
+# Hoặc truy cập Superset -> Datasets -> Sync columns
 ```
 
 ---

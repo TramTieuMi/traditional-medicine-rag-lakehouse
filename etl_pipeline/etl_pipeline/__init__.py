@@ -9,6 +9,7 @@ from .assets.gold_embeddings         import gold_embeddings
 from .assets.gold_evaluation         import gold_evaluation
 from .assets.gold_herb_mentions      import gold_herb_mentions
 from .assets.gold_tang_phu_mentions  import gold_tang_phu_mentions
+from .assets.gold_pdf_extraction     import gold_pdf_extraction
 
 # Import new User Lakehouse Medallion assets
 from .assets.user_bronze             import (
@@ -57,6 +58,7 @@ defs = Definitions(
         gold_evaluation,
         gold_herb_mentions,
         gold_tang_phu_mentions,
+        gold_pdf_extraction,
         
         # User Lakehouse - Bronze
         bronze_mongodb_users,

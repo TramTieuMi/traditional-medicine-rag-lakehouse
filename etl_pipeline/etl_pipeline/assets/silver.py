@@ -20,7 +20,9 @@ try:
     from pyspark.sql import SparkSession
     from pyspark.sql.functions import col, lit, udf
     from pyspark.sql.types import StringType
-    PYSPARK_AVAILABLE = True
+    # Lỗi executor crash loop trên worker vì thiếu thư viện Python đồng bộ
+    # Tạm thời vô hiệu hóa PySpark, sử dụng Polars cực nhanh thay thế.
+    PYSPARK_AVAILABLE = False
 except ImportError:
     PYSPARK_AVAILABLE = False
 

@@ -121,6 +121,8 @@ Nhắc nhở những điều cần chú ý và khuyên gặp thầy thuốc khi 
 
 Không bịa đặt thông tin y tế. Nếu không có tài liệu tham khảo, trả lời từ kiến thức YHCT chung và ghi rõ "theo kiến thức chung". Dùng lịch sử hội thoại để hiểu ngữ cảnh câu tiếp nối."""
 
+SYSTEM_PROMPT = _SYSTEM_PROMPT
+
 # ── Singletons & Initialization ───────────────────────────────────────────────
 _model = None
 _col   = None
@@ -285,7 +287,7 @@ def api_chat(payload: ChatRequest):
             is_zero = True
 
     # 3. Tạo messages cho LLM
-    system_prompt = _SYSTEM_PROMPT
+    system_prompt = SYSTEM_PROMPT
     if payload.user_name:
         system_prompt += f"\n\nThông tin người dùng hiện tại:\n- Họ và tên: {payload.user_name}\n- Tuổi: {payload.user_age or 'Không rõ'}\n- Giới tính: {payload.user_gender or 'Không rõ'}"
     messages = [{"role": "system", "content": system_prompt}]
@@ -335,3 +337,34 @@ def api_chat(payload: ChatRequest):
             herbs=extracted["herbs"]
         )
     )
+
+# ── Dynamic Config Endpoints ──────────────────────────────────────────────────
+class ConfigUpdate(BaseModel):
+    min_sim: Optional[float] = None
+    top_k: Optional[int] = None
+    system_prompt: Optional[str] = None
+    groq_model: Optional[str] = None
+
+@app.get("/api/config")
+def get_config():
+    global MIN_SIM, TOP_K, SYSTEM_PROMPT, GROQ_MODEL
+    return {
+        "min_sim": MIN_SIM,
+        "top_k": TOP_K,
+        "system_prompt": SYSTEM_PROMPT,
+        "groq_model": GROQ_MODEL
+    }
+
+@app.post("/api/config")
+def update_config(payload: ConfigUpdate):
+    global MIN_SIM, TOP_K, SYSTEM_PROMPT, GROQ_MODEL
+    if payload.min_sim is not None:
+        MIN_SIM = payload.min_sim
+    if payload.top_k is not None:
+        TOP_K = payload.top_k
+    if payload.system_prompt is not None:
+        SYSTEM_PROMPT = payload.system_prompt
+    if payload.groq_model is not None:
+        GROQ_MODEL = payload.groq_model
+    return {"status": "success", "config": get_config()}
+

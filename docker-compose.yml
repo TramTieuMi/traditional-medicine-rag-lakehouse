@@ -355,7 +355,6 @@ services:
       - yhct_network
     command: |
       bash -c "
-        pip install --quiet duckdb==0.10.0 duckdb-engine boto3 pyarrow &&
         sleep 10 &&
         superset db upgrade &&
         superset fab create-admin --username admin --firstname Admin --lastname YHCT --email admin@yhct.com --password admin123 || true &&
@@ -382,7 +381,6 @@ services:
       - yhct_network
     command: |
       bash -c "
-        pip install --quiet duckdb==0.10.0 duckdb-engine boto3 pyarrow &&
         superset run -h 0.0.0.0 -p 8088 --with-threads
       "
     restart: unless-stopped

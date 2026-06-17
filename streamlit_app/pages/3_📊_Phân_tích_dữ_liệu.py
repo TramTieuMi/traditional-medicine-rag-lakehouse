@@ -158,12 +158,15 @@ def _upload_to_minio(filename: str, data: bytes) -> None:
 # ── Tabs ─────────────────────────────────────────────────────────────────────
 st.title("📊 YHCT Analytics Dashboard")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "🌿 Dược liệu",
     "🫀 Tạng phủ",
     "📄 Chunks",
     "📚 Nguồn tài liệu",
     "📥 Thêm tài liệu",
+    "👥 Tương tác Người dùng",
+    "💬 Hiệu năng Chatbot",
+    "🩺 Xu hướng Dịch tễ"
 ])
 
 # ── Tab 1: Herb mentions ──────────────────────────────────────────────────────
@@ -416,3 +419,175 @@ with tab5:
                         load_parquet.clear()
                     if run["status"] in ("STARTED", "QUEUED"):
                         st.info("Pipeline đang chạy...")
+
+# ── Tab 6: Tương tác Người dùng ───────────────────────────────────────────────
+with tab6:
+    st.subheader("👥 Phân tích Tương tác Người dùng Web")
+    try:
+        user_eng_df = load_parquet("yhct-gold", "gold/mongodb/gold_user_engagement.parquet")
+        if not user_eng_df.is_empty():
+            df_pd = user_eng_df.to_pandas()
+            
+            # Thống kê KPI
+            latest = df_pd.iloc[-1]
+            avg_duration = df_pd['average_session_duration_sec'].mean()
+            avg_bounce = df_pd['bounce_rate_pct'].mean()
+            total_views = df_pd['total_page_views'].sum()
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+            kpi1.metric("DAU (Hôm nay)", f"{latest['total_active_users']:,}")
+            kpi2.metric("Tổng lượt xem trang", f"{total_views:,}")
+            kpi3.metric("Thời lượng TB (giây)", f"{avg_duration:.1f}s")
+            kpi4.metric("Tỷ lệ thoát (Bounce)", f"{avg_bounce:.1f}%")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            # Biểu đồ DAU và Thiết bị
+            col1, col2 = st.columns([3, 2])
+            with col1:
+                fig_dau = px.line(
+                    df_pd, x="date", y="total_active_users",
+                    title="📈 Xu hướng người dùng hoạt động (DAU)",
+                    markers=True,
+                    line_shape="spline",
+                    color_discrete_sequence=["#2E86C1"]
+                )
+                fig_dau.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", xaxis_title="", yaxis_title="Active Users")
+                fig_dau.update_xaxes(showgrid=False)
+                fig_dau.update_yaxes(showgrid=True, gridcolor="#e0e0e0")
+                st.plotly_chart(fig_dau, use_container_width=True)
+            with col2:
+                total_desktop = df_pd["device_desktop_pct"].mean()
+                total_mobile = df_pd["device_mobile_pct"].mean()
+                if total_desktop is not None and total_mobile is not None:
+                    fig_device = px.pie(
+                        names=["Desktop", "Mobile"], values=[total_desktop, total_mobile],
+                        title="📱 Phân bố thiết bị",
+                        hole=0.4,
+                        color_discrete_sequence=["#117A65", "#48C9B0"]
+                    )
+                    fig_device.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(t=50, b=0, l=0, r=0))
+                    st.plotly_chart(fig_device, use_container_width=True)
+            
+            with st.expander("🔍 Xem chi tiết dữ liệu thô"):
+                st.dataframe(df_pd, use_container_width=True)
+        else:
+            st.info("Chưa có dữ liệu tương tác người dùng.")
+    except Exception as e:
+        st.error(f"Lỗi load dữ liệu: {e}")
+
+# ── Tab 7: Hiệu năng Chatbot ──────────────────────────────────────────────────
+with tab7:
+    st.subheader("🤖 Phân tích Hiệu năng Chatbot")
+    try:
+        chat_perf_df = load_parquet("yhct-gold", "gold/mongodb/gold_chat_performance.parquet")
+        if not chat_perf_df.is_empty():
+            import pandas as pd
+            df_pd = chat_perf_df.to_pandas()
+            
+            # KPI
+            total_sessions = len(df_pd)
+            avg_latency = df_pd['average_latency_ms'].mean()
+            avg_rating = df_pd['feedback_rating'].mean()
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Tổng số phiên chat", f"{total_sessions:,}")
+            c2.metric("Độ trễ trung bình (ms)", f"{avg_latency:.0f} ms" if not pd.isna(avg_latency) else "N/A")
+            c3.metric("Đánh giá trung bình", f"{avg_rating:.1f} ⭐" if not pd.isna(avg_rating) else "Chưa có")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            col1, col2 = st.columns([3, 2])
+            with col1:
+                fig_latency = px.histogram(
+                    df_pd, x="average_latency_ms",
+                    nbins=30, title="⏱️ Phân bố độ trễ phản hồi (ms)",
+                    color_discrete_sequence=["#F39C12"],
+                    marginal="box"
+                )
+                fig_latency.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", xaxis_title="Độ trễ (ms)", yaxis_title="Số lượng")
+                st.plotly_chart(fig_latency, use_container_width=True)
+            with col2:
+                rating_counts = chat_perf_df.group_by("feedback_rating").agg(pl.len().alias("count")).drop_nulls()
+                if not rating_counts.is_empty():
+                    fig_rating = px.pie(
+                        rating_counts.to_pandas(), names="feedback_rating", values="count",
+                        title="⭐ Phân bố Đánh giá (Sao)",
+                        hole=0.4,
+                        color_discrete_sequence=["#F1C40F", "#D4AC0D", "#9A7D0A", "#E67E22", "#D35400"]
+                    )
+                    fig_rating.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)")
+                    st.plotly_chart(fig_rating, use_container_width=True)
+            
+            with st.expander("🔍 Xem chi tiết dữ liệu thô"):
+                st.dataframe(df_pd, use_container_width=True)
+        else:
+            st.info("Chưa có dữ liệu hiệu năng chatbot.")
+    except Exception as e:
+        st.error(f"Lỗi load dữ liệu: {e}")
+
+# ── Tab 8: Xu hướng Dịch tễ ──────────────────────────────────────────────────
+with tab8:
+    st.subheader("🩺 Khai phá Xu hướng Dịch tễ học")
+    try:
+        medical_insights_df = load_parquet("yhct-gold", "gold/mongodb/gold_medical_insights.parquet")
+        if not medical_insights_df.is_empty():
+            df_pd = medical_insights_df.to_pandas()
+            
+            import pandas as pd
+            symp_list = []
+            for s in medical_insights_df["symptoms_list"].drop_nulls():
+                import json
+                try:
+                    symp_list.extend(json.loads(s))
+                except:
+                    pass
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            c1, c2, c3 = st.columns(3)
+            c1.metric("Tổng ca ghi nhận", f"{len(df_pd):,}")
+            c2.metric("Triệu chứng độc lập", f"{len(set(symp_list)):,}" if symp_list else "0")
+            c3.metric("Khu vực phổ biến", f"{df_pd['user_city'].mode()[0]}" if not df_pd['user_city'].isnull().all() else "N/A")
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
+            col1, col2 = st.columns([3, 2])
+            with col1:
+                if symp_list:
+                    symp_df = pd.DataFrame(symp_list, columns=["symptom"])
+                    symp_counts = symp_df["symptom"].value_counts().reset_index()
+                    symp_counts.columns = ["Triệu chứng", "Số lần"]
+                    
+                    fig_symp = px.bar(
+                        symp_counts.head(15), x="Số lần", y="Triệu chứng",
+                        orientation="h", title="🦠 Top 15 triệu chứng được quan tâm nhất",
+                        color="Số lần", color_continuous_scale="Reds"
+                    )
+                    fig_symp.update_layout(
+                        plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", 
+                        yaxis=dict(autorange="reversed"), xaxis_title="Số lần đề cập"
+                    )
+                    fig_symp.update_xaxes(showgrid=True, gridcolor="#e0e0e0")
+                    st.plotly_chart(fig_symp, use_container_width=True)
+                else:
+                    st.info("Chưa có dữ liệu phân tích triệu chứng.")
+                    
+            with col2:
+                # Phân bố theo giới tính
+                gender_counts = df_pd['user_gender'].value_counts().reset_index()
+                gender_counts.columns = ['Giới tính', 'Số lượng']
+                if not gender_counts.empty:
+                    fig_gender = px.pie(
+                        gender_counts, names='Giới tính', values='Số lượng',
+                        title="👥 Cơ cấu giới tính",
+                        hole=0.4,
+                        color_discrete_sequence=["#3498DB", "#E74C3C", "#95A5A6"]
+                    )
+                    fig_gender.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)")
+                    st.plotly_chart(fig_gender, use_container_width=True)
+            
+            with st.expander("🔍 Xem chi tiết dữ liệu thô"):
+                st.dataframe(df_pd, use_container_width=True)
+        else:
+            st.info("Chưa có dữ liệu dịch tễ học.")
+    except Exception as e:
+        st.error(f"Lỗi load dữ liệu: {e}")
