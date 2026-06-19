@@ -14,6 +14,11 @@ from minio import Minio
 
 st.set_page_config(page_title="YHCT Analytics", page_icon="📊", layout="wide")
 
+import sys, os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.dirname(__file__)))
+from utils import inject_css, kpis, section, fc, COLORS
+inject_css()
+
 MINIO_ENDPOINT   = os.getenv("MINIO_ENDPOINT",   "minio:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY",  "minio")
 MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY",  "minio123")
@@ -119,8 +124,9 @@ def _upload_to_minio(filename: str, data: bytes) -> None:
 
 # ── Header + navigation ───────────────────────────────────────────────────────
 st.title("📊 YHCT Analytics Dashboard")
-st.page_link("pages/2_👥_Quản_lý_người_dùng.py", label="→ Xem chi tiết từng người dùng", icon="👥")
-st.markdown("---")
+st.caption("Dữ liệu từ lakehouse — cập nhật tự động sau mỗi lần ETL pipeline chạy.")
+st.page_link("pages/2_👥_Quản_lý_người_dùng.py", label="→ Quản lý người dùng", icon="👥")
+st.markdown('<div style="margin-bottom:8px"></div>', unsafe_allow_html=True)
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "🌿 Dược liệu",
@@ -146,11 +152,11 @@ with tab1:
         )
         fig = px.bar(
             top_herbs.to_pandas(), x="total", y="herb_name", orientation="h",
-            color="total", color_continuous_scale="Greens",
+            color_discrete_sequence=[COLORS[0]],
             title="Top 20 dược liệu trong tài liệu YHCT",
             labels={"total": "Số lần xuất hiện", "herb_name": "Dược liệu"},
         )
-        fig.update_layout(height=600, yaxis=dict(autorange="reversed"))
+        fig.update_layout(height=580, yaxis=dict(autorange="reversed"), showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
         with st.expander("Bảng chi tiết"):
             st.dataframe(top_herbs.to_pandas(), use_container_width=True)
@@ -178,12 +184,13 @@ with tab2:
         with col1:
             st.plotly_chart(px.pie(
                 tp_pd, values="count", names="tang_phu_label", title="Tỷ lệ đề cập tạng phủ",
-                hole=0.4, color_discrete_sequence=px.colors.qualitative.Set2,
+                hole=0.4, color_discrete_sequence=COLORS,
             ), use_container_width=True)
         with col2:
             st.plotly_chart(px.bar(
-                tp_pd, x="tang_phu_label", y="count", color="count",
-                color_continuous_scale="Teal", title="Số chunk đề cập theo tạng phủ",
+                tp_pd, x="tang_phu_label", y="count",
+                color_discrete_sequence=[COLORS[1]],
+                title="Số chunk đề cập theo tạng phủ",
                 labels={"count": "Số chunks", "tang_phu_label": "Tạng phủ"},
             ), use_container_width=True)
         st.dataframe(tp_pd, use_container_width=True)
@@ -202,14 +209,14 @@ with tab3:
         c4.metric("Số nguồn tài liệu",   f"{chunk_df['source_file'].n_unique():,}")
         st.plotly_chart(px.histogram(
             chunk_df.to_pandas(), x="word_count", nbins=40,
-            color_discrete_sequence=["#2d9e5f"],
+            color_discrete_sequence=[COLORS[0]],
             title="Phân bố số từ trong mỗi chunk",
             labels={"word_count": "Số từ", "count": "Số chunks"},
         ), use_container_width=True)
         by_source = chunk_df.group_by("source_file").agg(pl.len().alias("chunks")).sort("chunks", descending=True)
         st.plotly_chart(px.bar(
             by_source.to_pandas(), x="source_file", y="chunks",
-            color="chunks", color_continuous_scale="Blues",
+            color_discrete_sequence=[COLORS[2]],
             title="Số chunks theo nguồn tài liệu",
         ), use_container_width=True)
     except Exception as e:
@@ -315,43 +322,38 @@ with tab6:
         avg_msgs     = float(chat_pd["total_messages_exchanged"].mean()) if not chat_pd.empty else 0.0
         avg_retain   = df_pd["retention_rate_pct"].mean()
 
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("DAU (ngày gần nhất)",  f"{int(latest['total_active_users']):,}")
-        c2.metric("Tổng lượt xem trang",  f"{total_views:,}")
-        c3.metric("Thời gian TB/phiên",   f"{avg_duration:.1f}s")
-        c4.metric("Tỷ lệ thoát (Bounce)", f"{avg_bounce:.1f}%")
-
-        c5, c6, c7, c8 = st.columns(4)
-        c5.metric("Tổng phiên chat",      f"{total_sess:,}")
-        c6.metric("TB câu hỏi/phiên",     f"{avg_msgs:.1f}")
-        c7.metric("Retention rate TB",    f"{avg_retain:.1f}%")
-        c8.metric("Người dùng mới TB/ngày", f"{df_pd['new_registered_users'].mean():.1f}")
-
-        st.markdown("---")
+        kpis([
+            {"label": "DAU (ngày gần nhất)",    "value": f"{int(latest['total_active_users']):,}"},
+            {"label": "Tổng lượt xem trang",    "value": f"{total_views:,}",  "accent": "blue"},
+            {"label": "Thời gian TB/phiên",     "value": f"{avg_duration:.0f}s", "accent": "teal"},
+            {"label": "Tỷ lệ thoát",            "value": f"{avg_bounce:.1f}%", "accent": "red"},
+            {"label": "Tổng phiên chat",        "value": f"{total_sess:,}",   "accent": "purple"},
+            {"label": "TB câu hỏi/phiên",       "value": f"{avg_msgs:.1f}",   "accent": "amber"},
+            {"label": "Retention TB",           "value": f"{avg_retain:.1f}%"},
+            {"label": "Người mới TB/ngày",      "value": f"{df_pd['new_registered_users'].mean():.1f}", "accent": "slate"},
+        ])
 
         # ── Chart 1: DAU trend ──────────────────────────────────────────────
         col1, col2 = st.columns([3, 2])
         with col1:
             fig_dau = px.line(
                 df_pd, x="date", y="total_active_users",
-                title="📈 Xu hướng người dùng hoạt động (DAU)",
+                title="Xu hướng người dùng hoạt động (DAU)",
                 markers=True, line_shape="spline",
-                color_discrete_sequence=["#2E86C1"],
+                color_discrete_sequence=[COLORS[0]],
             )
-            fig_dau.update_layout(xaxis_title="", yaxis_title="Active Users",
-                                  plot_bgcolor="rgba(0,0,0,0)")
-            st.plotly_chart(fig_dau, use_container_width=True)
+            fig_dau.update_layout(xaxis_title="", yaxis_title="Active Users")
+            st.plotly_chart(fc(fig_dau), use_container_width=True)
         with col2:
             avg_d = df_pd["device_desktop_pct"].mean()
             avg_m = df_pd["device_mobile_pct"].mean()
             fig_dev = px.pie(
                 names=["Desktop", "Mobile", "Khác"],
                 values=[avg_d, avg_m, max(0, 100 - avg_d - avg_m)],
-                title="📱 Phân bố thiết bị", hole=0.4,
-                color_discrete_sequence=["#117A65", "#48C9B0", "#A9CCE3"],
+                title="Phân bố thiết bị", hole=0.45,
+                color_discrete_sequence=[COLORS[0], COLORS[2], COLORS[7]],
             )
-            fig_dev.update_layout(margin=dict(t=50, b=0, l=0, r=0))
-            st.plotly_chart(fig_dev, use_container_width=True)
+            st.plotly_chart(fc(fig_dev, height=320), use_container_width=True)
 
         # ── Chart 2: Người mới vs Quay lại ─────────────────────────────────
         df_pd["returning_users"] = (
@@ -360,11 +362,11 @@ with tab6:
         fig_stack = px.bar(
             df_pd, x="date",
             y=["new_registered_users", "returning_users"],
-            title="👤 Người dùng mới vs Quay lại theo ngày",
+            title="Người dùng mới vs Quay lại theo ngày",
             barmode="stack",
             color_discrete_map={
-                "new_registered_users": "#2E86C1",
-                "returning_users":      "#27AE60",
+                "new_registered_users": COLORS[2],
+                "returning_users":      COLORS[0],
             },
             labels={"value": "Số người", "variable": ""},
         )
@@ -372,40 +374,37 @@ with tab6:
             "new_registered_users": "Người mới",
             "returning_users":      "Quay lại",
         }.get(t.name, t.name)))
-        fig_stack.update_layout(plot_bgcolor="rgba(0,0,0,0)", xaxis_title="")
-        st.plotly_chart(fig_stack, use_container_width=True)
+        fig_stack.update_layout(xaxis_title="")
+        st.plotly_chart(fc(fig_stack, height=320), use_container_width=True)
 
         # ── Chart 3: Retention + session duration ───────────────────────────
         col3, col4 = st.columns(2)
         with col3:
             fig_ret = px.line(
                 df_pd, x="date", y="retention_rate_pct",
-                title="🔁 Tỷ lệ quay lại (Retention Rate %)",
-                markers=True, color_discrete_sequence=["#8E44AD"],
+                title="Tỷ lệ quay lại (Retention %)",
+                markers=True, color_discrete_sequence=[COLORS[3]],
             )
-            fig_ret.update_layout(xaxis_title="", yaxis_title="Retention (%)",
-                                  plot_bgcolor="rgba(0,0,0,0)")
-            st.plotly_chart(fig_ret, use_container_width=True)
+            fig_ret.update_layout(xaxis_title="", yaxis_title="Retention (%)")
+            st.plotly_chart(fc(fig_ret), use_container_width=True)
         with col4:
             fig_dur = px.bar(
                 df_pd, x="date", y="average_session_duration_sec",
-                title="⏱️ Thời gian ở lại trung bình (giây)",
-                color="average_session_duration_sec",
-                color_continuous_scale="Blues",
+                title="Thời gian ở lại TB / phiên (giây)",
+                color_discrete_sequence=[COLORS[2]],
             )
-            fig_dur.update_layout(xaxis_title="", yaxis_title="Giây",
-                                  plot_bgcolor="rgba(0,0,0,0)")
-            st.plotly_chart(fig_dur, use_container_width=True)
+            fig_dur.update_layout(xaxis_title="", yaxis_title="Giây")
+            st.plotly_chart(fc(fig_dur), use_container_width=True)
 
         # ── Chart 4: Page views trend ───────────────────────────────────────
         fig_pv = px.area(
             df_pd, x="date", y="total_page_views",
-            title="📄 Lượt xem trang theo ngày",
-            color_discrete_sequence=["#F39C12"],
+            title="Lượt xem trang theo ngày",
+            color_discrete_sequence=[COLORS[1]],
             line_shape="spline",
         )
-        fig_pv.update_layout(plot_bgcolor="rgba(0,0,0,0)", xaxis_title="")
-        st.plotly_chart(fig_pv, use_container_width=True)
+        fig_pv.update_layout(xaxis_title="")
+        st.plotly_chart(fc(fig_pv, height=300), use_container_width=True)
 
         with st.expander("🔍 Dữ liệu thô"):
             st.dataframe(df_pd, use_container_width=True)
@@ -436,41 +435,37 @@ with tab7:
         zero_rate      = df_pd["is_zero_query_ratio"].mean() * 100
         total_msgs     = int(df_pd["total_messages_exchanged"].sum())
 
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Tổng phiên chat",       f"{total_sessions:,}")
-        c2.metric("Tổng câu hỏi",          f"{total_msgs:,}")
-        c3.metric("TB câu hỏi/phiên",      f"{avg_msgs:.1f}")
-        c4.metric("Nhiều nhất/phiên",      f"{max_msgs}")
-
-        c5, c6, c7, c8 = st.columns(4)
-        c5.metric("Độ trễ TB (ms)",        f"{avg_latency:.0f}" if pd.notna(avg_latency) else "N/A")
-        c6.metric("Đánh giá TB",           f"{avg_rating:.1f} ⭐" if pd.notna(avg_rating) else "Chưa có")
-        c7.metric("Tỷ lệ 0 kết quả",      f"{zero_rate:.1f}%")
-        c8.metric("Phiên có đánh giá",     f"{df_pd['feedback_rating'].notna().sum():,}")
-
-        st.markdown("---")
+        kpis([
+            {"label": "Tổng phiên chat",    "value": f"{total_sessions:,}"},
+            {"label": "Tổng câu hỏi",       "value": f"{total_msgs:,}",     "accent": "blue"},
+            {"label": "TB câu hỏi/phiên",   "value": f"{avg_msgs:.1f}",     "accent": "teal"},
+            {"label": "Nhiều nhất/phiên",   "value": f"{max_msgs}",         "accent": "amber"},
+            {"label": "Độ trễ TB",          "value": f"{avg_latency:.0f}ms" if pd.notna(avg_latency) else "N/A", "accent": "slate"},
+            {"label": "Đánh giá TB",        "value": f"{avg_rating:.1f} ★" if pd.notna(avg_rating) else "—", "accent": "purple"},
+            {"label": "Tỷ lệ 0 kết quả",   "value": f"{zero_rate:.1f}%",   "accent": "red"},
+            {"label": "Phiên có đánh giá",  "value": f"{df_pd['feedback_rating'].notna().sum():,}"},
+        ])
 
         # ── Chart 1: Số câu hỏi/phiên + phân bố latency ────────────────────
         col1, col2 = st.columns(2)
         with col1:
             fig_msgs = px.histogram(
                 df_pd, x="total_messages_exchanged", nbins=25,
-                title="❓ Phân bố số câu hỏi/phiên chat",
-                color_discrete_sequence=["#E67E22"],
+                title="Phân bố số câu hỏi / phiên chat",
+                color_discrete_sequence=[COLORS[1]],
                 labels={"total_messages_exchanged": "Số câu hỏi", "count": "Số phiên"},
             )
-            fig_msgs.update_layout(plot_bgcolor="rgba(0,0,0,0)", bargap=0.05)
-            st.plotly_chart(fig_msgs, use_container_width=True)
+            fig_msgs.update_layout(bargap=0.05)
+            st.plotly_chart(fc(fig_msgs), use_container_width=True)
         with col2:
             fig_lat = px.histogram(
                 df_pd, x="average_latency_ms", nbins=30,
-                title="⏱️ Phân bố độ trễ phản hồi (ms)",
-                color_discrete_sequence=["#9B59B6"],
+                title="Phân bố độ trễ phản hồi (ms)",
+                color_discrete_sequence=[COLORS[3]],
                 marginal="box",
                 labels={"average_latency_ms": "Độ trễ (ms)", "count": "Số phiên"},
             )
-            fig_lat.update_layout(plot_bgcolor="rgba(0,0,0,0)")
-            st.plotly_chart(fig_lat, use_container_width=True)
+            st.plotly_chart(fc(fig_lat), use_container_width=True)
 
         # ── Chart 2: Sessions per day + rating distribution ─────────────────
         col3, col4 = st.columns([3, 2])
@@ -493,20 +488,21 @@ with tab7:
                     line=dict(color="#E74C3C", width=2), yaxis="y2",
                 ))
                 fig_sd.update_layout(
-                    title="📅 Phiên chat & câu hỏi theo ngày",
+                    title="Phiên chat & câu hỏi theo ngày",
                     xaxis_title="", yaxis=dict(title="Số phiên"),
                     yaxis2=dict(title="Số câu hỏi", overlaying="y", side="right"),
-                    plot_bgcolor="rgba(0,0,0,0)", legend=dict(x=0, y=1.1, orientation="h"),
+                    legend=dict(x=0, y=1.1, orientation="h"),
                 )
-                st.plotly_chart(fig_sd, use_container_width=True)
+                st.plotly_chart(fc(fig_sd), use_container_width=True)
         with col4:
             rating_counts = chat_perf_df.group_by("feedback_rating").agg(pl.len().alias("count")).drop_nulls()
             if not rating_counts.is_empty():
-                st.plotly_chart(px.pie(
+                fig_rat = px.pie(
                     rating_counts.to_pandas(), names="feedback_rating", values="count",
-                    title="⭐ Phân bố đánh giá (Sao)", hole=0.4,
-                    color_discrete_sequence=["#F1C40F","#D4AC0D","#E67E22","#D35400","#CB4335"],
-                ), use_container_width=True)
+                    title="Phân bố đánh giá (Sao)", hole=0.45,
+                    color_discrete_sequence=[COLORS[5], COLORS[0], COLORS[1], COLORS[3], COLORS[4]],
+                )
+                st.plotly_chart(fc(fig_rat, height=320), use_container_width=True)
 
         # ── Chart 3: Zero-result rate trend ────────────────────────────────
         if "date" in df_pd.columns:
@@ -518,14 +514,13 @@ with tab7:
             zero_trend["zero_rate"] *= 100
             fig_zero = px.line(
                 zero_trend, x="date", y="zero_rate",
-                title="⚠️ Tỷ lệ câu hỏi không có kết quả theo ngày (%)",
-                markers=True, color_discrete_sequence=["#E74C3C"],
+                title="Tỷ lệ câu hỏi không có kết quả (%)",
+                markers=True, color_discrete_sequence=[COLORS[4]],
             )
-            fig_zero.add_hline(y=20, line_dash="dash", line_color="orange",
+            fig_zero.add_hline(y=20, line_dash="dash", line_color=COLORS[1],
                                annotation_text="Ngưỡng 20%")
-            fig_zero.update_layout(yaxis_title="Zero-result (%)", xaxis_title="",
-                                   plot_bgcolor="rgba(0,0,0,0)")
-            st.plotly_chart(fig_zero, use_container_width=True)
+            fig_zero.update_layout(yaxis_title="Zero-result (%)", xaxis_title="")
+            st.plotly_chart(fc(fig_zero, height=300), use_container_width=True)
 
         # ── Top users by engagement ─────────────────────────────────────────
         st.subheader("🏆 Top người dùng theo số câu hỏi")

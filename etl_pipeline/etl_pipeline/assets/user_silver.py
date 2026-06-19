@@ -46,15 +46,13 @@ def silver_mongodb_users(context, bronze_mongodb_users: pl.DataFrame) -> Output:
     else:
         # Deduplicate users by user_id
         df_dedup = bronze_mongodb_users.unique(subset=["user_id"], keep="last")
-        
-        # Mask emails and fill nulls
-        emails_masked = [mask_email_val(email) for email in df_dedup["email"].to_list()]
-        
-        df_silver = df_dedup.with_columns([
-            pl.Series("email_hashed", emails_masked, dtype=pl.Utf8),
+
+        # Use pre-computed email_sha256 from Bronze (rename to email_hashed for compat)
+        # Raw email is dropped here — PII stays in Bronze only
+        df_silver = df_dedup.rename({"email_sha256": "email_hashed"}).with_columns([
             pl.col("age").fill_null(0).cast(pl.Int32),
             pl.col("gender").fill_null("khác").str.to_lowercase()
-        ]).drop("email")  # Remove raw email for security compliance (PII protection)
+        ]).drop("email")
         
     context.log.info(f"✅ Đã làm sạch và ẩn danh thông tin. Dòng còn lại: {df_silver.shape[0]}")
     

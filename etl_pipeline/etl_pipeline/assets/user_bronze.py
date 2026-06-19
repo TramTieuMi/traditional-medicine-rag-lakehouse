@@ -4,8 +4,10 @@
 # Mỗi lần chạy chỉ lấy record MỚI (dựa vào max timestamp của Parquet hiện có).
 # Full scan chỉ xảy ra lần đầu tiên khi Parquet chưa tồn tại.
 
+import hashlib
 import json
 import os
+import uuid
 from datetime import datetime
 from io import BytesIO
 
@@ -85,10 +87,13 @@ def bronze_mongodb_users(context) -> Output:
 
     with MongoClient(MONGO_URI) as client:
         for u in client.get_database().get_collection("users").find(query):
+            email_raw = u.get("email", "").strip().lower()
             rows.append({
                 "user_id":       str(u["_id"]),
+                "user_uuid":     u.get("user_uuid") or str(uuid.uuid5(uuid.NAMESPACE_OID, str(u["_id"]))),
                 "full_name":     u.get("full_name", ""),
-                "email":         u.get("email", ""),
+                "email":         email_raw,
+                "email_sha256":  hashlib.sha256(email_raw.encode("utf-8")).hexdigest() if email_raw else "",
                 "age":           int(u.get("age") or 0),
                 "gender":        u.get("gender", "khác"),
                 "created_at":    _to_iso(u.get("created_at"), now),
@@ -98,8 +103,10 @@ def bronze_mongodb_users(context) -> Output:
     if not rows:
         result_df = existing_df if existing_df is not None else pl.DataFrame({
             "user_id":       pl.Series([], dtype=pl.Utf8),
+            "user_uuid":     pl.Series([], dtype=pl.Utf8),
             "full_name":     pl.Series([], dtype=pl.Utf8),
             "email":         pl.Series([], dtype=pl.Utf8),
+            "email_sha256":  pl.Series([], dtype=pl.Utf8),
             "age":           pl.Series([], dtype=pl.Int32),
             "gender":        pl.Series([], dtype=pl.Utf8),
             "created_at":    pl.Series([], dtype=pl.Utf8),

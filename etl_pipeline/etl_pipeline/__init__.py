@@ -32,10 +32,11 @@ from .assets.user_gold               import (
 
 from .resources.minio_io_manager     import MinIOIOManager
 from .sensors                        import (
-    new_pdf_sensor, 
-    mongodb_change_sensor, 
-    daily_pipeline_schedule, 
-    all_assets_job, 
+    new_pdf_sensor,
+    mongodb_change_sensor,
+    daily_pipeline_schedule,
+    user_lakehouse_schedule,
+    all_assets_job,
     user_lakehouse_job
 )
 from .checks                         import ALL_CHECKS
@@ -83,5 +84,5 @@ defs = Definitions(
         "minio_io_manager": MinIOIOManager(MINIO_CONFIG),
     },
     sensors=[new_pdf_sensor, mongodb_change_sensor],
-    schedules=[daily_pipeline_schedule],
+    schedules=[daily_pipeline_schedule, user_lakehouse_schedule],
 )

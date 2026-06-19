@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    const payload = { id: user._id, email: user.email };
+    const payload = { id: user._id, email: user.email, uuid: user.user_uuid };
     const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
     const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: '7d' });
 
@@ -44,6 +44,7 @@ router.post('/register', async (req, res) => {
       refreshToken,
       user: {
         id: user._id,
+        user_uuid: user.user_uuid,
         full_name: user.full_name,
         email: user.email,
         age: user.age,
@@ -77,9 +78,14 @@ router.post('/login', async (req, res) => {
     }
 
     user.last_login_at = new Date();
+    // Backfill user_uuid for accounts created before this field was added
+    if (!user.user_uuid) {
+      const { v4: uuidv4 } = require('uuid');
+      user.user_uuid = uuidv4();
+    }
     await user.save();
 
-    const payload = { id: user._id, email: user.email };
+    const payload = { id: user._id, email: user.email, uuid: user.user_uuid };
     const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
     const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: '7d' });
 
@@ -88,6 +94,7 @@ router.post('/login', async (req, res) => {
       refreshToken,
       user: {
         id: user._id,
+        user_uuid: user.user_uuid,
         full_name: user.full_name,
         email: user.email,
         age: user.age,

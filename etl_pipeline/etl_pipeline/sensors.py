@@ -16,6 +16,12 @@ from dagster import (
     define_asset_job,
     sensor,
 )
+
+__all__ = [
+    "all_assets_job", "user_lakehouse_job",
+    "new_pdf_sensor", "mongodb_change_sensor",
+    "daily_pipeline_schedule", "user_lakehouse_schedule",
+]
 from pymongo import MongoClient
 import os
 
@@ -94,10 +100,6 @@ def new_pdf_sensor(context: SensorEvaluationContext):
 
 
 # ── Schedule: cron 2AM mỗi ngày ─────────────────────────────────────────────
-# Chạy toàn bộ pipeline mỗi sáng sớm để:
-#   - Kiểm tra asset checks tự động (data quality gate)
-#   - Đảm bảo ChromaDB và MinIO không out-of-sync
-#   - Thu thập metrics gold_evaluation định kỳ
 daily_pipeline_schedule = ScheduleDefinition(
     name="daily_pipeline_2am",
     cron_schedule="0 2 * * *",
@@ -106,6 +108,19 @@ daily_pipeline_schedule = ScheduleDefinition(
         "Chạy toàn bộ pipeline lúc 2 giờ sáng mỗi ngày. "
         "Đảm bảo dữ liệu fresh, asset checks được validate, "
         "và metrics được cập nhật tự động."
+    ),
+)
+
+# ── Schedule: User Lakehouse mỗi 15 phút ────────────────────────────────────
+# Đảm bảo data từ MongoDB luôn được sync vào Silver/Gold
+# tối đa sau 15 phút kể từ lúc có hoạt động mới (chat, đăng ký, v.v.)
+user_lakehouse_schedule = ScheduleDefinition(
+    name="user_lakehouse_every_15min",
+    cron_schedule="*/15 * * * *",
+    job=user_lakehouse_job,
+    description=(
+        "Sync MongoDB → Bronze → Silver → Gold mỗi 15 phút. "
+        "Đảm bảo dashboard Streamlit luôn hiển thị dữ liệu gần nhất."
     ),
 )
 

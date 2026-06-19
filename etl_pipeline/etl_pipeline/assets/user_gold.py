@@ -212,6 +212,8 @@ def gold_chat_performance(
     _empty = pl.DataFrame({
         "session_id":               pl.Series([], dtype=pl.Utf8),
         "user_id":                  pl.Series([], dtype=pl.Utf8),
+        "user_uuid":                pl.Series([], dtype=pl.Utf8),
+        "email_hashed":             pl.Series([], dtype=pl.Utf8),
         "user_age":                 pl.Series([], dtype=pl.Int32),
         "user_gender":              pl.Series([], dtype=pl.Utf8),
         "session_start_time":       pl.Series([], dtype=pl.Utf8),
@@ -231,7 +233,12 @@ def gold_chat_performance(
         for row in silver_mongodb_users.iter_rows(named=True):
             uid = row.get("user_id", "")
             if uid:
-                user_info[uid] = {"age": row.get("age"), "gender": row.get("gender")}
+                user_info[uid] = {
+                    "age":          row.get("age"),
+                    "gender":       row.get("gender"),
+                    "user_uuid":    row.get("user_uuid"),
+                    "email_hashed": row.get("email_hashed"),
+                }
 
     rows = []
     for row in silver_mongodb_conversations.iter_rows(named=True):
@@ -242,6 +249,8 @@ def gold_chat_performance(
         rows.append({
             "session_id":               row["session_id"],
             "user_id":                  uid if uid not in ("None", "null", "") else None,
+            "user_uuid":                info.get("user_uuid"),
+            "email_hashed":             info.get("email_hashed"),
             "user_age":                 info.get("age"),
             "user_gender":              info.get("gender"),
             "session_start_time":       row.get("start_time"),
@@ -284,19 +293,21 @@ def gold_medical_insights(
 ) -> Output:
 
     _empty = pl.DataFrame({
-        "log_id":        pl.Series([], dtype=pl.Utf8),
-        "session_id":    pl.Series([], dtype=pl.Utf8),
-        "user_id":       pl.Series([], dtype=pl.Utf8),
-        "user_age":      pl.Series([], dtype=pl.Int32),
-        "user_gender":   pl.Series([], dtype=pl.Utf8),
-        "user_city":     pl.Series([], dtype=pl.Utf8),
-        "user_country":  pl.Series([], dtype=pl.Utf8),
-        "symptoms_list": pl.Series([], dtype=pl.Utf8),
-        "diseases_list": pl.Series([], dtype=pl.Utf8),
-        "herbs_list":    pl.Series([], dtype=pl.Utf8),
+        "log_id":          pl.Series([], dtype=pl.Utf8),
+        "session_id":      pl.Series([], dtype=pl.Utf8),
+        "user_id":         pl.Series([], dtype=pl.Utf8),
+        "user_uuid":       pl.Series([], dtype=pl.Utf8),
+        "email_hashed":    pl.Series([], dtype=pl.Utf8),
+        "user_age":        pl.Series([], dtype=pl.Int32),
+        "user_gender":     pl.Series([], dtype=pl.Utf8),
+        "user_city":       pl.Series([], dtype=pl.Utf8),
+        "user_country":    pl.Series([], dtype=pl.Utf8),
+        "symptoms_list":   pl.Series([], dtype=pl.Utf8),
+        "diseases_list":   pl.Series([], dtype=pl.Utf8),
+        "herbs_list":      pl.Series([], dtype=pl.Utf8),
         "body_parts_list": pl.Series([], dtype=pl.Utf8),
-        "timestamp":     pl.Series([], dtype=pl.Utf8),
-        "updated_at":    pl.Series([], dtype=pl.Utf8),
+        "timestamp":       pl.Series([], dtype=pl.Utf8),
+        "updated_at":      pl.Series([], dtype=pl.Utf8),
     })
 
     if silver_mongodb_medical_logs.is_empty():
@@ -308,7 +319,12 @@ def gold_medical_insights(
         for row in silver_mongodb_users.iter_rows(named=True):
             uid = row.get("user_id", "")
             if uid:
-                user_info[uid] = {"age": row.get("age"), "gender": row.get("gender")}
+                user_info[uid] = {
+                    "age":          row.get("age"),
+                    "gender":       row.get("gender"),
+                    "user_uuid":    row.get("user_uuid"),
+                    "email_hashed": row.get("email_hashed"),
+                }
 
     # Pre-build geo map by session_id (first valid entry per session)
     geo_map: dict[str, tuple[str, str]] = {}
@@ -340,6 +356,8 @@ def gold_medical_insights(
             "log_id":          row["log_id"],
             "session_id":      row["session_id"],
             "user_id":         uid if uid not in ("None", "null", "") else None,
+            "user_uuid":       info.get("user_uuid"),
+            "email_hashed":    info.get("email_hashed"),
             "user_age":        info.get("age"),
             "user_gender":     info.get("gender"),
             "user_city":       city,

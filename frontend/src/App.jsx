@@ -12,6 +12,26 @@ import {
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 const MINIO_PUBLIC_URL = import.meta.env.VITE_MINIO_PUBLIC_URL || 'http://localhost:9000';
 
+// Silently refresh accessToken using refreshToken; returns new token or null
+async function tryRefreshToken() {
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!refreshToken) return null;
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/auth/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.accessToken) {
+      localStorage.setItem('accessToken', data.accessToken);
+      return data.accessToken;
+    }
+  } catch (_) {}
+  return null;
+}
+
 // Simple custom Markdown parser to format AI responses nicely
 const renderMarkdown = (text) => {
   if (!text) return null;
@@ -337,19 +357,37 @@ function App() {
       sources: []
     }]);
 
-    const token = localStorage.getItem('accessToken');
+    let token = localStorage.getItem('accessToken');
     try {
-      const res = await fetch(`${BACKEND_URL}/api/chat/message`, {
+      const doRequest = (t) => fetch(`${BACKEND_URL}/api/chat/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${t}`
         },
         body: JSON.stringify({
           session_id: activeSessionId,
           message_content: userMessageText
         })
       });
+
+      let res = await doRequest(token);
+
+      // Auto-refresh on 401 and retry once
+      if (res.status === 401) {
+        const newToken = await tryRefreshToken();
+        if (newToken) {
+          token = newToken;
+          res = await doRequest(newToken);
+        } else {
+          // Refresh failed — force logout
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          setUser(null);
+          setView('login');
+          return;
+        }
+      }
 
       if (res.ok) {
         const data = await res.json();
@@ -372,11 +410,12 @@ function App() {
           fetchSessions();
         }
       } else {
+        const errData = await res.json().catch(() => ({}));
         setMessages(prev => {
           const updated = [...prev];
           updated[updated.length - 1] = {
             message_content: userMessageText,
-            ai_response: 'Có lỗi xảy ra khi gọi dịch vụ AI. Vui lòng thử lại.',
+            ai_response: `Lỗi ${res.status}: ${errData.message || 'Có lỗi xảy ra khi gọi dịch vụ AI. Vui lòng thử lại.'}`,
             elapsed_ms: 0,
             sources: []
           };
