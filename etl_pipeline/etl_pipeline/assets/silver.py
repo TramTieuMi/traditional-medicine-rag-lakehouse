@@ -1,34 +1,23 @@
 # etl_pipeline/etl_pipeline/assets/silver.py
 #
 # Silver layer — lọc trang YHCT liên quan từ Bronze.
-# Engine: Apache Spark (kết nối spark://spark-master:7077).
-# Fallback về Polars nếu PySpark chưa khả dụng.
-#
-# Tại sao dùng Spark cho bước này?
-#   - Số trang text có thể lên đến hàng chục nghìn khi thêm nhiều sách.
-#   - Spark cho phép xử lý song song trên nhiều worker (horizontal scaling).
-#   - UDF-based filtering chạy distributed thay vì sequential Python loop.
+# Engine: Polars (single-node, đủ nhanh cho quy mô hiện tại).
+# Incremental: chỉ filter trang mới chưa có trong Silver, giữ nguyên trang cũ.
 
 import os
 from datetime import datetime
+from io import BytesIO
 
 import polars as pl
 from dagster import AssetIn, MetadataValue, Output, asset
+from minio import Minio
+from minio.error import S3Error
 
-# ── Optional PySpark import ───────────────────────────────────────────────────
-try:
-    from pyspark.sql import SparkSession
-    from pyspark.sql.functions import col, lit, udf
-    from pyspark.sql.types import StringType
-    # Lỗi executor crash loop trên worker vì thiếu thư viện Python đồng bộ
-    # Tạm thời vô hiệu hóa PySpark, sử dụng Polars cực nhanh thay thế.
-    PYSPARK_AVAILABLE = False
-except ImportError:
-    PYSPARK_AVAILABLE = False
-
-
-SPARK_MASTER = os.getenv("SPARK_MASTER_URL", "spark://spark-master:7077")
-
+MINIO_ENDPOINT   = "minio:9000"
+MINIO_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID",     "minio")
+MINIO_SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", "minio123")
+SILVER_BUCKET    = "yhct-silver"
+SILVER_KEY       = "silver/pdf/silver_filtered_pages.parquet"
 
 # ── Keywords YHCT — trang phải chứa ít nhất 1 trong các keyword này ──────────
 YHCT_KEYWORDS = [
@@ -75,16 +64,10 @@ STOPWORDS = [
     "chương trình đào tạo",
 ]
 
-# Trang quá ngắn (ít hơn N từ) → loại bỏ
 MIN_WORDS = 40
 
 
-# ── Hàm lọc thuần Python — dùng cho cả Polars fallback và Spark UDF ──────────
 def _classify_page(text: str) -> str:
-    """
-    Trả về '' nếu trang hợp lệ YHCT.
-    Trả về lý do nếu bị loại ('too_short', 'stopword:...', 'no_yhct_keyword').
-    """
     if not text:
         return "empty"
     if len(text.split()) < MIN_WORDS:
@@ -98,115 +81,26 @@ def _classify_page(text: str) -> str:
     return ""
 
 
-# ── Spark processing ──────────────────────────────────────────────────────────
-
-def _get_spark(context) -> "SparkSession":
-    """Tạo SparkSession kết nối đến cluster, fallback về local nếu lỗi."""
+def _load_existing_silver() -> pl.DataFrame | None:
+    """Đọc Silver hiện có từ MinIO. Trả về None nếu chưa có."""
     try:
-        spark = (
-            SparkSession.builder
-            .appName("YHCT-Silver-Filtering")
-            .master(SPARK_MASTER)
-            .config("spark.driver.memory",              "1g")
-            .config("spark.executor.memory",            "1g")
-            .config("spark.sql.shuffle.partitions",     "4")
-            .config("spark.driver.bindAddress",         "0.0.0.0")
-            .config("spark.driver.host",                "etl_pipeline")
-            .getOrCreate()
-        )
-        context.log.info(f"⚡ Spark kết nối thành công: {SPARK_MASTER}")
-        return spark
-    except Exception as e:
-        context.log.warning(f"⚠️  Không thể kết nối {SPARK_MASTER}: {e}")
-        context.log.info("⚡ Fallback → Spark local[*]")
-        return (
-            SparkSession.builder
-            .appName("YHCT-Silver-Filtering-Local")
-            .master("local[*]")
-            .config("spark.driver.memory",          "1g")
-            .config("spark.sql.shuffle.partitions", "4")
-            .getOrCreate()
-        )
+        client = Minio(MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, secure=False)
+        obj    = client.get_object(SILVER_BUCKET, SILVER_KEY)
+        return pl.read_parquet(BytesIO(obj.read()))
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            return None
+        raise
+    except Exception:
+        return None
 
 
-def _filter_with_spark(
-    bronze_df: pl.DataFrame, context
-) -> tuple[pl.DataFrame, dict, str]:
-    """
-    Lọc bằng Spark distributed processing.
-    Trả về (silver_df, filter_stats, spark_master_used).
-    """
-    spark = _get_spark(context)
-    master_used = spark.sparkContext.master
-
-    # Spark UDF — closure capture YHCT_KEYWORDS + STOPWORDS + MIN_WORDS
-    _kws  = YHCT_KEYWORDS
-    _sws  = STOPWORDS
-    _minw = MIN_WORDS
-
-    @udf(returnType=StringType())
-    def classify_udf(text: str) -> str:
-        if not text:
-            return "empty"
-        if len(text.split()) < _minw:
-            return "too_short"
-        low = text.lower()
-        for sw in _sws:
-            if sw in low:
-                return f"stopword:{sw}"
-        if not any(kw in low for kw in _kws):
-            return "no_yhct_keyword"
-        return ""
-
-    context.log.info(
-        f"⚡ Spark [{master_used}]: phân tán {bronze_df.shape[0]} trang "
-        f"ra các worker để lọc..."
-    )
-
-    # Polars → Pandas → Spark DataFrame
-    spark_df = spark.createDataFrame(bronze_df.to_pandas())
-
-    # Thêm cột filter_reason bằng UDF (chạy distributed trên worker)
-    classified = spark_df.withColumn("filter_reason", classify_udf(col("page_text")))
-
-    # Tính stats trước khi filter (lazy evaluation — 1 pass duy nhất)
-    classified.cache()
-
-    stats_rows = (
-        classified
-        .filter(col("filter_reason") != "")
-        .groupBy("filter_reason")
-        .count()
-        .collect()
-    )
-    filter_stats = {row["filter_reason"]: row["count"] for row in stats_rows}
-
-    # Giữ lại trang pass filter
-    kept_spark = classified.filter(col("filter_reason") == "")
-
-    # Spark → Pandas → Polars
-    kept_pandas = kept_spark.toPandas()
-    classified.unpersist()
-    spark.stop()
-
-    if kept_pandas.empty:
-        raise ValueError("Silver (Spark): không có trang nào pass filter!")
-
-    silver_df = pl.from_pandas(kept_pandas)
-    silver_df = silver_df.with_columns(
-        pl.lit(datetime.utcnow()).alias("silver_time"),
-        pl.lit(False).alias("is_filtered"),
-    )
-    return silver_df, filter_stats, master_used
-
-
-def _filter_with_polars(bronze_df: pl.DataFrame, context) -> tuple[pl.DataFrame, dict]:
-    """Fallback: lọc bằng Polars (single-node) khi PySpark chưa khả dụng."""
-    context.log.warning("⚠️  PySpark chưa cài — dùng Polars fallback.")
+def _filter_with_polars(pages_df: pl.DataFrame, context) -> tuple[pl.DataFrame, dict]:
+    """Lọc trang YHCT bằng Polars. Chỉ gọi với trang CHƯA có trong Silver."""
     kept_rows    = []
     filter_stats = {}
 
-    for row in bronze_df.iter_rows(named=True):
+    for row in pages_df.iter_rows(named=True):
         reason = _classify_page(row["page_text"])
         if reason == "":
             kept_rows.append({
@@ -219,7 +113,7 @@ def _filter_with_polars(bronze_df: pl.DataFrame, context) -> tuple[pl.DataFrame,
             filter_stats[reason] = filter_stats.get(reason, 0) + 1
 
     if not kept_rows:
-        raise ValueError("Silver: không có trang nào pass filter!")
+        raise ValueError("Silver: không có trang mới nào pass filter!")
 
     return pl.DataFrame(kept_rows), filter_stats
 
@@ -233,70 +127,109 @@ def _filter_with_polars(bronze_df: pl.DataFrame, context) -> tuple[pl.DataFrame,
     key_prefix=["silver", "pdf"],
     group_name="silver",
     io_manager_key="minio_io_manager",
-    compute_kind="spark" if PYSPARK_AVAILABLE else "python",
+    compute_kind="python",
     ins={"bronze_pdf_pages": AssetIn(key_prefix=["bronze", "pdf"])},
     description=(
-        "Lọc trang YHCT liên quan từ Bronze → Silver. "
-        "Engine: Apache Spark (distributed UDF filtering). "
-        "Fallback về Polars nếu PySpark chưa cài."
+        "Lọc trang YHCT liên quan từ Bronze → Silver (Polars). "
+        "Incremental: chỉ filter trang mới, giữ nguyên Silver cũ."
     ),
 )
 def silver_filtered_pages(context, bronze_pdf_pages: pl.DataFrame) -> Output:
     context.log.info(f"📥 Nhận {bronze_pdf_pages.shape[0]} trang từ Bronze")
 
-    # Log input stats theo file
+    # ── Incremental: tìm trang đã có trong Silver ────────────────────────────
+    existing_silver = _load_existing_silver()
+    already_done: set[tuple] = set()
+
+    if existing_silver is not None:
+        # Thêm filter_reason nếu Silver cũ không có (backward compat)
+        if "filter_reason" not in existing_silver.columns:
+            existing_silver = existing_silver.with_columns(pl.lit("").alias("filter_reason"))
+
+        already_done = set(zip(
+            existing_silver["doc_id"].to_list(),
+            existing_silver["page_num"].to_list(),
+        ))
+        context.log.info(
+            f"📊 Silver hiện có: {existing_silver.shape[0]} trang "
+            f"từ {existing_silver['source_file'].n_unique()} file"
+        )
+    else:
+        context.log.info("📊 Chưa có Silver data — lần đầu chạy toàn bộ.")
+
+    # ── Tìm trang mới chưa có trong Silver ──────────────────────────────────
+    new_pages = [
+        row for row in bronze_pdf_pages.iter_rows(named=True)
+        if (row["doc_id"], row["page_num"]) not in already_done
+    ]
+
+    if not new_pages:
+        context.log.info("✅ Không có trang mới — dùng lại Silver hiện có.")
+        return Output(
+            value=existing_silver,
+            metadata={
+                "status":       MetadataValue.text("incremental_no_new_pages"),
+                "total_kept":   MetadataValue.int(existing_silver.shape[0]),
+                "new_filtered": MetadataValue.int(0),
+            },
+        )
+
+    context.log.info(f"🆕 Cần filter {len(new_pages)} trang mới")
+    new_bronze_df = pl.DataFrame(new_pages)
+
+    # Log theo file
     file_counts = (
-        bronze_pdf_pages.group_by("source_file")
+        new_bronze_df.group_by("source_file")
         .agg(pl.len().alias("pages"))
         .sort("source_file")
     )
     for row in file_counts.iter_rows(named=True):
-        context.log.info(f"   └─ {row['source_file']}: {row['pages']} trang")
+        context.log.info(f"   └─ {row['source_file']}: {row['pages']} trang mới")
 
-    # ── Chọn engine xử lý ────────────────────────────────────────────────────
-    if PYSPARK_AVAILABLE:
-        silver_df, filter_stats, spark_master = _filter_with_spark(bronze_pdf_pages, context)
-        engine = f"spark ({spark_master})"
+    # ── Filter chỉ trang mới ─────────────────────────────────────────────────
+    new_silver_df, filter_stats = _filter_with_polars(new_bronze_df, context)
+    total_removed = len(new_pages) - new_silver_df.shape[0]
+
+    # ── Merge với Silver cũ ──────────────────────────────────────────────────
+    if existing_silver is not None:
+        new_silver_df = new_silver_df.with_columns(
+            pl.col("silver_time").cast(existing_silver["silver_time"].dtype)
+        )
+        combined_df = pl.concat([existing_silver, new_silver_df])
+        context.log.info(
+            f"🔗 Kết hợp: {existing_silver.shape[0]} trang cũ + "
+            f"{new_silver_df.shape[0]} trang mới = {combined_df.shape[0]} tổng"
+        )
     else:
-        silver_df, filter_stats = _filter_with_polars(bronze_pdf_pages, context)
-        engine = "polars (fallback)"
+        combined_df = new_silver_df
 
-    total_removed = bronze_pdf_pages.shape[0] - silver_df.shape[0]
-
-    # Log kết quả
+    # Log filter stats
     context.log.info(f"\n{'='*50}")
-    context.log.info(f"✅ TỔNG KẾT SILVER [{engine}]:")
-    context.log.info(f"   Giữ lại: {silver_df.shape[0]} trang")
-    context.log.info(f"   Loại bỏ: {total_removed} trang")
+    context.log.info(f"✅ TỔNG KẾT SILVER (incremental):")
+    context.log.info(f"   Trang mới giữ lại: {new_silver_df.shape[0]}")
+    context.log.info(f"   Trang mới loại bỏ: {total_removed}")
     for reason, count in sorted(filter_stats.items(), key=lambda x: x[1], reverse=True):
         context.log.info(f"   └─ {reason}: {count} trang")
+    context.log.info(f"   Tổng Silver: {combined_df.shape[0]} trang")
 
-    # Stats theo file
     file_kept = (
-        silver_df.group_by("source_file")
+        combined_df.group_by("source_file")
         .agg(pl.len().alias("pages_kept"))
         .sort("source_file")
     )
-    for row in file_kept.iter_rows(named=True):
-        context.log.info(f"   Giữ [{row['source_file']}]: {row['pages_kept']} trang")
-
-    preview_df = silver_df.select(
+    preview_df = combined_df.select(
         ["source_file", "doc_id", "page_num", "word_count"]
     ).head(8)
 
     return Output(
-        value=silver_df,
+        value=combined_df,
         metadata={
-            "engine":         MetadataValue.text(engine),
-            "total_input":    MetadataValue.int(bronze_pdf_pages.shape[0]),
-            "total_kept":     MetadataValue.int(silver_df.shape[0]),
-            "total_removed":  MetadataValue.int(total_removed),
+            "engine":         MetadataValue.text("polars"),
+            "total_kept":     MetadataValue.int(combined_df.shape[0]),
+            "new_filtered":   MetadataValue.int(new_silver_df.shape[0]),
+            "new_removed":    MetadataValue.int(total_removed),
             "filter_stats":   MetadataValue.json(filter_stats),
-            "kept_by_file":   MetadataValue.md(
-                file_kept.to_pandas().to_markdown()
-            ),
-            "preview":        MetadataValue.md(
-                preview_df.to_pandas().to_markdown()
-            ),
+            "kept_by_file":   MetadataValue.md(file_kept.to_pandas().to_markdown()),
+            "preview":        MetadataValue.md(preview_df.to_pandas().to_markdown()),
         },
     )

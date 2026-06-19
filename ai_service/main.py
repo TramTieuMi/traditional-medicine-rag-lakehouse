@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import time
@@ -31,47 +32,50 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Medical Entities Definitions for Parsing ──────────────────────────────────
-SYMPTOMS_LIST = [
-    "đau dạ dày", "táo bón", "tiêu chảy", "đầy bụng", "chướng bụng", "ợ chua", "ợ hơi",
-    "buồn nôn", "nôn mửa", "nôn", "đau bụng", "vàng da", "ăn không tiêu", "ăn kém", 
-    "tiêu hóa kém", "mất ngủ", "hồi hộp", "hay quên", "ho khan", "ho có đờm", "khó thở",
-    "đái dầm", "di tinh", "di niệu"
-]
+_ENTITY_EXTRACT_PROMPT = """Bạn là chuyên gia y học cổ truyền Việt Nam. Phân tích câu hỏi của người dùng và trích xuất các thực thể y tế họ đề cập.
 
-DISEASES_LIST = [
-    "viêm gan", "xơ gan", "viêm đại tràng", "viêm dạ dày", "tỳ vị hư", "can khí uất kết",
-    "can âm hư", "can huyết hư", "thận khí hư", "thận âm hư", "thận dương hư", "phế khí hư", 
-    "phế âm hư", "tâm huyết hư", "tâm khí hư", "tỳ khí hư", "tỳ dương hư"
-]
+Trả về JSON thuần túy (không markdown, không giải thích) với 4 trường:
+- "symptoms": danh sách triệu chứng người dùng MÔ TẢ mình đang bị (ví dụ: "đau đầu", "mất ngủ", "táo bón")
+- "diseases": tên bệnh hoặc hội chứng được nhắc đến (ví dụ: "viêm dạ dày", "tiểu đường")
+- "body_parts": bộ phận cơ thể liên quan (ví dụ: "dạ dày", "gan", "lưng")
+- "herbs": dược liệu hoặc thuốc được hỏi (ví dụ: "gừng", "cam thảo")
 
-BODY_PARTS_LIST = [
-    "dạ dày", "ruột", "gan", "mật", "thượng vị", "tỳ", "can", "thận", "phế", "tâm",
-    "đại tràng", "tiểu tràng", "bàng quang", "mệnh môn"
-]
+Chỉ ghi các thực thể THỰC SỰ có trong câu hỏi. Nếu không có thì để mảng rỗng [].
+Chuẩn hóa về dạng viết thường, bỏ dấu câu thừa.
 
-HERBS_LIST = [
-    "cam thảo", "bạch truật", "phục linh", "nhân sâm", "hoàng kỳ", "sinh địa", "thục địa",
-    "sài hồ", "bán hạ", "trần bì", "nhân trần", "sơn tra", "đương quy", "gừng", "nghệ",
-    "ngải cứu", "chi tử", "đại hoàng", "bạch thược", "thương truật", "hậu phác", "ý dĩ",
-    "hoàng liên", "sinh khương", "mộc hương"
-]
+Câu hỏi: {question}
 
-def extract_entities(text: str) -> Dict[str, List[str]]:
-    """Trích xuất thực thể y tế cơ bản từ văn bản bằng keyword matching."""
-    text_lower = text.lower()
-    
-    extracted_symptoms = [s for s in SYMPTOMS_LIST if s in text_lower]
-    extracted_diseases = [d for d in DISEASES_LIST if d in text_lower]
-    extracted_body_parts = [b for b in BODY_PARTS_LIST if b in text_lower]
-    extracted_herbs = [h for h in HERBS_LIST if h in text_lower]
-    
-    return {
-        "symptoms": extracted_symptoms,
-        "diseases": extracted_diseases,
-        "body_parts": extracted_body_parts,
-        "herbs": extracted_herbs
-    }
+JSON:"""
+
+
+def extract_entities(question: str, groq_client: Any) -> Dict[str, List[str]]:
+    """Dùng Groq LLM để trích xuất thực thể y tế từ câu hỏi người dùng."""
+    _empty = {"symptoms": [], "diseases": [], "body_parts": [], "herbs": []}
+    if not question or not question.strip():
+        return _empty
+    try:
+        resp = groq_client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[{
+                "role": "user",
+                "content": _ENTITY_EXTRACT_PROMPT.format(question=question.strip()),
+            }],
+            temperature=0.0,
+            max_tokens=256,
+        )
+        raw = resp.choices[0].message.content.strip()
+        # Bóc JSON ra dù model có thể thêm markdown
+        if "```" in raw:
+            raw = raw.split("```")[1].lstrip("json").strip()
+        parsed = json.loads(raw)
+        return {
+            "symptoms":   [str(x).strip() for x in parsed.get("symptoms",   []) if x],
+            "diseases":   [str(x).strip() for x in parsed.get("diseases",   []) if x],
+            "body_parts": [str(x).strip() for x in parsed.get("body_parts", []) if x],
+            "herbs":      [str(x).strip() for x in parsed.get("herbs",      []) if x],
+        }
+    except Exception:
+        return _empty
 
 # ── Obvious Social Chat Classifier ────────────────────────────────────────────
 _OBVIOUS_ACK = re.compile(
@@ -320,8 +324,8 @@ def api_chat(payload: ChatRequest):
 
     elapsed = int((time.perf_counter() - t0) * 1000)
 
-    # 5. Trích xuất thực thể y tế (từ cả câu hỏi và câu trả lời)
-    extracted = extract_entities(question + " " + answer)
+    # 5. Trích xuất thực thể y tế từ câu hỏi người dùng bằng LLM
+    extracted = extract_entities(question, get_groq())
 
     return ChatResponse(
         answer=answer,

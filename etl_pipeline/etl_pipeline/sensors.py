@@ -38,7 +38,7 @@ POLL_INTERVAL_SEC = 30   # kiểm tra mỗi 30 giây
 
 
 @sensor(
-    job_name="__ASSET_JOB",
+    job=all_assets_job,
     minimum_interval_seconds=POLL_INTERVAL_SEC,
     description=(
         "Theo dõi thư mục data/raw/ mỗi 30 giây. "

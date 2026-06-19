@@ -11,6 +11,7 @@ from io import BytesIO
 import polars as pl
 from dagster import AssetCheckResult, AssetCheckSeverity, MetadataValue, asset_check
 from minio import Minio
+from minio.error import S3Error
 
 from .assets.bronze      import bronze_pdf_ingestion
 from .assets.silver      import silver_filtered_pages
@@ -26,6 +27,24 @@ def _read_parquet(bucket: str, key: str) -> pl.DataFrame:
     client = Minio(MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, secure=False)
     obj    = client.get_object(bucket, key)
     return pl.read_parquet(BytesIO(obj.read()))
+
+
+def _not_found_result(check_name: str) -> AssetCheckResult:
+    """Check result bỏ qua nhẹ nhàng khi Parquet chưa tồn tại (first run)."""
+    return AssetCheckResult(
+        passed=True,
+        severity=AssetCheckSeverity.WARN,
+        metadata={"status": MetadataValue.text("skipped — parquet not yet materialized")},
+    )
+
+
+def _error_result(e: Exception) -> AssetCheckResult:
+    """Check result khi có lỗi thật (không phải file-not-found)."""
+    return AssetCheckResult(
+        passed=False,
+        severity=AssetCheckSeverity.WARN,
+        metadata={"error": MetadataValue.text(str(e))},
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -221,17 +240,17 @@ def check_gold_engagement_no_nulls(context) -> AssetCheckResult:
     try:
         df = _read_parquet("yhct-gold", "gold/mongodb/gold_user_engagement.parquet")
         null_dates = df.filter(pl.col("date").is_null() | (pl.col("date") == "")).shape[0]
-        passed = (null_dates == 0)
+        return AssetCheckResult(
+            passed=(null_dates == 0),
+            severity=AssetCheckSeverity.ERROR,
+            metadata={"null_dates_count": MetadataValue.int(null_dates)},
+        )
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            return _not_found_result("gold_engagement_no_null_date")
+        return _error_result(e)
     except Exception as e:
-        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
-        passed = True  # Fallback if first run or empty
-        null_dates = 0
-        
-    return AssetCheckResult(
-        passed=passed,
-        severity=AssetCheckSeverity.ERROR,
-        metadata={"null_dates_count": MetadataValue.int(null_dates)},
-    )
+        return _error_result(e)
 
 
 @asset_check(
@@ -243,20 +262,20 @@ def check_gold_chat_rating_range(context) -> AssetCheckResult:
     try:
         df = _read_parquet("yhct-gold", "gold/mongodb/gold_chat_performance.parquet")
         invalid_ratings = df.filter(
-            (pl.col("feedback_rating").is_not_null()) & 
+            (pl.col("feedback_rating").is_not_null()) &
             ((pl.col("feedback_rating") < 1) | (pl.col("feedback_rating") > 5))
         ).shape[0]
-        passed = (invalid_ratings == 0)
+        return AssetCheckResult(
+            passed=(invalid_ratings == 0),
+            severity=AssetCheckSeverity.ERROR,
+            metadata={"invalid_ratings_count": MetadataValue.int(invalid_ratings)},
+        )
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            return _not_found_result("gold_chat_rating_range")
+        return _error_result(e)
     except Exception as e:
-        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
-        passed = True
-        invalid_ratings = 0
-        
-    return AssetCheckResult(
-        passed=passed,
-        severity=AssetCheckSeverity.ERROR,
-        metadata={"invalid_ratings_count": MetadataValue.int(invalid_ratings)},
-    )
+        return _error_result(e)
 
 
 @asset_check(
@@ -266,27 +285,25 @@ def check_gold_chat_rating_range(context) -> AssetCheckResult:
 )
 def check_gold_insights_valid(context) -> AssetCheckResult:
     try:
-        df = _read_parquet("yhct-gold", "gold/mongodb/gold_medical_insights.parquet")
-        total = df.shape[0]
+        df          = _read_parquet("yhct-gold", "gold/mongodb/gold_medical_insights.parquet")
+        total       = df.shape[0]
         unique_logs = df["log_id"].n_unique()
-        null_logs = df.filter(pl.col("log_id").is_null() | (pl.col("log_id") == "")).shape[0]
-        passed = (total == unique_logs) and (null_logs == 0)
+        null_logs   = df.filter(pl.col("log_id").is_null() | (pl.col("log_id") == "")).shape[0]
+        return AssetCheckResult(
+            passed=(total == unique_logs) and (null_logs == 0),
+            severity=AssetCheckSeverity.ERROR,
+            metadata={
+                "total_records": MetadataValue.int(total),
+                "unique_logs":   MetadataValue.int(unique_logs),
+                "null_logs":     MetadataValue.int(null_logs),
+            },
+        )
+    except S3Error as e:
+        if e.code == "NoSuchKey":
+            return _not_found_result("gold_insights_valid_ids")
+        return _error_result(e)
     except Exception as e:
-        context.log.warning(f"Không thể đọc file parquet hoặc thực hiện kiểm tra: {e}")
-        passed = True
-        total = 0
-        unique_logs = 0
-        null_logs = 0
-        
-    return AssetCheckResult(
-        passed=passed,
-        severity=AssetCheckSeverity.ERROR,
-        metadata={
-            "total_records": MetadataValue.int(total),
-            "unique_logs": MetadataValue.int(unique_logs),
-            "null_logs": MetadataValue.int(null_logs),
-        },
-    )
+        return _error_result(e)
 
 
 # Danh sách export cho __init__.py
