@@ -1,0 +1,13 @@
+﻿id,category,question,answer,top_similarity,precision_at_k,mrr,ndcg_at_k,chunk_coverage,faithfulness,answer_relevancy,rouge_l,completeness,is_zero_result,response_ms,confusion_label
+GP001,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Hàn thấp theo y học cổ truyền?","Theo y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Hàn thấp được mô tả như sau:
+
+**Nguyên nhân:**
+
+Đau cột thắt lưng thể Hàn thấp được coi là do phong thấp xâm nhập vào cột sống, gây ra đau nhức và khó chịu. Phong thấp là một loại bệnh lý trong y học cổ truyền, được đặc trưng bởi sự xuất hiện c",0.5802,0.2,0.2,0.3869,0.4,0.8,0.5,0.264,0.9957,0,7196,correct
+GP002,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt theo y học cổ truyền?","Theo Y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt là một chứng bệnh do phong thấp nhiệt tích tụ trong cơ thể, đặc biệt là ở vùng cột thắt lưng.
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, nguyên nhân của Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt thường là do:
+
+* Phong thấp nhiệt tíc",0.6904,0.2,0.5,0.6309,0.4,0.7948,0.5,0.2167,1.0,0,1163,correct

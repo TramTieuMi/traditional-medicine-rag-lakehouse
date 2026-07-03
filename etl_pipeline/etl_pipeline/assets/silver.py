@@ -12,6 +12,7 @@ import polars as pl
 from dagster import AssetIn, MetadataValue, Output, asset
 from minio import Minio
 from minio.error import S3Error
+from .text_cleaner import clean_ocr_text
 
 MINIO_ENDPOINT   = "minio:9000"
 MINIO_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID",     "minio")
@@ -101,10 +102,15 @@ def _filter_with_polars(pages_df: pl.DataFrame, context) -> tuple[pl.DataFrame, 
     filter_stats = {}
 
     for row in pages_df.iter_rows(named=True):
-        reason = _classify_page(row["page_text"])
+        # Làm sạch và sửa lỗi chính tả văn bản trước khi phân loại và lưu
+        cleaned_text = clean_ocr_text(row["page_text"])
+        reason = _classify_page(cleaned_text)
         if reason == "":
+            cleaned_row = dict(row)
+            cleaned_row["page_text"] = cleaned_text
+            cleaned_row["word_count"] = len(cleaned_text.split())
             kept_rows.append({
-                **row,
+                **cleaned_row,
                 "is_filtered":   False,
                 "filter_reason": "",
                 "silver_time":   datetime.utcnow(),
@@ -113,7 +119,13 @@ def _filter_with_polars(pages_df: pl.DataFrame, context) -> tuple[pl.DataFrame, 
             filter_stats[reason] = filter_stats.get(reason, 0) + 1
 
     if not kept_rows:
-        raise ValueError("Silver: không có trang mới nào pass filter!")
+        # Return empty DataFrame with correct schema instead of raising ValueError
+        empty_df = pages_df.clone().head(0).with_columns([
+            pl.lit(False).alias("is_filtered").cast(pl.Boolean),
+            pl.lit("").alias("filter_reason").cast(pl.Utf8),
+            pl.lit(datetime.utcnow()).alias("silver_time").cast(pl.Datetime)
+        ])
+        return empty_df, filter_stats
 
     return pl.DataFrame(kept_rows), filter_stats
 
@@ -192,9 +204,19 @@ def silver_filtered_pages(context, bronze_pdf_pages: pl.DataFrame) -> Output:
 
     # ── Merge với Silver cũ ──────────────────────────────────────────────────
     if existing_silver is not None:
+        # Align columns just in case schemas have evolved
+        for col in new_silver_df.columns:
+            if col not in existing_silver.columns:
+                existing_silver = existing_silver.with_columns(pl.lit(None).alias(col).cast(new_silver_df[col].dtype))
+        for col in existing_silver.columns:
+            if col not in new_silver_df.columns:
+                new_silver_df = new_silver_df.with_columns(pl.lit(None).alias(col).cast(existing_silver[col].dtype))
+        
+        # Ensure correct types and ordering
         new_silver_df = new_silver_df.with_columns(
             pl.col("silver_time").cast(existing_silver["silver_time"].dtype)
-        )
+        ).select(existing_silver.columns)
+        
         combined_df = pl.concat([existing_silver, new_silver_df])
         context.log.info(
             f"🔗 Kết hợp: {existing_silver.shape[0]} trang cũ + "

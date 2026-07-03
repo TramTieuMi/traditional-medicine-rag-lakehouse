@@ -214,9 +214,11 @@ def answer_completeness(
 
     # Threshold khác nhau theo category
     thresholds = {
-        "duoc_lieu":  {"min": 50, "good": 100, "max": 300},
-        "bai_thuoc":  {"min": 80, "good": 150, "max": 400},
-        "tieu_hoa":   {"min": 60, "good": 120, "max": 350},
+        "tieu_hoa":             {"min": 60, "good": 120, "max": 350},
+        "xuong_khop":           {"min": 60, "good": 120, "max": 350},
+        "ho_hap":               {"min": 60, "good": 120, "max": 350},
+        "tiet_nieu_sinh_duc":   {"min": 60, "good": 120, "max": 350},
+        "tuan_hoan_than_kinh":  {"min": 60, "good": 120, "max": 350},
     }
     t = thresholds.get(question_category, {"min": 50, "good": 100, "max": 300})
 

@@ -58,14 +58,18 @@ TOP_K         = 5
 SIM_THRESHOLD = 0.25
 
 COLORS = {
-    "tieu_hoa":  "#2d9e5f",
-    "duoc_lieu": "#1a6b9e",
-    "bai_thuoc": "#9e6b1a",
+    "tieu_hoa":             "#2d9e5f",
+    "xuong_khop":           "#1a6b9e",
+    "ho_hap":               "#9e6b1a",
+    "tiet_nieu_sinh_duc":   "#9e1a6b",
+    "tuan_hoan_than_kinh":  "#6b1a9e",
 }
 CATEGORY_LABELS = {
-    "tieu_hoa":  "Bệnh tiêu hóa",
-    "duoc_lieu": "Dược liệu",
-    "bai_thuoc": "Bài thuốc",
+    "tieu_hoa":             "Bệnh tiêu hóa",
+    "xuong_khop":           "Bệnh cơ xương khớp",
+    "ho_hap":               "Bệnh hô hấp",
+    "tiet_nieu_sinh_duc":   "Bệnh tiết niệu sinh dục",
+    "tuan_hoan_than_kinh":  "Bệnh tuần hoàn thần kinh",
 }
 
 
@@ -182,8 +186,8 @@ def _apply_style(ax):
 
 def plot_metrics_radar(df_agg: pd.DataFrame, out_path: str):
     """Radar chart so sánh 5 metrics chính theo 3 categories."""
-    metrics = ["precision_at_k", "mrr", "faithfulness", "answer_relevancy", "rouge_l"]
-    labels  = ["Precision@5", "MRR", "Faithfulness", "Relevancy", "ROUGE-L"]
+    metrics = ["precision_at_k", "top_similarity", "faithfulness", "answer_relevancy", "rouge_l"]
+    labels  = ["Precision@5", "Top Sim", "Faithfulness", "Relevancy", "ROUGE-L"]
     cats    = df_agg["category"].unique()
 
     angles = np.linspace(0, 2 * np.pi, len(metrics), endpoint=False).tolist()
@@ -215,7 +219,7 @@ def plot_metrics_radar(df_agg: pd.DataFrame, out_path: str):
 
 def plot_similarity_distribution(df: pd.DataFrame, out_path: str):
     """Histogram phân bố top_similarity theo category."""
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4), sharey=True)
+    fig, axes = plt.subplots(1, 5, figsize=(18, 4), sharey=True)
     fig.patch.set_facecolor("white")
     fig.suptitle("Phân bố cosine similarity theo category",
                  fontsize=13, color="#212529", fontweight="bold", y=1.02)
@@ -286,14 +290,12 @@ def plot_confusion_matrix(df: pd.DataFrame, out_path: str):
 def plot_metrics_heatmap(df_agg: pd.DataFrame, out_path: str):
     """Heatmap tổng hợp tất cả metrics theo category."""
     metric_cols = [
-        "top_similarity", "precision_at_k", "mrr", "ndcg_at_k",
-        "faithfulness", "answer_relevancy", "rouge_l", "completeness",
-        "chunk_coverage",
+        "top_similarity", "precision_at_k",
+        "faithfulness", "answer_relevancy", "rouge_l",
     ]
     metric_labels = [
-        "Top similarity", "Precision@5", "MRR", "nDCG@5",
-        "Faithfulness", "Ans. relevancy", "ROUGE-L", "Completeness",
-        "Chunk coverage",
+        "Top similarity", "Precision@5",
+        "Faithfulness", "Ans. relevancy", "ROUGE-L",
     ]
 
     cats    = [CATEGORY_LABELS.get(c, c) for c in df_agg["category"].tolist()]
@@ -453,9 +455,9 @@ def export_pdf_report(
         ax.set_title("Bảng tổng hợp metrics theo category (mean)",
                      fontsize=12, fontweight="bold", color=DARK, pad=10)
 
-        display_metrics = ["top_similarity","precision_at_k","mrr","faithfulness",
-                           "answer_relevancy","rouge_l","completeness"]
-        col_labels = ["Category","Top sim","Prec@5","MRR","Faith","Rel","ROUGE-L","Comp"]
+        display_metrics = ["top_similarity", "precision_at_k", "faithfulness",
+                           "answer_relevancy", "rouge_l"]
+        col_labels = ["Category", "Top sim", "Prec@5", "Faith", "Rel", "ROUGE-L"]
         table_data = []
         for _, row in df_agg.iterrows():
             r = [CATEGORY_LABELS.get(row["category"], row["category"])]
@@ -666,14 +668,9 @@ def main():
         global_metrics = {
             "avg_top_similarity":   float(df["top_similarity"].mean()),
             "avg_precision_at_k":   float(df["precision_at_k"].mean()),
-            "avg_mrr":              float(df["mrr"].mean()),
-            "avg_ndcg_at_k":        float(df["ndcg_at_k"].mean()),
             "avg_faithfulness":     float(df["faithfulness"].mean()),
             "avg_answer_relevancy": float(df["answer_relevancy"].mean()),
             "avg_rouge_l":          float(df["rouge_l"].mean()),
-            "avg_completeness":     float(df["completeness"].mean()),
-            "avg_chunk_coverage":   float(df["chunk_coverage"].mean()),
-            "zero_result_rate":     float(df["is_zero_result"].mean()),
             "avg_response_ms":      float(df["response_ms"].mean()),
             "correct_rate":         float((df["confusion_label"]=="correct").mean()),
             "partial_rate":         float((df["confusion_label"]=="partial").mean()),
@@ -686,12 +683,10 @@ def main():
             cat = row["category"]
             mlflow.log_metrics({
                 f"{cat}_precision_at_k":   float(row["precision_at_k"]),
-                f"{cat}_mrr":              float(row["mrr"]),
+                f"{cat}_top_similarity":   float(row["top_similarity"]),
                 f"{cat}_faithfulness":     float(row["faithfulness"]),
                 f"{cat}_answer_relevancy": float(row["answer_relevancy"]),
                 f"{cat}_rouge_l":          float(row["rouge_l"]),
-                f"{cat}_top_similarity":   float(row["top_similarity"]),
-                f"{cat}_zero_result_rate": float(row["is_zero_result"]),
             })
 
         # Log charts
@@ -716,7 +711,7 @@ def main():
     log.info(f"  Avg Precision@5:    {global_metrics['avg_precision_at_k']:.4f}")
     log.info(f"  Avg Faithfulness:   {global_metrics['avg_faithfulness']:.4f}")
     log.info(f"  Avg ROUGE-L:        {global_metrics['avg_rouge_l']:.4f}")
-    log.info(f"  Zero-result rate:   {global_metrics['zero_result_rate']*100:.1f}%")
+    log.info(f"  Zero-result rate:   {df['is_zero_result'].mean()*100:.1f}%")
     log.info(f"  Correct rate:       {global_metrics['correct_rate']*100:.1f}%")
     log.info(f"  Avg response time:  {global_metrics['avg_response_ms']:.0f} ms")
     log.info(f"  MLflow UI:          {MLFLOW_URI}")

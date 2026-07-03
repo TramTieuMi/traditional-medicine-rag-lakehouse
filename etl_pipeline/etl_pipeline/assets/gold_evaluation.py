@@ -33,31 +33,7 @@ COLLECTION    = "yhct_chunks"
 TOP_K         = 5
 SIM_THRESHOLD = 0.25
 
-# 22 câu hỏi test — 3 categories
-TEST_QUESTIONS = [
-    {"id":"TH001","category":"tieu_hoa",  "question":"Bài thuốc nào chữa đau dạ dày theo y học cổ truyền?",      "expected_keywords":["dạ dày","cam thảo","bạch truật","bán hạ"]},
-    {"id":"TH002","category":"tieu_hoa",  "question":"Điều trị táo bón bằng thảo dược như thế nào?",              "expected_keywords":["táo bón","đại hoàng","nhuận tràng"]},
-    {"id":"TH003","category":"tieu_hoa",  "question":"Phương pháp chữa tiêu chảy trong y học cổ truyền?",         "expected_keywords":["tiêu chảy","tỳ","kiện tỳ","phục linh"]},
-    {"id":"TH004","category":"tieu_hoa",  "question":"Bài thuốc điều trị đầy bụng chướng bụng?",                  "expected_keywords":["đầy bụng","hậu phác","mộc hương","tiêu thực"]},
-    {"id":"TH005","category":"tieu_hoa",  "question":"Chữa buồn nôn nôn mửa bằng thuốc đông y?",                  "expected_keywords":["nôn","bán hạ","sinh khương","hòa vị"]},
-    {"id":"TH006","category":"tieu_hoa",  "question":"Điều trị viêm đại tràng mạn theo YHCT?",                    "expected_keywords":["đại tràng","tỳ hư","kiện tỳ"]},
-    {"id":"TH007","category":"tieu_hoa",  "question":"Bài thuốc trị ợ chua ợ hơi?",                               "expected_keywords":["ợ chua","vị","hòa vị"]},
-    {"id":"TH008","category":"tieu_hoa",  "question":"Điều trị viêm gan theo y học cổ truyền?",                   "expected_keywords":["viêm gan","can","nhân trần","chi tử"]},
-    {"id":"DL001","category":"duoc_lieu", "question":"Cam thảo có công dụng và liều dùng như thế nào?",            "expected_keywords":["cam thảo","bổ tỳ","giải độc","liều"]},
-    {"id":"DL002","category":"duoc_lieu", "question":"Bạch truật dùng trong những bài thuốc nào?",                 "expected_keywords":["bạch truật","kiện tỳ","táo thấp"]},
-    {"id":"DL003","category":"duoc_lieu", "question":"Phục linh có tác dụng gì trong y học cổ truyền?",            "expected_keywords":["phục linh","kiện tỳ","an thần"]},
-    {"id":"DL004","category":"duoc_lieu", "question":"Hoàng kỳ có tác dụng bổ khí như thế nào?",                  "expected_keywords":["hoàng kỳ","bổ khí","thăng dương"]},
-    {"id":"DL005","category":"duoc_lieu", "question":"Sài hồ có công dụng sơ can giải uất như thế nào?",           "expected_keywords":["sài hồ","can","giải uất","sơ can"]},
-    {"id":"DL006","category":"duoc_lieu", "question":"Nhân trần dùng chữa vàng da viêm gan?",                      "expected_keywords":["nhân trần","vàng da","viêm gan"]},
-    {"id":"DL007","category":"duoc_lieu", "question":"Sơn tra có tác dụng tiêu thực như thế nào?",                 "expected_keywords":["sơn tra","tiêu thực","tiêu hóa"]},
-    {"id":"BT001","category":"bai_thuoc", "question":"Bài thuốc Tứ Quân Tử thang gồm những vị nào?",               "expected_keywords":["tứ quân tử","nhân sâm","bạch truật","phục linh","cam thảo"]},
-    {"id":"BT002","category":"bai_thuoc", "question":"Bài thuốc Lục Quân Tử thang điều trị tỳ vị hư?",             "expected_keywords":["lục quân tử","tỳ vị","bán hạ","trần bì"]},
-    {"id":"BT003","category":"bai_thuoc", "question":"Bài Bình Vị tán điều trị đầy bụng thấp trở?",                "expected_keywords":["bình vị","thương truật","hậu phác","trần bì"]},
-    {"id":"BT004","category":"bai_thuoc", "question":"Bài Tiêu Dao tán dùng điều trị can khí uất kết?",             "expected_keywords":["tiêu dao","can","uất","sài hồ","bạch thược"]},
-    {"id":"BT005","category":"bai_thuoc", "question":"Bài thuốc Bổ Trung Ích Khí thang có công dụng gì?",           "expected_keywords":["bổ trung ích khí","hoàng kỳ","nhân sâm","đương quy"]},
-    {"id":"BT006","category":"bai_thuoc", "question":"Sâm Linh Bạch Truật tán dùng chữa bệnh gì?",                 "expected_keywords":["sâm linh bạch truật","tỳ hư","tiêu chảy","ý dĩ"]},
-    {"id":"BT007","category":"bai_thuoc", "question":"Bài Tiêu Dao tán kết hợp với Tứ Vật thang điều trị gì?",     "expected_keywords":["tiêu dao","tứ vật","can huyết hư","bạch thược"]},
-]
+# TEST_QUESTIONS will be loaded dynamically inside the asset body from evaluation/test_data/test_questions.json
 
 
 def _run_rag_single(question: str, model, col, groq_client) -> dict:
@@ -120,6 +96,19 @@ def gold_evaluation(context, gold_embeddings) -> Output:
             metadata={"status": MetadataValue.text("skipped — metrics.py not found")}
         )
 
+    # ── Load test questions dynamically ────────────────────────────────────
+    import json
+    json_path = "/opt/dagster/app/evaluation/test_data/test_questions.json"
+    if not os.path.exists(json_path):
+        json_path = os.path.join(os.path.dirname(__file__), "..", "..", "evaluation", "test_data", "test_questions.json")
+    
+    try:
+        with open(json_path, encoding="utf-8") as f:
+            test_questions = json.load(f)
+    except Exception as e:
+        context.log.warning(f"⚠️ Failed to load test questions from {json_path}: {e}")
+        test_questions = []
+
     # ── Load dependencies một lần ─────────────────────────────────────────
     context.log.info(f"🤖 Loading embedding model: {EMBED_MODEL}")
     from sentence_transformers import SentenceTransformer
@@ -138,10 +127,10 @@ def gold_evaluation(context, gold_embeddings) -> Output:
 
     # ── Chạy evaluation ───────────────────────────────────────────────────
     rows = []
-    context.log.info(f"🧪 Evaluating {len(TEST_QUESTIONS)} questions...")
+    context.log.info(f"🧪 Evaluating {len(test_questions)} questions...")
 
-    for i, q in enumerate(TEST_QUESTIONS):
-        context.log.info(f"  [{i+1:02d}/{len(TEST_QUESTIONS)}] {q['id']} — {q['question'][:55]}")
+    for i, q in enumerate(test_questions):
+        context.log.info(f"  [{i+1:02d}/{len(test_questions)}] {q['id']} — {q['question'][:55]}")
         try:
             rag = _run_rag_single(q["question"], model, col, groq)
         except Exception as e:
@@ -182,9 +171,9 @@ def gold_evaluation(context, gold_embeddings) -> Output:
 
     # ── Aggregate ─────────────────────────────────────────────────────────
     num_cols = [
-        "top_similarity","precision_at_k","mrr","ndcg_at_k",
-        "faithfulness","answer_relevancy","rouge_l","completeness",
-        "chunk_coverage","is_zero_result","response_ms"
+        "top_similarity", "precision_at_k",
+        "faithfulness", "answer_relevancy", "rouge_l",
+        "is_zero_result", "response_ms"
     ]
     df_agg = df.group_by("category").agg(
         [pl.mean(c).alias(c) for c in num_cols]
@@ -194,13 +183,9 @@ def gold_evaluation(context, gold_embeddings) -> Output:
     global_metrics = {
         "avg_top_similarity":    float(df["top_similarity"].mean()),
         "avg_precision_at_k":    float(df["precision_at_k"].mean()),
-        "avg_mrr":               float(df["mrr"].mean()),
-        "avg_ndcg_at_k":         float(df["ndcg_at_k"].mean()),
         "avg_faithfulness":      float(df["faithfulness"].mean()),
         "avg_answer_relevancy":  float(df["answer_relevancy"].mean()),
         "avg_rouge_l":           float(df["rouge_l"].mean()),
-        "avg_completeness":      float(df["completeness"].mean()),
-        "zero_result_rate":      float(df["is_zero_result"].mean()),
         "avg_response_ms":       float(df["response_ms"].mean()),
         "correct_rate":          float((df["confusion_label"] == "correct").sum() / n),
         "partial_rate":          float((df["confusion_label"] == "partial").sum() / n),
@@ -225,11 +210,10 @@ def gold_evaluation(context, gold_embeddings) -> Output:
                 cat = row["category"]
                 mlflow.log_metrics({
                     f"{cat}_precision_at_k":   float(row["precision_at_k"]),
-                    f"{cat}_mrr":              float(row["mrr"]),
+                    f"{cat}_top_similarity":   float(row["top_similarity"]),
                     f"{cat}_faithfulness":     float(row["faithfulness"]),
                     f"{cat}_answer_relevancy": float(row["answer_relevancy"]),
                     f"{cat}_rouge_l":          float(row["rouge_l"]),
-                    f"{cat}_top_similarity":   float(row["top_similarity"]),
                 })
 
             # CSV artifact
@@ -251,11 +235,9 @@ def gold_evaluation(context, gold_embeddings) -> Output:
     context.log.info(f"{'='*55}")
     context.log.info(f"  Questions evaluated : {n}")
     context.log.info(f"  Avg Precision@5     : {global_metrics['avg_precision_at_k']:.4f}")
-    context.log.info(f"  Avg MRR             : {global_metrics['avg_mrr']:.4f}")
-    context.log.info(f"  Avg nDCG@5          : {global_metrics['avg_ndcg_at_k']:.4f}")
     context.log.info(f"  Avg Faithfulness    : {global_metrics['avg_faithfulness']:.4f}")
     context.log.info(f"  Avg ROUGE-L         : {global_metrics['avg_rouge_l']:.4f}")
-    context.log.info(f"  Zero-result rate    : {global_metrics['zero_result_rate']*100:.1f}%")
+    context.log.info(f"  Zero-result rate    : {float(df['is_zero_result'].mean())*100:.1f}%")
     context.log.info(f"  Correct rate        : {global_metrics['correct_rate']*100:.1f}%")
     context.log.info(f"  Avg response time   : {global_metrics['avg_response_ms']:.0f} ms")
     context.log.info(f"  MLflow UI           : {MLFLOW_URI}")
@@ -274,7 +256,7 @@ def gold_evaluation(context, gold_embeddings) -> Output:
             "avg_precision_at_k":   MetadataValue.float(global_metrics["avg_precision_at_k"]),
             "avg_faithfulness":     MetadataValue.float(global_metrics["avg_faithfulness"]),
             "avg_rouge_l":          MetadataValue.float(global_metrics["avg_rouge_l"]),
-            "zero_result_rate_pct": MetadataValue.float(global_metrics["zero_result_rate"] * 100),
+            "zero_result_rate_pct": MetadataValue.float(float(df["is_zero_result"].mean()) * 100),
             "correct_rate_pct":     MetadataValue.float(global_metrics["correct_rate"] * 100),
             "avg_response_ms":      MetadataValue.float(global_metrics["avg_response_ms"]),
             "mlflow_run_id":        MetadataValue.text(run_id),

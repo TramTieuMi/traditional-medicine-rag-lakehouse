@@ -1,0 +1,53 @@
+--------------Xác định thực thể (Entity)
+1. Nhóm điều trị
+* HerbMaterial.csv: Dược liệu 
+* Formula.csv: Bài thuốc
+* TherapeuticPrinciple.csv: Phép trị
+
+2. Nhóm bệnh và chẩn đoán
+* SyndromePattern.csv: Thể bệnh
+* FourDiagnostics.csv: Tứ chẩn
+
+3. Nhóm cơ thể
+* MeridianOrgan.csv: Kinh lạc 
+* OrganZangFu.csv: Lục phủ ngũ tạng 
+* Acupoint.csv: Huyệt vị
+* ZangXiangTheory.csv: Tạng tượng
+
+4. Nhóm lý luận
+* YinYangTheory.csv: âm dương
+* FiveElements.csv: ngũ hành
+* ClimateLuck.csv: Vận – khí – thời tiết
+* ThreePowers.csv: Tam tài
+--->Có 13 thực thể 
+
+---------Thực thể chính (node types)
+* HerbMaterial.csv: Dược liệu 
+* Formula.csv: Bài thuốc
+* SyndromePattern.csv: Thể bệnh
+* OrganZangFu.csv: Lục phủ ngũ tạng 
+* MeridianOrgan.csv: Kinh lạc 
+* FiveElements.csv: ngũ hành
+* YinYangTheory.csv: âm dương
+* Acupoint.csv: Huyệt vị
+
+---------------Xác định quan hệ giữa các thực thể
+Theo dạng: A -> B: Ý nghĩa quan hệ
+* Herb --> YinYang: Dược liệu thuộc âm hay dương
+* Herb --> FiveElements: Dược liệu thược ngũ hành nào
+* Herb --> OrganZangFu: Dược liệu đi vào tạng/phủ nào
+* Formula --> Herb: Có những dược liệu nào là thành phần trong bài thuốc
+* Formula --> SyndromePattern: Bài thuốc dùng cho thể bệnh nào
+* TherapeuticPrinciple --> SyndromePattern: Phép trị dùng cho thể bệnh nào
+* SyndromePattern --> OrganZangFu: Thể bệnh ảnh hưởng tới tạng/phủ nào
+* SyndromePattern --> MeridianOrgan: Liên quan tới kinh lạc nào (Khó)
+* SyndromePattern --> FourDiagnostics: Thể bệnh được phát hiện qua tứ chẩn nào (Ko khả thi)
+* SyndromePattern --> Acupoint: Thể bệnh này dùng huyệt vị nào (Chưa chắc chắn)
+* OrganZangFu --> FiveElements: Tạng/phủ thuộc ngũ hành nào
+* OrganZangFu --> MeridianOrgan: Tạng/phủ liên quan tới kinh nào
+* OrganZangFu --> ZangXiangTheory: Lý luận tạng tượng
+* Acupoint --> MeridianOrgan: Huyệt vị thuộc kinh nào
+* ClimateLuck --> SyndromePattern: Điều gì gây ra bệnh
+* ClimateLuck --> OrganZangFu: Ảnh hưởng tới tạng/phủ
+* ThreePowers --> OrganZangFu: Ảnh hưởng tới tạng/phủ (Ko khả thi)
+* ThreePowers --> SyndromePattern: Vai trò trong bệnh 

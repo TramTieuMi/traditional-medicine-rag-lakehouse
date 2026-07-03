@@ -1,0 +1,262 @@
+* HerbMaterial.csv: Dược liệu 
+herb_id: Mã dược liệu
+herb_name_vi: Tên dược liệu Tiếng Việt
+herb_name_latin: Tên dược liệu khoa học
+yin_yang: Âm dương
+element_group: Ngũ hành
+nature_vi: Vị
+temp_property: Tính
+category_vi: Thuộc loại thuốc nào
+meridian: Quy kinh --> Hiểu đơn giản: Dược liệu này đi vào đâu trong cơ thể
+indication_vi: Công dụng (Tác động vào cơ quan nào / Thuốc làm gì với cơ thể)
+safety_note: Nội dung cảnh báo có 2 loại: Chống chỉ định và Tương tác (Chống chỉ định: Không được dùng trong một số trường hợp, Tương tác: Thận trọng trong trường hợp nào đó). Tránh dùng chung với dược liệu nào,...
+data_source: Nguồn dữ liệu
+
+* Formula.csv: Bài thuốc
+formula_id: Mã bài thuốc
+formula_name_vi: Tên bài thuốc
+formula_category: Loại / Nhóm thuốc
+object: Dành cho đối tượng nào
+function: Công năng
+indications: Chủ trị
+usage: Cách dùng
+data_source: Nguồn dữ liệu
+
+* FormulaComponent.csv: Thành phần bài thuốc
+formula_id: Mã bài thuốc
+herb_id: Mã dược liệu
+dosage_value: Liều lượng
+dosage_unit: Đơn vị (g)
+
+* SyndromePattern.csv: Thể bệnh
+pattern_id: Mã chứng
+pattern_name_vi: Tên thể bệnh
+pattern_description: Mô tả ngắn gọn thể bệnh
+tcm_disease_name: Bệnh yhct
+etiology_tcm: Nguyên nhân
+affected_meridians_organs: Kinh lạc / tạng phủ
+eight_principles: bát cương
+modern_diagnostic_findings: Phát hiện bệnh bằng Tây Y (VD: X - quang,...) - Phán đoán bằng YHHD
+clinical_manifestations: Triệu chứng
+data_source: Nguồn dữ liệu
+
+* TherapeuticPrinciple.csv: Phép trị
+principle_id: Mã Phép trị
+principle_name_vi: Tên Phép trị
+description: Mô tả phép trị
+target_pathology: Tác động chính (hàn, nhiệt, thấp, ứ…) - dùng khi các bệnh nào
+safety_note
+data_source: Nguồn dữ liệu
+
+* MeridianOrgan.csv: Kinh lạc 
+meridian_id: id kinh lạc
+meridian_name_vi: Tên kinh lạc
+yin_yang: Âm dương
+related_organ: Tạng / Phủ liên quan
+meridian_type: thuộc chính kinh hay kì kinh
+pathway_description: Lộ rình kinh lạc
+clinical_significance: Ý nghĩa lâm sàng
+data_source: Nguồn dữ liệu
+
+* OrganZangFu.csv: Lục phủ ngũ tạng 
+organ_id: Id lục phủ ngũ tạng
+organ_name_vi: Tên lục phủ ngũ tạng
+organ_type: thuộc Tạng hay Phủ
+related_zang_fu: Quan hệ giữa các tạng, phủ
+physiological_function: chức năng sinh lý
+associated_body_parts: Bộ phận liên quan
+pathological_manifestation: biểu hiện bệnh lý
+data_source: Nguồn dữ liệu
+
+* FourDiagnostics.csv: Tứ chẩn
+diagnostic_id: Id tứ chẩn
+diagnostic_type: Vọng / Văn / Vấn / Thiết
+observed_sign: Dấu hiệu quan sát
+tcm_interpretation: Ý nghĩa theo YHCT
+related_pattern: Thể bệnh liên quan
+data_source: Nguồn dữ liệu
+
+* Acupoint.csv: Huyệt vị
+acupoint_id: huyệt vị
+acupoint_name_vi: Tên huyệt
+meridian: Thuộc kinh nào
+point_type: Phân loại hoặc đặc tính của huyệt vị
+alternative_name: Tên gọi khác
+location_description: Vị trí
+function: Tác dụng
+data_source: Nguồn dữ liệu 
+
+* ThreePowers.csv: Tam tài
+power_id: id
+power_name: Thiên / Địa / Nhân
+description: Ý nghĩa
+application_in_tcm: Ứng dụng trong YHCT
+data_source: Nguồn dữ liệu
+
+* YinYangTheory.csv: âm dương
+yinyang_id: id
+aspect: Âm / Dương
+characteristics: thuộc tính cơ bản
+transformation_rule: Quy luật chuyển hóa
+application_in_tcm: Ứng dụng
+data_source: Nguồn dữ liệu
+
+* FiveElements.csv: ngũ hành
+element_id: id
+element_name: tên
+characteristics: Đặc tính
+related_organs: Tạng phủ liên quan
+application_in_tcm: ứng dụng
+data_source: Nguồn dữ liệu
+
+* FiveElementRelation.csv: Quan hệ sinh khắc Ngũ Hành
+element_from: Ngũ hành nguồn
+element_to: Ngũ hành đích
+relation_type: Sinh hoặc khắc
+clinical_meaning: Ý nghĩa lâm sàng
+data_source: Nguồn dữ liệu
+
+* ClimateLuck.csv: Vận – khí – thời tiết
+climate_id: id
+six_climatic_factors: Phong / Hàn / Thử / Thấp / Táo / Hỏa
+seasonal_effect: Ảnh hưởng theo mùa
+disease_tendency: Khuynh hướng bệnh
+affected_organs: Tạng phủ dễ ảnh hưởng
+disease_prevention: Phòng bệnh
+data_source: Nguồn dữ liệu	
+
+* ZangXiangTheory.csv: Tạng tượng
+zangxiang_id: Id tạng tượng
+organ_name_vi: Tên tạng tượng
+organ_type: Thuộc tạng hay phủ
+function: tác dụng
+data_source: Nguồn dữ liệu	
+
+* dim_bat_cuong.csv
+bcuong_id: id từng cương
+bcuong_name_vi: Tên từng yếu tố trong bát cương
+axis_group: Phân loại yếu tố đó thuộc về
+description: Mô tả ngắn về yếu tố
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_etiology_tcm.csv: Nguyên nhân bệnh (Bệnh nhân học)
+etiology_id: Id
+etiology_name_vi: Tên nguyên nhân gây bệnh
+etiology_group: Nguyên nhân đó thuộc về nhóm nào
+description: Mô tả ngắn về nguyên nhân gây bệnh
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_pattern_concept.csv: Khái niệm thể bệnh
+concept_id: id
+concept_name_vi: Tên
+concept_group: Phân nhóm khái niệm thể bệnh
+description: Mô tả chi tiết về khái niệm
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_pulse_diagnosis.csv: Chẩn đoán mạch
+pulse_id: id
+pulse_name_vi: Tên loại mạch
+pulse_description: Mô tả cảm giác khi bắt mạch
+tcm_interpretation: Ý nghĩa lâm sàng theo YHCT
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_taste.csv: Vị
+taste_id: Id
+taste_name_vi: Tên mỗi Vị
+yin_yang_tendency: Cho biết vị đó thiên về Âm, Dương hay Trung tính (cân bằng)
+clinical_effect: Tác dụng
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_thermal_property.csv: Tính
+temp_id: Id
+temp_name_vi: Tên mỗi Tính
+polarity_rank: Giá trị số biểu diễn mức độ lạnh – nóng(-2 là Hàn, +2 là Nhiệt)
+yin_yang_tendency: Xu hướng Âm – Dương hoặc Trung tính
+clinical_effect: Tác dụng
+data_source: Nguồn
+uid: Id duy nhất
+
+* dim_tongue_diagnosis.csv: Chẩn đoán lưỡi
+tongue_id: Id
+tongue_sign_vi: Dấu hiệu quan sát trên lưỡi
+tongue_category: Nhóm phân loại dấu hiệu lưỡi
+tcm_interpretation: Diễn giải theo YHCT
+data_source: Nguồn
+uid: Id duy nhất
+
+--------------Liên kết các file csv---------------
+Thể bệnh → Phép trị → Bài thuốc → Thành Phần → Dược liệu
+
+N Thể bệnh → N Phép trị
+N Phép trị → N Bài thuốc
+1 Bài thuốc → N Thành phần
+1 Bài thuốc → N Phép trị
+N Dược liệu → xuất hiện trong N Bài thuốc
+
+
+--------------------------Sơ đồ quan hệ-------------
+YinYangTheory --- Duoclieu_Amduong --- HerbMaterial <-- FormulaComponent --> Formula
+               |                    |-- Duoclieu_Nguhanh ── FiveElements ── FiveElementRelation
+               |                    |-- DuocLieu_TangPhu ── OrganZangFu ── MeridianOrgan ── Acupoint
+               |                    |-- HerbMaterial_Meridian ─ MeridianOrgan
+
+SyndromePattern ── FourDiagnostics
+        │
+        ├─ SyndromePattern_Meridian ─ MeridianOrgan
+        ├─ Pattern_Principle_Map ─ TherapeuticPrinciple
+        └─ Pattern_Climate_Map ─ ClimateLuck
+
+TherapeuticPrinciple ─ Principle_Climate_Map ─ ClimateLuck
+
+OrganZangFu ─ Organ_ZangXiang_Map ─ ZangXiangTheory
+
+
+--------Xác định Tính / Vị----------
+* Vị:
+Cay - Tân
+Ngọt - Cam
+Đắng - Khổ
+Chua - Toan
+Mặn - Hàm
+Nhạt - Đạm
+Chát - Sáp
+
+* Tính:
+Ấm - Ôn
+Mát - Lương
+
+--------Cách xác định Âm-Dương và Ngũ Hành---------------
+* Âm - Dương: lấy tính làm chủ, vị làm phụ
+- Tính:
+Hàn: Âm
+Lương: Âm
+Bình: Trung tính
+Ôn: Dương
+Nhiệt: Dương
+- Vị:
+Khổ: Âm
+Hàm: Âm
+Toan: Âm
+Sáp: Dương
+Cam: Dương
+Tân: Dương
+Đạm: Không có Âm - Dương
+link tài liệu: https://suckhoedoisong.vn/tu-tinh-vi-thuoc-co-truyen-den-tinh-vi-trong-thuc-pham-1699636.htm
+
+* Ngũ hành: xác định theo Quy Kinh (Tạng / Phủ)
+Can / Đởm: Mộc
+Tâm / Tiểu trường: Hỏa
+Tỳ / Vị: Thổ
+Phế / Đại trường: Kim
+Thận / Bàng quang: Thủy
+Tâm bào
+Tam tiêu
+
+* Formula --> SyndromePattern: Bài thuốc dùng cho thể bệnh nào
+--- Số lượng g mỗi dược liệu trong bài thuốc file thu thập từ ĐHY.Dược Học Cổ Truyền (NXB Y Học 2002) khác với g trong HƯỚNG DẪN CHẨN ĐOÁN VÀ ĐIỀU TRỊ BỆNH THEO Y HỌC CỔ TRUYỀN KẾT HỢP Y HỌC CỔ TRUYỀN VÀ Y HỌC HIỆN ĐẠI
+

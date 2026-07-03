@@ -1,0 +1,527 @@
+﻿id,category,question,answer,top_similarity,precision_at_k,mrr,ndcg_at_k,chunk_coverage,faithfulness,answer_relevancy,rouge_l,completeness,is_zero_result,response_ms,confusion_label
+GP001,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Hàn thấp theo y học cổ truyền?","**Nguyên nhân:**
+
+Theo y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Hàn thấp được giải thích là do phong thấp xâm nhập vào cơ thể, gây ra sự chặn nghẽ khí huyết và tổn thương các khớp cột sống. Nguyên nhân có thể do:
+
+* Phong thấp xâm nhập vào cơ thể qua đường hô hấp, tiêu hóa hoặc da
+* Thiếu ",0.5802,0.2,0.2,0.3869,0.4,0.7244,0.5,0.2421,0.9504,0,8642,correct
+GP002,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt theo y học cổ truyền?","Theo y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt là một chứng bệnh do phong thấp nhiệt tích tụ ở cột thắt lưng, gây ra đau nhức, mỏi cơ, khó di chuyển.
+
+**Nguyên nhân:**
+
+* Phong thấp nhiệt tích tụ ở cột thắt lưng
+* Có thể do phong thấp nhiệt tiết thũng, gây ra đau nhức, mỏi cơ
+* H",0.6904,0.2,0.5,0.6309,0.4,0.8722,0.5,0.3018,0.967,0,1316,correct
+GP003,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Huyết ứ theo y học cổ truyền?","Theo y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Huyết ứ là một chứng bệnh do sự tích tụ của máu ứ ở cột sống thắt lưng, dẫn đến đau nhức, khó chịu.
+
+Nguyên nhân:
+
+* Huyết ứ là một trạng thái bệnh lý do sự tích tụ của máu ứ ở một khu vực nhất định, trong trường hợp này là cột sống thắt lưng.
+",0.6674,0.0,0.0,0.0,0.4,0.6364,0.5,0.1962,1.0,0,18420,correct
+GP004,xuong_khop,Bệnh Đau cột thắt lưng (Yêu thống) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Đau cột thắt lưng (Yêu thống) thể Can thận hư là một chứng bệnh trong Y học cổ truyền Việt Nam, được mô tả như sau:
+
+""Yếu thống: Thanh nga hoàn là phương chủ yếu trị thận hư, đau eo lưng. Phụ nữ đái hạ có chứng đau lưng cũng dùng được. Nếu do phong thấp, trật đả (ngã, đòn) lao quyện (mệt) mà đa",0.755,0.0,0.0,0.0,0.4,0.7344,0.5,0.3718,0.8643,0,24679,correct
+GP005,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Thận dương hư theo y học cổ truyền?","Theo y học cổ truyền, Đau cột thắt lưng (Yêu thống) thể Thận dương hư là một chứng bệnh do Thận dương hư hao dẫn đến đau cột thắt lưng.
+
+**Nguyên nhân:**
+
+Nguyên nhân chính của chứng bệnh này là Thận dương hư hao, dẫn đến mất cân bằng giữa Thận dương và âm, gây ra đau cột thắt lưng.
+
+**Triệu chứng:*",0.6694,0.2,0.5,0.6309,0.2,0.64,0.5,0.1359,0.9922,0,11037,correct
+GP006,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý theo y học cổ truyền?","Theo y học cổ truyền, bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý là một chứng bệnh do phong, hàn và thấp xâm phạm vào khớp gối, gây ra đau nhức, sưng phù và khó cử động.
+
+**Nguyên nhân:**
+
+* Phong: Phong là một loại khí xấu, có thể xâm phạm vào cơ thể qua đường khí hoặc đường huyế",0.7161,0.0,0.0,0.0,0.4,0.8528,0.5,0.2155,0.9426,0,15858,correct
+GP007,xuong_khop,Bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý kèm can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý kèm can thận hư có các biểu hiện lâm sàng như sau:
+
+- Đau nhức khớp gối, đặc biệt là sau khi sử dụng hoặc khi di chuyển.
+- Khớp gối sưng phù, nóng đỏ.
+- Hoạt động khó khăn, đau nhức khi di chuyển.
+- Có thể có các triệu chứng khác như tê d",0.7362,0.0,0.0,0.0,0.4,0.7689,0.5,0.1725,0.9583,0,16030,correct
+GP008,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong thấp nhiệt kèm can thận hư theo y học cổ truyền?","Bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong thấp nhiệt kèm can thận hư là một chứng bệnh phức tạp, kết hợp giữa phong thấp nhiệt và can thận hư. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này theo y học cổ truyền:
+
+**Nguyên nhân:**
+
+* Phong thấp nhiệt: Phong thấp là một lo",0.7454,0.0,0.0,0.0,0.4,0.7903,0.5,0.2552,1.0,0,14026,correct
+GP009,xuong_khop,Bệnh Gout (Thống phong) thể Phong thấp nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Gout (Thống phong) thể Phong thấp nhiệt là một chứng bệnh phong thấp nhiệt, biểu hiện bởi các triệu chứng như:
+
+- Đau nhức mình mẩy, lưng gối nhức mỏi
+- Cơ khớp tê dại hoặc sưng nóng đỏ đau
+- Hoạt động khó khăn
+
+Để điều trị bệnh Gout thể Phong thấp nhiệt, Y học cổ truyền Việt Nam thường sử dụng",0.6607,0.4,1.0,0.9386,0.4,0.8467,0.8333,0.306,0.8635,0,17396,correct
+GP010,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Gout (Thống phong) thể Phong hàn thấp theo y học cổ truyền?","Bệnh Gout (Thống phong) thể Phong hàn thấp là một chứng bệnh lý thuộc phạm vi của Y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, nguyên nhân gây ra bệnh Gout (Thống phong) thể Phong hàn thấp là do phong hàn thấp",0.6462,0.0,0.0,0.0,0.4,0.7711,0.5,0.2629,1.0,0,16176,correct
+GP011,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Gout (Thống phong) thể Đàm ứ trở trệ theo y học cổ truyền?","Bệnh Gout (Thống phong) thể Đàm ứ trở trệ là một loại bệnh lý thuộc phạm vi của y học cổ truyền, được mô tả trong các tài liệu y học cổ truyền Trung Quốc và Việt Nam.
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh Gout (Thống phong) thể Đàm ứ trở trệ được gây ra bởi sự tích tụ của đàm ứ và phong nhiệ",0.5862,0.0,0.0,0.0,0.4,0.7722,0.5,0.2214,1.0,0,28441,correct
+GP012,xuong_khop,Bệnh Gout (Thống phong) thể Can thận lưỡng hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Gout (Thống phong) thể Can thận lưỡng hư là một tình trạng bệnh lý đặc trưng bởi sự suy yếu của cả Can thận và âm âm (âm âm bao gồm âm khí và âm huyết). Điều này dẫn đến sự mất cân bằng trong cơ thể, gây ra các biểu hiện lâm sàng như:
+
+- Đau nhức ở khớp, đặc biệt là ở bàn chân và tay
+- Sưng và ",0.6868,0.0,0.0,0.0,0.4,0.55,0.5,0.1734,0.9391,0,11805,correct
+GP013,xuong_khop,Bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp là một loại bệnh lý thuộc về Y học cổ truyền Việt Nam, được mô tả trong tài liệu ""Thuốc khư phong thấp"".
+
+Biểu hiện lâm sàng của bệnh Viêm khớp dạng thấp thể Phong thấp bao gồm:
+
+- Đau nhức mình mẩy, lưng gối nhức mỏi
+- Cơ khớp tê dại hoặc sưng nóng",0.6839,0.6,0.5,0.7003,0.4,0.8222,0.5,0.3587,0.9052,0,17458,correct
+GP014,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm khớp dạng thấp (Chứng tý) thể Hàn thấp theo y học cổ truyền?","**Nguyên nhân của Viêm khớp dạng thấp (Chứng tý) thể Hàn thấp theo y học cổ truyền:**
+
+Theo y học cổ truyền, Viêm khớp dạng thấp (Chứng tý) thể Hàn thấp được gây ra bởi sự xâm nhập của tam tà khí (phong, hàn, thấp) vào kinh lạc, khớp đốt và cơ nhục. Tam tà khí này có thể xâm nhập từ bên ngoài hoặc d",0.6012,0.4,1.0,0.8503,0.4,0.9251,0.5,0.2573,1.0,0,14068,correct
+GP015,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp nhiệt theo y học cổ truyền?","Bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp nhiệt là một chứng bệnh thường gặp trong y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp nhiệt sinh ra do ngoạ",0.6922,0.4,1.0,1.0,0.4,0.8826,0.5,0.4059,1.0,0,18521,correct
+GP016,xuong_khop,Bệnh Viêm khớp dạng thấp (Chứng tý) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Viêm khớp dạng thấp (Chứng tý) thể Can thận hư là một dạng bệnh lý đặc trưng bởi sự suy giảm chức năng của Can thận, dẫn đến sự hư hỏng của các khớp và cơ thể. Biểu hiện lâm sàng của bệnh này bao gồm:
+
+- Đau khớp và cơ
+- Sưng phù và biến dạng khớp
+- Co duỗi khó khăn
+- Tê dại và khó cử động
+- Ph",0.688,0.0,0.0,0.0,0.4,0.8472,0.5,0.3684,0.8896,0,14838,correct
+GP017,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Phong hàn theo y học cổ truyền?","Hội chứng cổ vai cánh tay (Chứng tý) thể Phong hàn là một chứng bệnh thuộc phạm vi của phong thấp, được mô tả trong Y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền Việt Nam, Hội chứng cổ vai cánh tay (Chứng tý) th",0.6267,0.0,0.0,0.0,0.4,0.7857,0.5,0.2112,1.0,0,14839,correct
+GP018,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Phong thấp nhiệt tý theo y học cổ truyền?","Hội chứng cổ vai cánh tay (Chứng tý) thể Phong thấp nhiệt tý theo y học cổ truyền được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh tý sinh ra do ngoại tà xâm nhập và chính khí hư nhược dẫn đến tam tà khí; phong, hàn thấp thừa hư xâm phạm vào khắp cơ nhục, kinh lạc, khớp đốt v.v… khí huyết không tuyên thô",0.7147,0.2,1.0,1.0,0.4,0.9087,0.5,0.3519,0.9974,0,14830,correct
+GP019,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Huyết ứ theo y học cổ truyền?","Theo Y học cổ truyền, Hội chứng cổ vai cánh tay (Chứng tý) thể Huyết ứ là một loại bệnh tý sinh ra do chính khí hư nhược dẫn đến tam tà khí; phong, hàn thấp thừa hư xâm phạm vào khắp cơ nhục, kinh lạc, khớp đốt v.v… khí huyết không tuyên thông được mà sinh ra.
+
+Triệu chứng của bệnh này bao gồm:
+
+- Đ",0.6589,0.4,1.0,0.9197,0.4,0.8721,0.6667,0.5059,0.9252,0,21672,correct
+GP020,xuong_khop,Bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Hội chứng cổ vai cánh tay (Chứng tý) thể Can thận hư là một tình trạng bệnh lý trong Y học cổ truyền Việt Nam, được mô tả như sau:
+
+Biểu hiện lâm sàng:
+
+- Đau nhức ở các khớp di chuyển (phong tý)
+- Cổ vai cánh tay đau nhức, khó di chuyển
+- Có thể có các triệu chứng khác như mệt mỏi, giảm khả năng vậ",0.6846,0.0,0.0,0.0,0.4,0.7563,0.5,0.4188,0.8574,0,15684,correct
+GP021,xuong_khop,Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can dương thượng cang có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can dương thường có các biểu hiện lâm sàng như:
+
+- Sốt cao, mồ hôi trộm
+- Đau đầu, chóng mặt
+- Mờ mắt, hoa mắt
+- Suy nhược thần kinh
+- Cường tuyến giáp
+- Huyết áp cao
+
+Để điều trị bệnh Tăng huyết áp vô căn thể Can dương, có thể sử dụng bài thuốc ""KỶ CÚC ĐỊA",0.6778,0.2,0.3333,0.5,0.4,0.7566,0.5,0.3348,0.8922,0,18528,correct
+GP022,xuong_khop,Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can thận âm hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can thận âm hư là một tình trạng bệnh lý phức tạp, trong đó Can thận âm hư là nguyên nhân chính gây ra tăng huyết áp. Biểu hiện lâm sàng của bệnh này bao gồm:
+
+* Tăng huyết áp không rõ nguyên nhân
+* Suy nhược thần kinh
+* Suy giảm khả năng sinh sản ở nam giớ",0.7451,0.4,0.5,0.6509,0.4,0.8467,0.5,0.3262,0.8913,0,17606,correct
+GP023,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Âm dương lưỡng hư theo y học cổ truyền?","Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Âm dương lưỡng hư là một trạng thái bệnh lý trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh Tăng huyết áp vô căn thể Âm dương lưỡng hư thường do sự mất cân bằng giữa âm và dương trong cơ thể, dẫn đến sự suy ",0.6212,0.0,0.0,0.0,0.6,0.85,0.5,0.1786,1.0,0,16886,correct
+GP024,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Đàm thấp theo y học cổ truyền?","Theo y học cổ truyền, Tăng huyết áp vô căn (Huyễn vựng) thể Đàm thấp là một trong những nguyên nhân gây tăng huyết áp không rõ nguyên nhân. Nguyên nhân của chứng bệnh này được giải thích như sau:
+
+Nguyên nhân: Đàm thấp là một trạng thái bệnh lý trong đó có sự tích tụ của các chất độc hại trong cơ th",0.5972,0.4,1.0,0.8772,0.4,0.7143,0.6667,0.1495,1.0,0,20052,correct
+GP025,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ hư đàm thấp theo y học cổ truyền?","Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ hư đàm thấp theo y học cổ truyền được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, chứng Tỳ hư đàm thấp là do Tỳ vị hư tổn, không đủ năng lực để điều hòa và chuyển hóa lipid trong cơ thể. Nguyên nhân",0.658,0.0,0.0,0.0,0.4,0.3064,0.5,0.0743,1.0,0,22815,correct
+GP026,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ thận dương hư theo y học cổ truyền?","**Nguyên nhân:**
+
+Theo y học cổ truyền, chứng Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ thận dương hư được gây ra bởi sự mất cân bằng giữa Tỳ và Thận, dẫn đến sự suy giảm của dương khí trong cơ thể. Điều này có thể do nhiều nguyên nhân, bao gồm:
+
+* Thiếu kh",0.671,0.0,0.0,0.0,0.6,0.7565,0.5,0.1715,1.0,0,25217,correct
+GP027,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can thận âm hư theo y học cổ truyền?","Theo y học cổ truyền, Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can thận âm hư được mô tả như sau:
+
+**Nguyên nhân:**
+
+* Can thận âm hư là tình trạng âm dương mất cân bằng, âm yếu, dương quá, dẫn đến rối loạn chuyển hóa lipid trong cơ thể.
+* Nguyên nhân có thể ",0.6888,0.2,0.5,0.6309,0.6,0.8145,0.5,0.2314,1.0,0,25409,correct
+GP028,xuong_khop,Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can uất tỳ hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can uất tỳ hư có các biểu hiện lâm sàng như sau:
+
+- Ngực sườn đầy tức, đau
+- ợ chua, ợ hơi
+- Mạch huyền (xơ gan còn bù)
+
+Để điều trị chứng Can uất tỳ hư, chúng ta có thể sử dụng bài thuốc Sài hồ 9g (sắc trước) Hươ",0.682,0.2,1.0,1.0,0.6,0.8872,0.5,0.3692,0.8722,0,17484,correct
+GP029,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Thấp nhiệt nội kết theo y học cổ truyền?","Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Thấp nhiệt nội kết theo y học cổ truyền được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Thấp nhiệt nội kết được gây ra bởi sự mất cân b",0.6247,0.2,0.3333,0.5,0.6,0.7356,0.6667,0.1538,1.0,0,21196,correct
+GP030,tieu_hoa,Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Khí trệ huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Khí trệ huyết ứ có các biểu hiện lâm sàng như:
+
+- Ngực sườn đầy tức
+- Ăn kém
+- Buồn nôn
+- Nôn
+- ợ hơi
+- Sắc mặt vàng
+- Rêu lưỡi trắng nhớt
+- Mạch huyền (xơ gan còn bù)
+
+Để điều trị bệnh này, có thể sử dụng bài thu",0.675,0.0,0.0,0.0,0.6,0.8626,0.5,0.3148,0.8626,0,24641,correct
+GP031,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Phong hàn ở kinh lạc theo y học cổ truyền?","Bệnh dây thần kinh mặt (Khẩu nhãn ôa tà) thể Phong hàn ở kinh lạc theo y học cổ truyền là một chứng bệnh ngoại cảm phong hàn, ảnh hưởng đến kinh lạc và dây thần kinh mặt. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh dây thần kinh ",0.6886,0.0,0.0,0.0,0.4,0.8192,0.3333,0.2962,1.0,0,18217,correct
+GP032,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Phong nhiệt theo y học cổ truyền?","Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Phong nhiệt theo y học cổ truyền là một chứng bệnh thuộc phạm vi của ""Phong nhiệt"" trong Đông y học. Nguyên nhân của bệnh này thường do sự mất cân bằng giữa âm và dương, dẫn đến sự bạo phát của dương khí và âm khí suy nhược.
+
+Triệu chứng của bệnh dây thần",0.6638,0.2,0.25,0.4307,0.4,0.8224,0.5,0.3266,1.0,0,16536,correct
+GP033,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Huyết ứ theo y học cổ truyền?","Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Huyết ứ là một chứng bệnh thuộc phạm vi của Y học cổ truyền Việt Nam, được mô tả trong các tài liệu y học cổ truyền. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, bệnh dây thần kinh mặt thể H",0.6533,0.0,0.0,0.0,0.4,0.8042,0.5,0.1614,1.0,0,21122,correct
+GP034,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Phong hàn theo y học cổ truyền?","Theo y học cổ truyền, bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Phong hàn được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh Hiếp thống thể Phong hàn được coi là do phong tà xâm nhập vào cơ thể, gây ra chứng đau dây thần kinh liên sườn. Phong tà có thể xâm nhập vào cơ thể qua các cách khác nhau, ch",0.6747,0.0,0.0,0.0,0.4,0.656,0.5,0.1628,0.9687,0,17170,correct
+GP035,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can khí uất kết theo y học cổ truyền?","Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can khí uất kết theo y học cổ truyền là một chứng bệnh do Can khí uất kết gây ra, dẫn đến đau nhức dây thần kinh liên sườn.
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, nguyên nhân của bệnh Đau dây thần kinh liên sườn thể Can khí uất kết là do Can khí uấ",0.7003,0.0,0.0,0.0,0.4,0.875,0.5,0.2414,1.0,0,13034,correct
+GP036,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can uất hóa hỏa theo y học cổ truyền?","Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can uất hóa hỏa là một chứng bệnh trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh Đau dây thần kinh liên sườn thể Can uất hóa hỏa thường xuất phát từ sự bất đồng cân bằng giữa các yếu tố âm dương tron",0.6696,0.2,0.5,0.6309,0.4,0.7451,0.5,0.1167,1.0,0,19332,correct
+GP037,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Tà uất thiếu dương theo y học cổ truyền?","Theo Y học cổ truyền, Đau dây thần kinh liên sườn (Hiếp thống) thể Tà uất thiếu dương được mô tả như sau:
+
+**Nguyên nhân:**
+
+Nguyên nhân của Đau dây thần kinh liên sườn thể Tà uất thiếu dương là do ""tà uất"" (phong tà) xâm phạm vào kinh mạch, gây nên chứng thiếu dương khí, dẫn đến đau dây thần kinh l",0.6726,0.0,0.0,0.0,0.4,0.7716,0.5,0.2154,0.9748,0,14623,correct
+GP038,tuan_hoan_than_kinh,Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Huyết ứ có các biểu hiện lâm sàng như sau:
+
+- Đau dây thần kinh liên sườn
+- Huyết ứ ở ngực sườn
+- Các chấn thương phần mềm
+- Áp xe gan
+
+Để điều trị bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Huyết ứ, có thể sử dụng bài thuốc ""PHÚC NGUYÊN"" như ",0.7478,0.4,1.0,1.0,0.4,0.9247,0.5,0.4809,0.8087,0,17498,correct
+GP039,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can đởm thấp nhiệt theo y học cổ truyền?","Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can đởm thấp nhiệt là một chứng bệnh thuộc phạm vi của Y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can đởm t",0.6979,0.0,0.0,0.0,0.4,0.7143,0.5,0.1757,1.0,0,12057,correct
+GP040,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Thể phong hàn thấp theo y học cổ truyền?","Theo Y học cổ truyền, Đau thần kinh tọa (Yêu cước thống) thể Thể phong hàn thấp là một chứng bệnh thuộc phạm vi phong thấp, được đặc trưng bởi đau nhức ở vùng thần kinh tọa (tức là vùng lưng dưới và chân).
+
+**Nguyên nhân:**
+
+Nguyên nhân của Đau thần kinh tọa thể Thể phong hàn thấp thường là do phong",0.7631,0.0,0.0,0.0,0.4,0.82,0.5,0.3184,1.0,0,15045,correct
+GP041,xuong_khop,Bệnh Đau thần kinh tọa (Yêu cước thống) thể Phong hàn thấp kết hợp can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Đau thần kinh tọa (Yêu cước thống) thể Phong hàn thấp kết hợp can thận hư là một chứng bệnh phức tạp, bao gồm cả phong thấp và hàn thấp, kết hợp với hư tổn của thận.
+
+Biểu hiện lâm sàng của bệnh này có thể bao gồm:
+
+* Đau nhức ở vùng lưng, đặc biệt là ở vùng thắt lưng
+* Tê yếu hoặc mất cảm giác",0.8203,0.0,0.0,0.0,0.4,0.7696,0.5,0.1553,0.973,0,20634,correct
+GP042,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Thấp nhiệt theo y học cổ truyền?","Bệnh Đau thần kinh tọa (Yêu cước thống) thể Thấp nhiệt là một trong những chứng bệnh thuộc nhóm bệnh lý biểu gặp trong các bệnh nhiễm ở giai đoạn sơ khởi. Theo y học cổ truyền, nguyên nhân của bệnh này thường do phong nhiệt, thấp nhiệt hoặc thấp hàn gây ra.
+
+Triệu chứng của bệnh Đau thần kinh tọa th",0.7131,0.0,0.0,0.0,0.4,0.8529,0.5,0.2373,1.0,0,18325,correct
+GP043,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Huyết ứ theo y học cổ truyền?","Theo Y học cổ truyền, Đau thần kinh tọa (Yêu cước thống) thể Huyết ứ là một chứng bệnh do huyết ứ gây ra, dẫn đến đau nhức ở vùng thần kinh tọa (đầu gối).
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, nguyên nhân của Đau thần kinh tọa thể Huyết ứ có thể là do:
+
+* Huyết ứ gây ra bởi các yếu tố như:
+ + Huy",0.6809,0.0,0.0,0.0,0.4,0.8073,0.5,0.1823,0.98,0,18296,correct
+GP044,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Can thận âm hư theo y học cổ truyền?","**Nguyên nhân**
+
+Theo y học cổ truyền, Di chứng nhồi máu não (Bán thân bất hoại) thể Can thận âm hư được coi là một chứng bệnh thuộc về âm hư hỏa vượng. Nguyên nhân của chứng bệnh này có thể do:
+
+* Dương suy âm thịnh: Khi dương khí suy thoái, âm khí trở nên thịnh hành, dẫn đến sự mất cân bằng âm dươ",0.6727,0.2,0.5,0.6309,0.4,0.77,0.5,0.1631,0.9939,0,20063,correct
+GP045,tieu_hoa,Bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Phong đàm có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Phong đàm là một tình trạng bệnh lý nghiêm trọng, trong đó có sự tích tụ của phong và đàm trong não, dẫn đến các triệu chứng như:
+
+- Đau đầu dữ dội
+- Chóng mặt
+- Đau nhức ở các phần của cơ thể
+- Suy giảm khả năng vận động
+- Suy giảm trí nhớ và khả n",0.6577,0.0,0.0,0.0,0.6,0.8154,0.5,0.2448,0.86,0,20566,correct
+GP046,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Khí hư huyết ứ theo y học cổ truyền?","**Nguyên nhân:**
+
+Theo y học cổ truyền, Di chứng nhồi máu não (Bán thân bất hoại) thể Khí hư huyết ứ được coi là một chứng bệnh về huyết, cụ thể là chứng huyết ứ do khí hư. Nguyên nhân của chứng này có thể là do:
+
+* Khí hư: Là tình trạng khí không lưu thông được trong cơ thể, dẫn đến tình trạng huyế",0.6435,0.0,0.0,0.0,0.4,0.8441,0.5,0.1547,1.0,0,14939,correct
+GP047,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Can thận bất túc theo y học cổ truyền?","Bại não trẻ em (Ngũ trì) thể Can thận bất túc là một bệnh lý thuộc trường hợp Can thận bất túc, một trong những nguyên nhân dẫn đến bệnh Bại não trẻ em. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này theo y học cổ truyền:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, Can thận bất túc",0.5859,0.0,0.0,0.0,0.4,0.7538,0.5,0.1115,1.0,0,17970,correct
+GP048,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Tâm tỳ hư theo y học cổ truyền?","Bại não trẻ em (Ngũ trì) thể Tâm tỳ hư là một chứng bệnh trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bại não trẻ em thể Tâm tỳ hư thường do các nguyên nhân sau:
+
+* Tâm tỳ hư tổn: Tâm và tỳ là hai cơ quan quan trọng trong cơ thể, chịu trách nhiệm về tâm trí và tiêu hóa. Khi",0.5321,0.0,0.0,0.0,0.4,0.5798,0.5,0.1097,1.0,0,19972,correct
+GP049,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Đàm ứ trở trệ theo y học cổ truyền?","Bại não trẻ em (Ngũ trì) thể Đàm ứ trở trệ là một chứng bệnh trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, Bại não trẻ em thể Đàm ứ trở trệ thường do các nguyên nhân sau:
+
+* Đàm thấp trọc gây nên, làm cho các chất độc tích tụ trong cơ thể, ảnh hưởng đến",0.5507,0.0,0.0,0.0,0.4,0.84,0.5,0.2603,1.0,0,19012,correct
+GP050,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng viêm não do virus (Ôn bệnh) thể Âm hư theo y học cổ truyền?","**Nguyên nhân:**
+
+Theo y học cổ truyền, Di chứng viêm não do virus (Ôn bệnh) thể Âm hư được xem là một loại bệnh thuộc về ""Âm hư"". Nguyên nhân của bệnh này có thể được giải thích như sau:
+
+* ""Âm hư"" là một trạng thái của cơ thể khi mà âm khí (khí âm) bị suy yếu, không đủ để bảo vệ cơ thể khỏi tác độ",0.53,0.0,0.0,0.0,0.4,0.8061,0.5,0.1272,1.0,0,17146,correct
+GP051,tuan_hoan_than_kinh,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng viêm não do virus (Ôn bệnh) thể Khí âm lưỡng hư (khí huyết hư) theo y học cổ truyền?","**Nguyên nhân:**
+Bệnh Di chứng viêm não do virus (Ôn bệnh) thể Khí âm lưỡng hư (khí huyết hư) là một tình trạng bệnh lý phức tạp, trong đó cơ thể bị nhiễm virus và dẫn đến viêm não. Nguyên nhân chính là do virus xâm nhập vào não và gây viêm, làm tổn thương các tế bào não và dẫn đến sự mất cân bằng c",0.6072,0.0,0.0,0.0,0.4,0.7849,0.6667,0.1523,1.0,0,20284,correct
+GP052,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Cam khí (Tỳ hư) theo y học cổ truyền?","Bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Cam khí (Tỳ hư) là một loại bệnh suy dinh dưỡng nghiêm trọng, đặc trưng bởi tình trạng mất cơ bắp và suy giảm chức năng của các cơ quan. Theo y học cổ truyền, bệnh này được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh Suy dinh dưỡng thể Marasmus (Cam tích) t",0.6193,0.0,0.0,0.0,0.4,0.8157,0.6667,0.1358,1.0,0,24252,correct
+GP053,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Cam tích theo y học cổ truyền?","Suy dinh dưỡng thể Marasmus (Cam tích) là một dạng suy dinh dưỡng nghiêm trọng, đặc trưng bởi tình trạng mất cơ bắp và cơ thể trở nên gầy gò, nhăn nheo. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) theo y học cổ truyền:
+
+**Nguyên nhân:**
+
+The",0.5784,0.0,0.0,0.0,0.4,0.662,0.5,0.157,1.0,0,21135,correct
+GP054,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Can cam (Khí huyết hư) theo y học cổ truyền?","Suy dinh dưỡng thể Marasmus (Cam tích) thể Can cam (Khí huyết hư) là một dạng suy dinh dưỡng nghiêm trọng, đặc trưng bởi tình trạng thiếu hụt calo và protein nghiêm trọng, dẫn đến suy giảm chức năng của các cơ quan và hệ thống trong cơ thể. Theo y học cổ truyền, nguyên nhân của bệnh này được giải th",0.6492,0.0,0.0,0.0,0.4,0.711,0.6667,0.1185,1.0,0,23150,correct
+GP055,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Khí trệ theo y học cổ truyền?","Viêm dạ dày và tá tràng (Vị quản thống) thể Khí trệ là một chứng bệnh trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Viêm dạ dày và tá tràng thể Khí trệ thường do sự tích tụ của khí trệ trong dạ dày và tá tràng, dẫn đến tổn thương niêm mạc và viêm nhiễm. Nguyên nhân có thể ba",0.6132,0.0,0.0,0.0,0.4,0.6923,0.5,0.1187,1.0,0,20466,correct
+GP056,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Hỏa uất theo y học cổ truyền?","Theo y học cổ truyền, Viêm dạ dày và tá tràng (Vị quản thống) thể Hỏa uất là một loại bệnh do Hỏa uất (thực quản thống) gây ra, ảnh hưởng đến dạ dày và tá tràng.
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, nguyên nhân của Viêm dạ dày và tá tràng thể Hỏa uất bao gồm:
+
+* Hỏa uất (thực quản thống) gây ra ",0.6186,0.0,0.0,0.0,0.2,0.7137,0.5,0.1463,1.0,0,24960,correct
+GP057,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Huyết ứ theo y học cổ truyền?","Viêm dạ dày và tá tràng (Vị quản thống) thể Huyết ứ theo y học cổ truyền là một chứng bệnh do sự tích tụ của máu trong dạ dày và tá tràng, gây ra các triệu chứng như:
+
+- Bụng dưới đầy đau, đau âm ỉ
+- Tiểu tiện không lợi, đại tiện phân màu đen
+- Sốt cao, bứt rứt
+- Bụng dưới đầy trướng đau, có hòn cục",0.6962,0.4,0.3333,0.5706,0.4,0.8614,0.5,0.2765,1.0,0,19295,correct
+GP058,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Tỳ vị hư hàn theo y học cổ truyền?","Viêm dạ dày và tá tràng (Vị quản thống) thể Tỳ vị hư hàn là một chứng bệnh được mô tả trong Y học cổ truyền Việt Nam. Dưới đây là nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo Y học cổ truyền, Viêm dạ dày và tá tràng thể Tỳ vị hư hàn được gây ra bởi sự hư hàn của Tỳ vị (",0.6841,0.4,1.0,0.8503,0.2,0.7563,0.5,0.2122,1.0,0,15978,correct
+GP059,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Khí ngưng theo y học cổ truyền?","Viêm gan virus mạn (Hiếp thống) thể Khí ngưng là một loại bệnh lý phức tạp, được mô tả trong y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, Viêm gan virus mạn thể Khí ngưng được gây ra bởi sự tích tụ của khí ngư",0.5439,0.0,0.0,0.0,0.4,0.6645,0.5,0.1317,1.0,0,20162,correct
+GP060,xuong_khop,Bệnh Viêm gan virus mạn (Hiếp thống) thể Huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Viêm gan virus mạn (Hiếp thống) thể Huyết ứ là một dạng bệnh lý về gan do virus gây ra, đặc trưng bởi sự tích tụ của chất béo và các tế bào gan bị tổn thương. Biểu hiện lâm sàng của bệnh này bao gồm:
+
+- Sưng và đau bụng
+- Mệt mỏi và giảm khả năng tập trung
+- Sốt và đau đầu
+- Mất thèm ăn và giảm",0.6642,0.0,0.0,0.0,0.4,0.7677,0.5,0.1508,0.8983,0,19141,correct
+GP061,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Can đởm thấp nhiệt theo y học cổ truyền?","Viêm gan virus mạn (Hiếp thống) thể Can đởm thấp nhiệt là một bệnh lý phức tạp, được mô tả trong y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, Viêm gan virus mạn thể Can đởm thấp nhiệt thường do sự mất cân bằng",0.6192,0.0,0.0,0.0,0.2,0.5724,0.5,0.1124,1.0,0,12374,correct
+GP062,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Âm hư nội nhiệt theo y học cổ truyền?","Bệnh Viêm gan virus mạn (Hiếp thống) thể Âm hư nội nhiệt theo y học cổ truyền được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh Viêm gan virus mạn thể Âm hư nội nhiệt thường do sự mất cân bằng của âm và dương trong cơ thể, dẫn đến âm hư và nhiệt tích tụ trong gan. Nguyên nhân có thể bao gồm:
+
+* Mất cân bằ",0.5853,0.2,0.5,0.6309,0.4,0.738,0.5,0.2566,1.0,0,16991,correct
+GP063,ho_hap,Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Phong nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh phổi tắc nghẽn mạn tính (COPD) hay còn gọi là khái suyễn là một tình trạng bệnh lý về phổi, trong đó phổi bị tắc nghẽn do các mảnh vỡ tế bào và chất nhầy tích tụ. Biểu hiện lâm sàng của bệnh này bao gồm:
+
+- Ho lâu ngày, thường xuyên
+- Khó thở khi vận động hoặc gắng sức
+- Sốt, ho, hoại tử khi mắ",0.6831,0.2,1.0,1.0,0.4,0.71,0.3333,0.3521,0.947,0,18009,correct
+GP064,ho_hap,Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Phong hàn có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Phong hàn có các biểu hiện lâm sàng như:
+
+- Sốt cao, ho nhiều, khó thở
+- Máu ho có màu vàng hoặc màu đỏ
+- Sắc mặt ảm đạm, da dẻ khô ráo, thô ráp
+- Rêu trắng, lưỡi nhạt
+- Biểu hiện chứng mạch tượng trì tế, hư hàn
+
+Để điều trị bệnh này, có thể sử dụ",0.6082,0.0,0.0,0.0,0.4,0.8974,0.3333,0.3473,0.8965,0,17911,correct
+GP065,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Khí táo theo y học cổ truyền?","Bệnh phổi tắc nghẽn mạn tính (COPD) hay còn gọi là Khái suyễn theo y học cổ truyền, là một chứng bệnh về phổi tiến triển theo thời gian, gây khó thở và suy giảm khả năng hô hấp. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này theo y học cổ truyền:
+
+**Nguyên nhân:**
+
+Theo y học cổ",0.6279,0.0,0.0,0.0,0.4,0.8387,0.1667,0.306,1.0,0,22217,partial
+GP066,tieu_hoa,Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Đàm thấp có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh phổi tắc nghẽn mạn tính (COPD) hoặc khái suyễn là một tình trạng bệnh lý nghiêm trọng ảnh hưởng đến hô hấp, đặc biệt là phổi. Trong trường hợp này, tôi sẽ trả lời dựa trên thông tin liên quan đến ""Đàm thấp"" và các bài thuốc liên quan.
+
+Đàm thấp là một trạng thái bệnh lý trong Đông y, được đặc t",0.6648,0.2,0.5,0.6309,0.4,0.8055,0.3333,0.26,1.0,0,19418,correct
+GP067,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Thủy ẩm (hàn ẩm) theo y học cổ truyền?","Bệnh phổi tắc nghẽn mạn tính (COPD) thể Thủy ẩm (hàn ẩm) theo y học cổ truyền được mô tả như sau:
+
+**Nguyên nhân:**
+
+Bệnh phổi tắc nghẽn mạn tính thể Thủy ẩm (hàn ẩm) được xem là do sự kết hợp của các yếu tố như:
+
+* Ngoại cảm phong tà
+* Phế khí không thông
+* Đàm ứ trệ tại phế
+* Tỳ vị rối loạn, tỳ th",0.6444,0.0,0.0,0.0,0.4,0.8448,0.5,0.4097,0.9278,0,23868,correct
+GP068,tieu_hoa,Bệnh Màn đay (Ẩn chẳn) thể Phong hàn có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Màn đay (Ẩn chẳn) thể Phong hàn là một loại bệnh thuộc nhóm phong hàn, có biểu hiện lâm sàng như sau:
+
+- Đau nhức mình mẩy, lưng gối nhức mỏi
+- Cơ khớp tê dại hoặc sưng nóng đỏ đau
+- Hoạt động khó khăn
+
+Để điều trị bệnh Màn đay (Ẩn chẳn) thể Phong hàn, có thể sử dụng bài thuốc Xuyên khung trà đ",0.6524,0.2,0.3333,0.5,0.4,0.8488,0.5,0.4208,0.9,0,19481,correct
+GP069,tieu_hoa,Bệnh Màn đay (Ẩn chẳn) thể Phong nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Màn đay (Ẩn chẳn) thể Phong nhiệt là một chứng bệnh thuộc phạm vi của Y học cổ truyền Việt Nam, được mô tả trong các tài liệu cổ điển. Dưới đây là các biểu hiện lâm sàng và cách điều trị:
+
+Biểu hiện lâm sàng:
+
+- Màn đay (Ẩn chẳn) thể Phong nhiệt thường xuất hiện ở người trẻ, đặc biệt là trẻ em.",0.6284,0.0,0.0,0.0,0.6,0.6502,0.5,0.1443,1.0,0,12894,correct
+GP070,tieu_hoa,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Màn đay (Ẩn chẳn) thể Huyết hư phong táo theo y học cổ truyền?","Bệnh Màn đay (Ẩn chẳn) thể Huyết hư phong táo là một chứng bệnh thuộc phạm vi phong thấp nhiệt, được mô tả trong Y học cổ truyền Việt Nam. Dưới đây là mô tả nguyên nhân, triệu chứng và phép trị cho bệnh này:
+
+**Nguyên nhân:**
+
+Nguyên nhân của bệnh Màn đay (Ẩn chận) thể Huyết hư phong táo là do Huyết",0.6562,0.0,0.0,0.0,0.4,0.7695,0.5,0.2636,1.0,0,18523,correct
+GP071,tiet_nieu_sinh_duc,Bệnh Bí đái cơ năng (Long bế) thể Bàng quang thấp nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?,"Bệnh Bí đái cơ năng (Long bế) thể Bàng quang thấp nhiệt là một chứng bệnh liên quan đến hệ tiết niệu, đặc biệt là bàng quang. Chứng bệnh này thường biểu hiện bởi các triệu chứng như:
+
+- Đau nhức vùng bụng dưới, đặc biệt là vùng bàng quang
+- Tiểu tiện khó khăn, đau đớn
+- Tiểu tiện ít, hoặc không thể ",0.6619,0.4,0.25,0.5013,0.4,0.6952,0.6667,0.2382,0.9296,0,19643,correct
+GP072,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Phế nhiệt theo y học cổ truyền?","Bí đái cơ năng (Long bế) thể Phế nhiệt là một chứng bệnh lý trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, nguyên nhân gây ra chứng Bí đái cơ năng (Long bế) thể Phế nhiệt là do Phế khí bị nhiệt độc thịnh, gây ra chứng Phế nhiệt. Phế khí là một trong nhữn",0.6504,0.0,0.0,0.0,0.4,0.705,0.5,0.1584,1.0,0,12902,correct
+GP073,xuong_khop,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Khí trệ huyết ứ theo y học cổ truyền?","Bí đái cơ năng (Long bế) thể Khí trệ huyết ứ là một loại bệnh lý theo y học cổ truyền, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, nguyên nhân gây ra Bí đái cơ năng (Long bế) thể Khí trệ huyết ứ là do sự tích tụ của khí trệ và huyết ứ trong cơ thể, dẫn đến sự chặn nghẽ của đường tiê",0.6822,0.0,0.0,0.0,0.4,0.7724,0.5,0.2081,1.0,0,17709,correct
+GP074,tiet_nieu_sinh_duc,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Thận khí hư theo y học cổ truyền?","Bí đái cơ năng (Long bế) thể Thận khí hư là một chứng bệnh trong y học cổ truyền Việt Nam, được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, nguyên nhân của chứng Bí đái cơ năng (Long bế) thể Thận khí hư là do Thận khí hư tổn, Thận dương suy yếu, dẫn đến sự mất cân bằng giữa âm và dương t",0.7242,0.0,0.0,0.0,0.4,0.7848,0.5,0.2018,1.0,0,19869,correct
+GP075,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh trĩ (Hạ trĩ) thể Nhiệt độc (tương ứng với trĩ nội độ 1, 2) theo y học cổ truyền?","Bệnh trĩ (Hạ trĩ) thể Nhiệt độc theo y học cổ truyền là một chứng bệnh lý biểu gặp trong các bệnh nhiễm ở giai đoạn sơ khởi, do nhiệt độc xâm nhập vào vệ biểu thân thể con người.
+
+**Nguyên nhân:**
+
+Nhiệt độc xâm nhập vào vệ biểu thân thể con người, gây ra chứng biểu nhiệt, biểu hàn, biểu phong, biểu",0.6208,0.2,0.3333,0.5,0.4,0.8938,0.5,0.0839,1.0,0,23384,correct
+GP076,ho_hap,"Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh trĩ (Hạ trĩ) thể Huyết ứ (tương ứng với trĩ tắc mạch) theo y học cổ truyền?","Bệnh trĩ thể Huyết ứ (tương ứng với trĩ tắc mạch) theo y học cổ truyền Việt Nam được mô tả như sau:
+
+**Nguyên nhân:**
+
+Theo y học cổ truyền, bệnh trĩ thể Huyết ứ do nhiệt độc ủng kết trong ruột, huyết ứ không tán mà thành bệnh. Nhiệt độc ủng kết trong ruột có thể do ăn uống không điều độ, tiêu hóa k",0.5867,0.4,0.3333,0.5706,0.4,0.8489,0.5,0.2726,0.9852,0,29122,correct
+GP077,ho_hap,"Bệnh Bệnh trĩ (Hạ trĩ) thể Thấp nhiệt (tương ứng với trĩ viêm, loét) có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?","Bệnh trĩ (Hạ trĩ) thể Thấp nhiệt (tương ứng với trĩ viêm, loét) là một trong những biểu hiện của bệnh trĩ, đặc trưng bởi tình trạng viêm nhiễm và loét tại vùng hậu môn trực tràng.
+
+Biểu hiện lâm sàng của bệnh trĩ thể Thấp nhiệt bao gồm:
+
+* Chảy máu tươi khi đại tiện, tự cầm khi kết thúc cuộc đi ngoà",0.7723,0.8,1.0,0.9047,0.2,0.6974,0.6667,0.1473,0.8774,0,21448,correct
+GP078,tieu_hoa,"Bệnh Bệnh trĩ (Hạ trĩ) thể Khí huyết lưỡng hư (tương ứng trĩ hỗn hợp độ IV, trĩ lâu ngày gây thiếu máu) có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?","Bệnh trĩ (Hạ trĩ) thể Khí huyết lưỡng hư là một bệnh lý phức tạp, bao gồm cả trĩ hỗn hợp độ IV và trĩ lâu ngày gây thiếu máu. Biểu hiện lâm sàng của bệnh này bao gồm:
+
+- Người bệnh thường gầy, bụng trướng, sau án càng nặng, mệt mỏi, đoản hơi, mặt vàng, rêu lưỡi mỏng, chất lưỡi nhạt, mạch hoãn.
+- Bện",0.782,0.8,1.0,0.9047,0.2,0.7586,0.5,0.2172,0.9887,0,18834,correct
+GF001,xuong_khop,"Bài thuốc Ma hoàng thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Ma hoàng thang thuộc nhóm Phò chính giải biểu. Đây là một loại bài thuốc có tác dụng vừa nâng cao chính khí, vừa giải biểu ""đuổi tà khí"".
+
+Bài thuốc Ma hoàng thang có công năng và chủ trị như sau:
+
+- Công năng: Nâng cao chính khí, giải biểu ""đuổi tà khí"".
+- Chủ trị: Thường sử dụng đối với ",0.6875,0.2,0.5,0.6309,0.4,0.9217,0.2,0.4178,0.8313,0,19367,partial
+GF002,ho_hap,"Bài thuốc Quế chi thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Quế chi thang không được đề cập trực tiếp trong các tài liệu đã cung cấp. Tuy nhiên, dựa trên thông tin về bài thuốc Ma hoàng thang, chúng ta có thể biết được rằng Quế chi được sử dụng như một vị thuốc phù trợ để tăng thêm tác dụng tân ôn giải biểu của Ma hoàng.
+
+Bài thuốc Ma hoàng thang đ",0.684,0.0,0.0,0.0,0.4,0.7955,0.2,0.2078,0.9435,0,16893,partial
+GF003,ho_hap,"Bài thuốc Tang cúc ấm thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Tôi xin lỗi vì tài liệu không đề cập đến bài thuốc Tang cúc ấm. Tuy nhiên, dựa trên kiến thức về y học cổ truyền, tôi có thể cung cấp thông tin về bài thuốc này.
+
+Bài thuốc Tang cúc ấm là một bài thuốc cổ truyền trong y học cổ truyền Việt Nam. Bài thuốc này thường được sử dụng để điều trị các chứng ",0.6451,0.0,0.0,0.0,0.4,0.6769,0.1667,0.1822,0.0,0,15850,partial
+GF004,tieu_hoa,"Bài thuốc Ngân kiều tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc không được đề cập trong các đoạn tài liệu bạn cung cấp. Tuy nhiên, dựa trên thông tin bạn cung cấp, tôi có thể trả lời câu hỏi về nguyên tắc tạo thành bài thuốc và cách phối hợp các vị thuốc trong một bài thuốc.
+
+Bài thuốc đông y được tạo thành bởi một hoặc nhiều vị thuốc bào chế theo một ",0.6593,0.0,0.0,0.0,0.4,0.9057,0.0,0.2818,0.9122,0,17788,partial
+GF005,tieu_hoa,"Bài thuốc Ngũ vị tiêu độc ẩm thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Ngũ vị tiêu độc ẩm thuộc nhóm thuốc giải biểu công lý. Đây là một loại thuốc đông y được sử dụng để điều trị các hội chứng bệnh lý bên ngoài có biểu chứng, bên trong có thực nhiệt tích trệ.
+
+Ngũ vị tiêu độc ẩm là một bài thuốc gồm 5 vị thuốc có tác dụng tiêu độc và giải biểu. Các vị thuốc ",0.7305,0.0,0.0,0.0,0.4,0.9114,0.1667,0.302,0.9026,0,18643,partial
+GF006,tieu_hoa,"Bài thuốc Long đởm tả can thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Long đởm tả can thang thuộc nhóm thuốc thanh can đởm kinh thấp nhiệt. Bài thuốc này được sử dụng để điều trị chứng can đởm kinh thấp nhiệt.
+
+Bài thuốc Long đởm tả can thang có thành phần bao gồm:
+
+- Long đởm thảo (rượu sao) 12g
+- Hoàng cầm 8g
+- Trạch tả 8g
+- Mộc thông 8g
+- Đương quy (rượu ",0.6236,0.2,1.0,1.0,0.4,0.9492,0.1667,0.7469,0.9113,0,19036,partial
+GF007,tieu_hoa,"Bài thuốc Cát căn cầm liên thang gia vị thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Cát căn cầm liên thang gia vị không được đề cập cụ thể trong các tài liệu đã được trích dẫn. Tuy nhiên, dựa trên tên bài thuốc, có thể suy đoán rằng nó liên quan đến việc điều trị các vấn đề về tiêu hóa hoặc đường ruột.
+
+Cát căn (Cassia obtusifolia) là một loại thảo mộc được sử dụng trong ",0.7182,0.0,0.0,0.0,0.4,0.6891,0.1667,0.133,0.8557,0,18618,partial
+GF008,tieu_hoa,"Bài thuốc Bạch thược thang gia vị thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Bạch thược thang gia vị không được đề cập trực tiếp trong các đoạn tài liệu cung cấp. Tuy nhiên, chúng ta có thể tìm hiểu về Bạch thược và tác dụng của nó trong y học cổ truyền.
+
+Bạch thược là một loại dược liệu trong y học cổ truyền Việt Nam, được sử dụng để chữa nhiều bệnh khác nhau. Tro",0.6883,0.0,0.0,0.0,0.4,0.7396,0.2,0.1869,0.9217,0,14789,partial
+GF010,ho_hap,"Bài thuốc Tứ nghịch thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Tứ nghịch thang thuộc nhóm thuốc ""thông xị"" trong y học cổ truyền.
+
+Tứ nghịch thang là một bài thuốc cổ truyền được sử dụng để điều trị các bệnh về đường hô hấp, đặc biệt là ho và viêm phổi. Bài thuốc này được tạo thành từ bốn vị thuốc chính:
+
+1. Thông bạch (Bambusa tulda)
+2. Đạm đậu xị (P",0.689,0.0,0.0,0.0,0.4,0.6686,0.2,0.1568,0.9374,0,3281,partial
+GF011,tieu_hoa,"Bài thuốc Lý trung thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Lý trung thang không được đề cập trong các đoạn tài liệu cung cấp. Tuy nhiên, dựa trên kiến thức cơ bản về các bài thuốc đông y, chúng ta có thể biết rằng bài thuốc đông y được tạo thành bởi 3 thành phần: vị thuốc chủ, vị thuốc phù trợ và vị thuốc gia thêm theo bệnh.
+
+Để trả lời câu hỏi, c",0.696,0.0,0.0,0.0,0.4,0.6962,0.1667,0.176,0.8017,0,21175,partial
+GF012,tieu_hoa,"Bài thuốc Tứ thần hoàn thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Tứ thần hoàn thuộc nhóm bài thuốc Đông y có nhiều vị. Bài thuốc này được tạo thành bởi 4 vị thuốc chính: Bạch truật, Bạch thược, Phục linh, và Thục địa.
+
+Công năng của bài thuốc Tứ thần hoàn là:
+
+- Tăng cường sức khỏe tổng thể
+- Trợ giúp điều trị các bệnh về tiêu hóa, như viêm dạ dày, viêm",0.6996,0.0,0.0,0.0,0.4,0.7043,0.2,0.1655,0.84,0,18537,partial
+GF013,ho_hap,"Bài thuốc Nhị trần thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Nhị trần thang thuộc nhóm bài thuốc có nhiều vị. 
+
+Bài thuốc Nhị trần thang có công năng và chủ trị như sau:
+
+- Công năng: Bài thuốc Nhị trần thang có công năng thanh nhiệt, trừ phong, giải độc, tiêu viêm, giảm đau.
+- Chủ trị: Bài thuốc Nhị trần thang chủ trị các bệnh như sốt cao, ho, đau ",0.6755,0.4,0.5,0.6241,0.4,0.717,0.1667,0.0579,1.0,0,19318,partial
+GF014,ho_hap,"Bài thuốc Thanh nhiệt hóa đàm thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Thanh nhiệt hóa đàm thang không được đề cập trong các đoạn tài liệu đã cung cấp. Tuy nhiên, dựa trên tên bài thuốc và các đoạn tài liệu đã cung cấp, có thể đưa ra một số thông tin liên quan.
+
+Trong y học cổ truyền, Thanh nhiệt hóa đàm thang thường được sử dụng để điều trị các chứng bệnh li",0.7348,0.0,0.0,0.0,0.4,0.4973,0.4,0.1873,0.9226,0,16634,correct
+GF015,ho_hap,"Bài thuốc Chỉ thấu tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc ""Chỉ thấu tán"" không được đề cập trực tiếp trong tài liệu bạn cung cấp. Tuy nhiên, dựa trên thông tin về cách tạo thành bài thuốc và nguyên tắc ghép vị thuốc, chúng ta có thể hiểu rằng bài thuốc ""Chỉ thấu tán"" thuộc nhóm thuốc tán.
+
+Thuốc tán là loại thuốc được pha chế bằng cách tán nhỏ cá",0.69,0.0,0.0,0.0,0.4,0.7521,0.1667,0.1453,0.8374,0,16621,partial
+GF016,ho_hap,"Bài thuốc Hạnh tô tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Hạnh tô tán không được đề cập trực tiếp trong các đoạn tài liệu bạn cung cấp. Tuy nhiên, dựa trên thông tin về các bài thuốc và nguyên tắc tạo thành bài thuốc trong y học cổ truyền, chúng ta có thể suy luận về tính chất và công năng của bài thuốc này.
+
+Bài thuốc Hạnh tô tán có thể thuộc nh",0.6566,0.0,0.0,0.0,0.4,0.8014,0.1667,0.2526,0.887,0,18534,partial
+GF017,ho_hap,"Bài thuốc Bách hợp cố kim thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Bách hợp cố kim thang thuộc nhóm thuốc điều trị chứng phong, nhiệt, ho, tiêu hóa không tốt, và các chứng bệnh khác liên quan đến phong nhiệt.
+
+Bài thuốc Bách hợp cố kim thang được tạo thành bởi các dược liệu sau:
+
+- Bách hợp: 30g
+- Cố kim: 30g
+- Bạch phục linh: 30g
+- Bạch thược: 30g
+- Bạch",0.6538,0.0,0.0,0.0,0.4,0.4504,0.1667,0.051,1.0,0,20312,partial
+GF018,ho_hap,"Bài thuốc Lục quân tử thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Lục quân tử thang không được đề cập trực tiếp trong các đoạn tài liệu bạn cung cấp. Tuy nhiên, dựa trên tên bài thuốc và các thông tin liên quan, chúng ta có thể suy đoán về công năng và chủ trị của bài thuốc này.
+
+Lục quân tử (Cassia obtusifolia) là một loại thảo dược được sử dụng trong y",0.7069,0.0,0.0,0.0,0.4,0.6939,0.1667,0.1234,0.887,0,26016,partial
+GF019,ho_hap,"Bài thuốc Thiên ma cầu đằng thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Thiên ma cầu đằng thang không được đề cập trong các tài liệu đã cung cấp. Tuy nhiên, dựa trên tên gọi và cấu trúc của bài thuốc, có thể suy đoán rằng nó thuộc nhóm bài thuốc Phò chính giải biểu.
+
+Bài thuốc Phò chính giải biểu có tác dụng vừa nâng cao chính khí, vừa giải biểu ""đuổi tà khí"".",0.6555,0.0,0.0,0.0,0.4,0.6978,0.1667,0.3448,0.8609,0,16471,partial
+GF020,tuan_hoan_than_kinh,"Bài thuốc An thần hoàn thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc An thần hoàn thuộc nhóm thuốc an thần, giúp giảm căng thẳng, lo lắng và cải thiện chất lượng giấc ngủ. Trong y học cổ truyền, An thần hoàn được sử dụng để điều trị các chứng bệnh như:
+
+- Lo lắng, căng thẳng
+- Suy nhược, mệt mỏi
+- Giảm khả năng tập trung
+- Tăng huyết áp
+- Trầm cảm
+
+An thần ",0.6638,0.0,0.0,0.0,0.4,0.5118,0.1667,0.1111,0.8652,0,18132,partial
+GF021,tuan_hoan_than_kinh,"Bài thuốc Thiên vương bổ tâm đan thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Tôi không tìm thấy thông tin về bài thuốc ""Thiên vương bổ tâm đan"" trong tài liệu đã được cung cấp. Tuy nhiên, tôi có thể cung cấp thông tin chung về cách tạo thành và cấu trúc của một bài thuốc Đông y.
+
+Một bài thuốc Đông y thường được tạo thành bởi 3 thành phần chính:
+
+1. Vị thuốc chủ (chủ dược): ",0.6773,0.0,0.0,0.0,0.4,0.6174,0.1667,0.2547,0.0,0,16774,partial
+GF022,tieu_hoa,"Bài thuốc Quy tỳ thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?","Bài thuốc Quy tỳ thang thuộc nhóm thuốc bổ tỳ vị, có công năng và chủ trị như sau:
+
+- Công năng: Bài thuốc Quy tỳ thang có công năng bổ tỳ vị, thanh nhiệt, tiêu viêm, giải độc.
+- Chủ trị: Bài thuốc Quy tỳ thang chủ trị các chứng bệnh như:
+ + Bệnh tỳ vị hư hàn, không tiêu hóa được thức ăn.
+ + Bệnh tỳ",0.6803,0.0,0.0,0.0,0.4,0.634,0.1667,0.1506,0.907,0,16886,partial

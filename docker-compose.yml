@@ -302,7 +302,7 @@ services:
       - "3000:3000"
     environment:
       VITE_BACKEND_URL: https://smirk-video-attest.ngrok-free.dev
-      VITE_MINIO_PUBLIC_URL: ${MINIO_PUBLIC_URL:-http://localhost:9000}
+      VITE_MINIO_PUBLIC_URL: https://smirk-video-attest.ngrok-free.dev
     networks:
       - yhct_network
     restart: unless-stopped

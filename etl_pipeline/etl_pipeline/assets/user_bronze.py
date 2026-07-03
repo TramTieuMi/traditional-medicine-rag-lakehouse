@@ -62,6 +62,28 @@ def _to_iso(val, fallback_dt: datetime) -> str:
     return fallback_dt.isoformat()
 
 
+def _align_and_concat(existing_df: pl.DataFrame | None, new_df: pl.DataFrame) -> pl.DataFrame:
+    """Ghép hai DataFrame Polars một cách an toàn kể cả khi cấu trúc cột khác nhau."""
+    if existing_df is None or existing_df.is_empty():
+        return new_df
+    if new_df is None or new_df.is_empty():
+        return existing_df
+
+    # Align columns from new_df to existing_df
+    for col in new_df.columns:
+        if col not in existing_df.columns:
+            existing_df = existing_df.with_columns(pl.lit(None).alias(col).cast(new_df[col].dtype))
+            
+    # Align columns from existing_df to new_df
+    for col in existing_df.columns:
+        if col not in new_df.columns:
+            new_df = new_df.with_columns(pl.lit(None).alias(col).cast(existing_df[col].dtype))
+
+    # Reorder columns of new_df to match existing_df
+    new_df = new_df.select(existing_df.columns)
+    return pl.concat([existing_df, new_df])
+
+
 # ── 1. Bronze Users ──────────────────────────────────────────────────────────
 @asset(
     name="bronze_mongodb_users",
@@ -120,7 +142,7 @@ def bronze_mongodb_users(context) -> Output:
         })
 
     new_df = pl.DataFrame(rows)
-    result_df = pl.concat([existing_df, new_df]) if existing_df is not None and not existing_df.is_empty() else new_df
+    result_df = _align_and_concat(existing_df, new_df)
 
     context.log.info(f"✅ +{len(rows)} users mới | tổng {result_df.shape[0]}")
     return Output(value=result_df, metadata={
@@ -197,7 +219,7 @@ def bronze_mongodb_conversations(context) -> Output:
         })
 
     new_df    = pl.DataFrame(rows)
-    result_df = pl.concat([existing_df, new_df]) if existing_df is not None and not existing_df.is_empty() else new_df
+    result_df = _align_and_concat(existing_df, new_df)
 
     context.log.info(f"✅ +{len(rows)} conversations mới | tổng {result_df.shape[0]}")
     return Output(value=result_df, metadata={
@@ -282,7 +304,7 @@ def bronze_mongodb_events(context) -> Output:
         })
 
     new_df    = pl.DataFrame(rows)
-    result_df = pl.concat([existing_df, new_df]) if existing_df is not None and not existing_df.is_empty() else new_df
+    result_df = _align_and_concat(existing_df, new_df)
 
     context.log.info(f"✅ +{len(rows)} events mới | tổng {result_df.shape[0]}")
     return Output(value=result_df, metadata={
@@ -347,7 +369,7 @@ def bronze_mongodb_medical_logs(context) -> Output:
         })
 
     new_df    = pl.DataFrame(rows)
-    result_df = pl.concat([existing_df, new_df]) if existing_df is not None and not existing_df.is_empty() else new_df
+    result_df = _align_and_concat(existing_df, new_df)
 
     context.log.info(f"✅ +{len(rows)} medical logs mới | tổng {result_df.shape[0]}")
     return Output(value=result_df, metadata={

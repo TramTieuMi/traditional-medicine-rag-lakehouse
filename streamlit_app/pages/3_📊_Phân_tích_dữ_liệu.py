@@ -116,9 +116,22 @@ def _get_recent_runs(limit: int = 5) -> list[dict]:
 
 
 def _upload_to_minio(filename: str, data: bytes) -> None:
+    import json
     client = Minio(MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, secure=False)
     if not client.bucket_exists("yhct-docs"):
         client.make_bucket("yhct-docs")
+        policy = {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {"AWS": ["*"]},
+                    "Action": ["s3:GetObject"],
+                    "Resource": ["arn:aws:s3:::yhct-docs/*"]
+                }
+            ]
+        }
+        client.set_bucket_policy("yhct-docs", json.dumps(policy))
     client.put_object("yhct-docs", filename, BytesIO(data), length=len(data), content_type="application/pdf")
 
 

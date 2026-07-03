@@ -1,212 +1,1395 @@
 [
   {
-    "id": "TH001",
-    "category": "tieu_hoa",
-    "question": "Bài thuốc nào chữa đau dạ dày theo y học cổ truyền?",
-    "expected_keywords": ["dạ dày", "cam thảo", "bạch truật", "bán hạ", "thang"],
-    "expected_tang_phu": "ty_vi"
+    "id": "GP001",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Hàn thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau cột thắt lưng",
+      "đau cột thắt lưng (yêu thống)",
+      "hàn thấp",
+      "ngoại nhân",
+      "ngoại nhân (hàn thấp)",
+      "cơ cạnh cột"
+    ],
+    "expected_tang_phu": "than"
   },
   {
-    "id": "TH002",
-    "category": "tieu_hoa",
-    "question": "Điều trị táo bón bằng thảo dược như thế nào?",
-    "expected_keywords": ["táo bón", "đại hoàng", "nhuận tràng", "thông tiện"],
-    "expected_tang_phu": "ty_vi"
+    "id": "GP002",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Thấp nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau cột thắt lưng",
+      "đau cột thắt lưng (yêu thống)",
+      "thấp nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (thấp nhiệt)",
+      "bứt rứt"
+    ],
+    "expected_tang_phu": "than"
   },
   {
-    "id": "TH003",
-    "category": "tieu_hoa",
-    "question": "Phương pháp chữa tiêu chảy trong y học cổ truyền?",
-    "expected_keywords": ["tiêu chảy", "tỳ", "kiện tỳ", "phục linh"],
-    "expected_tang_phu": "ty_vi"
+    "id": "GP003",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau cột thắt lưng",
+      "đau cột thắt lưng (yêu thống)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "cự án",
+      "chất lưỡi tím"
+    ],
+    "expected_tang_phu": "than"
   },
   {
-    "id": "TH004",
-    "category": "tieu_hoa",
-    "question": "Bài thuốc điều trị đầy bụng chướng bụng?",
-    "expected_keywords": ["đầy bụng", "chướng bụng", "hậu phác", "mộc hương", "tiêu thực"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "TH005",
-    "category": "tieu_hoa",
-    "question": "Chữa buồn nôn nôn mửa bằng thuốc đông y?",
-    "expected_keywords": ["nôn", "buồn nôn", "bán hạ", "sinh khương", "hòa vị"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "TH006",
-    "category": "tieu_hoa",
-    "question": "Điều trị viêm đại tràng mạn theo YHCT?",
-    "expected_keywords": ["đại tràng", "viêm", "tỳ hư", "kiện tỳ", "bổ"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "TH007",
-    "category": "tieu_hoa",
-    "question": "Bài thuốc trị ợ chua ợ hơi?",
-    "expected_keywords": ["ợ chua", "vị", "hòa vị", "giáng nghịch"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "TH008",
-    "category": "tieu_hoa",
-    "question": "Chữa đau bụng cơn theo y học cổ truyền?",
-    "expected_keywords": ["đau bụng", "can", "tỳ", "mộc hương", "bạch thược"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "TH009",
-    "category": "tieu_hoa",
-    "question": "Điều trị viêm gan theo y học cổ truyền?",
-    "expected_keywords": ["viêm gan", "can", "thanh can", "nhân trần", "chi tử"],
+    "id": "GP004",
+    "category": "xuong_khop",
+    "question": "Bệnh Đau cột thắt lưng (Yêu thống) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "đau cột thắt lưng",
+      "đau cột thắt lưng (yêu thống)",
+      "can thận hư",
+      "bất nội ngoại nhân , ngoại nhân .",
+      "bất nội ngoại nhân (nội thương), ngoại nhân (phong hàn thấp).",
+      "đau âm ỉ"
+    ],
     "expected_tang_phu": "can_dom"
   },
   {
-    "id": "TH010",
-    "category": "tieu_hoa",
-    "question": "Bài thuốc chữa xơ gan cổ trướng?",
-    "expected_keywords": ["xơ gan", "cổ trướng", "can", "lợi thủy", "phục linh"],
+    "id": "GP005",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau cột thắt lưng (Yêu thống) thể Thận dương hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau cột thắt lưng",
+      "đau cột thắt lưng (yêu thống)",
+      "thận dương hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "chân gối yếu"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP006",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý theo y học cổ truyền?",
+    "expected_keywords": [
+      "thoái hóa khớp gối",
+      "thoái hóa khớp gối (hạc tất phong)",
+      "phong hàn thấp tý",
+      "ngoại nhân",
+      "ngoại nhân (phong, hàn, thấp)",
+      "thấp) xuất hiện đau"
+    ],
     "expected_tang_phu": "can_dom"
   },
   {
-    "id": "DL001",
-    "category": "duoc_lieu",
-    "question": "Cam thảo có công dụng và liều dùng như thế nào?",
-    "expected_keywords": ["cam thảo", "bổ tỳ", "giải độc", "liều", "gram"],
+    "id": "GP007",
+    "category": "xuong_khop",
+    "question": "Bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong hàn thấp tý kèm can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "thoái hóa khớp gối",
+      "thoái hóa khớp gối (hạc tất phong)",
+      "phong hàn thấp tý kèm can thận hư",
+      "ngoại nhân , bất nội ngoại nhân .",
+      "ngoại nhân (phong, hàn, thấp), bất nội ngoại nhân (nội thương).",
+      "biến dạng khớp"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP008",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Thoái hóa khớp gối (Hạc tất phong) thể Phong thấp nhiệt kèm can thận hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "thoái hóa khớp gối",
+      "thoái hóa khớp gối (hạc tất phong)",
+      "phong thấp nhiệt kèm can thận hư",
+      "bất nội ngoại nhân , ngoại nhân .",
+      "bất nội ngoại nhân (nội thương), ngoại nhân (phong, thấp, nhiệt).",
+      "nóng hoặc đỏ"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP009",
+    "category": "xuong_khop",
+    "question": "Bệnh Gout (Thống phong) thể Phong thấp nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "gout",
+      "gout (thống phong)",
+      "phong thấp nhiệt",
+      "ngoại nhân và bất nội ngoại nhân",
+      "sưng",
+      "nóng"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP010",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Gout (Thống phong) thể Phong hàn thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "gout",
+      "gout (thống phong)",
+      "phong hàn thấp",
+      "ngoại nhân và bất nội ngoại nhân.",
+      "sưng nề",
+      "gặp lạnh đau tăng"
+    ],
     "expected_tang_phu": "ty_vi"
   },
   {
-    "id": "DL002",
-    "category": "duoc_lieu",
-    "question": "Bạch truật dùng trong những bài thuốc nào?",
-    "expected_keywords": ["bạch truật", "kiện tỳ", "táo thấp", "bài thuốc"],
+    "id": "GP011",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Gout (Thống phong) thể Đàm ứ trở trệ theo y học cổ truyền?",
+    "expected_keywords": [
+      "gout",
+      "gout (thống phong)",
+      "đàm ứ trở trệ",
+      "ngoại nhân và bất nội ngoại nhân.",
+      "các khớp sưng",
+      "dai dẳng  dứt"
+    ],
     "expected_tang_phu": "ty_vi"
   },
   {
-    "id": "DL003",
-    "category": "duoc_lieu",
-    "question": "Phục linh có tác dụng gì trong y học cổ truyền?",
-    "expected_keywords": ["phục linh", "kiện tỳ", "an thần", "lợi thấp"],
+    "id": "GP012",
+    "category": "xuong_khop",
+    "question": "Bệnh Gout (Thống phong) thể Can thận lưỡng hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "gout",
+      "gout (thống phong)",
+      "can thận lưỡng hư",
+      "ngoại nhân phối hợp bất nội ngoại nhân .",
+      "ngoại nhân phối hợp bất nội ngoại nhân (nội thương).",
+      "dai dẳng  dứt"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP013",
+    "category": "xuong_khop",
+    "question": "Bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "viêm khớp dạng thấp",
+      "viêm khớp dạng thấp (chứng tý)",
+      "phong thấp",
+      "ngoại nhân .",
+      "ngoại nhân (phong, thấp).",
+      "co duỗi khó khăn"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP014",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm khớp dạng thấp (Chứng tý) thể Hàn thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm khớp dạng thấp",
+      "viêm khớp dạng thấp (chứng tý)",
+      "hàn thấp",
+      "ngoại nhân .",
+      "ngoại nhân (hàn, thấp).",
+      "lạnh và nặng nề"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP015",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm khớp dạng thấp (Chứng tý) thể Phong thấp nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm khớp dạng thấp",
+      "viêm khớp dạng thấp (chứng tý)",
+      "phong thấp nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (phong, thấp, nhiệt)",
+      "các khớp sưng"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP016",
+    "category": "xuong_khop",
+    "question": "Bệnh Viêm khớp dạng thấp (Chứng tý) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "viêm khớp dạng thấp",
+      "viêm khớp dạng thấp (chứng tý)",
+      "can thận hư",
+      "ngoại nhân , bất nội ngoại nhân .",
+      "ngoại nhân (đàm thấp), bất nội ngoại nhân (nội thương).",
+      "các khớp sưng nề"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP017",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Phong hàn theo y học cổ truyền?",
+    "expected_keywords": [
+      "hội chứng cổ vai cánh tay",
+      "hội chứng cổ vai cánh tay (chứng tý)",
+      "phong hàn",
+      "ngoại nhân",
+      "ngoại nhân (phong, hàn)",
+      "đau nhức vùng đầu"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP018",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Phong thấp nhiệt tý theo y học cổ truyền?",
+    "expected_keywords": [
+      "hội chứng cổ vai cánh tay",
+      "hội chứng cổ vai cánh tay (chứng tý)",
+      "phong thấp nhiệt tý",
+      "ngoại nhân .",
+      "ngoại nhân (phong, thấp, nhiệt).",
+      "vùng cổ gáy sưng"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP019",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "hội chứng cổ vai cánh tay",
+      "hội chứng cổ vai cánh tay (chứng tý)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (huyết ứ)",
+      "đau nhức"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP020",
+    "category": "xuong_khop",
+    "question": "Bệnh Hội chứng cổ vai cánh tay (Chứng tý) thể Can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "hội chứng cổ vai cánh tay",
+      "hội chứng cổ vai cánh tay (chứng tý)",
+      "can thận hư",
+      "bất nội ngoại nhân .",
+      "bất nội ngoại nhân (nội thương).",
+      "đau căng đầu"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP021",
+    "category": "xuong_khop",
+    "question": "Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can dương thượng cang có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "tăng huyết áp vô căn",
+      "tăng huyết áp vô căn (huyễn vựng)",
+      "can dương thượng cang",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "hoa mắt"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP022",
+    "category": "xuong_khop",
+    "question": "Bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Can thận âm hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "tăng huyết áp vô căn",
+      "tăng huyết áp vô căn (huyễn vựng)",
+      "can thận âm hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "mệt mỏi"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP023",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Âm dương lưỡng hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "tăng huyết áp vô căn",
+      "tăng huyết áp vô căn (huyễn vựng)",
+      "âm dương lưỡng hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "mệt mỏi"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP024",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Tăng huyết áp vô căn (Huyễn vựng) thể Đàm thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "tăng huyết áp vô căn",
+      "tăng huyết áp vô căn (huyễn vựng)",
+      "đàm thấp",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đau đầu"
+    ],
     "expected_tang_phu": "ty_vi"
   },
   {
-    "id": "DL004",
-    "category": "duoc_lieu",
-    "question": "Hoàng kỳ có tác dụng bổ khí như thế nào?",
-    "expected_keywords": ["hoàng kỳ", "bổ khí", "thăng dương", "liều dùng"],
+    "id": "GP025",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ hư đàm thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "tỳ hư đàm thấp",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "người thường béo bệu"
+    ],
     "expected_tang_phu": "ty_vi"
   },
   {
-    "id": "DL005",
-    "category": "duoc_lieu",
-    "question": "Đương quy dùng trong điều trị bệnh gì?",
-    "expected_keywords": ["đương quy", "bổ huyết", "hoạt huyết", "điều kinh"],
+    "id": "GP026",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Tỳ thận dương hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "tỳ thận dương hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đầy chướng bụng"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP027",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can thận âm hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "can thận âm hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "váng đầu"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP028",
+    "category": "xuong_khop",
+    "question": "Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Can uất tỳ hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "can uất tỳ hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đau đầu"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP029",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Thấp nhiệt nội kết theo y học cổ truyền?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "thấp nhiệt nội kết",
+      "thấp nhiệt",
+      "chóng mặt",
+      "đau nặng đầu"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP030",
+    "category": "tieu_hoa",
+    "question": "Bệnh Rối loạn chuyển hóa Lipoprotein và tình trạng tăng lipid máu khác (Chứng đàm) thể Khí trệ huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác",
+      "rối loạn chuyển hóa lipoprotein và tình trạng tăng lipid máu khác (chứng đàm)",
+      "khí trệ huyết ứ",
+      "bất nội ngoại nhân",
+      "đau nhói vùng ngực",
+      "thiếu máu cơ tim)"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP031",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Phong hàn ở kinh lạc theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh dây thần kinh mặt",
+      "bệnh dây thần kinh mặt (khẩu nhãn oa tà)",
+      "phong hàn ở kinh lạc",
+      "ngoại nhân",
+      "ngoại nhân (phong hàn)",
+      "mắt nhắm  kín"
+    ],
     "expected_tang_phu": "tam_tieu_trang"
   },
   {
-    "id": "DL006",
-    "category": "duoc_lieu",
-    "question": "Hoàng liên chữa những bệnh nào theo YHCT?",
-    "expected_keywords": ["hoàng liên", "thanh nhiệt", "táo thấp", "giải độc"],
-    "expected_tang_phu": "ty_vi"
+    "id": "GP032",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Phong nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh dây thần kinh mặt",
+      "bệnh dây thần kinh mặt (khẩu nhãn oa tà)",
+      "phong nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (phong nhiệt)",
+      "miệng méo"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
   },
   {
-    "id": "DL007",
-    "category": "duoc_lieu",
-    "question": "Sài hồ có công dụng sơ can giải uất như thế nào?",
-    "expected_keywords": ["sài hồ", "can", "giải uất", "sơ can"],
+    "id": "GP033",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh dây thần kinh mặt (Khẩu nhãn oa tà) thể Huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh dây thần kinh mặt",
+      "bệnh dây thần kinh mặt (khẩu nhãn oa tà)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "mắt nhắm  kín",
+      "khó thổi lửa"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GP034",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Phong hàn theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "phong hàn",
+      "ngoại nhân",
+      "ngoại nhân (phong hàn)",
+      "đường nách giữa"
+    ],
     "expected_tang_phu": "can_dom"
   },
   {
-    "id": "DL008",
-    "category": "duoc_lieu",
-    "question": "Nhân trần dùng chữa vàng da viêm gan?",
-    "expected_keywords": ["nhân trần", "vàng da", "viêm gan", "thanh nhiệt", "lợi thấp"],
+    "id": "GP035",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can khí uất kết theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "can khí uất kết",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đau vùng hạ sườn"
+    ],
     "expected_tang_phu": "can_dom"
   },
   {
-    "id": "DL009",
-    "category": "duoc_lieu",
-    "question": "Bán hạ chế trị nôn mửa như thế nào?",
-    "expected_keywords": ["bán hạ", "nôn", "hóa đàm", "giáng nghịch"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "DL010",
-    "category": "duoc_lieu",
-    "question": "Sơn tra có tác dụng tiêu thực như thế nào?",
-    "expected_keywords": ["sơn tra", "tiêu thực", "tiêu hóa", "thịt"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT001",
-    "category": "bai_thuoc",
-    "question": "Bài thuốc Tứ Quân Tử thang gồm những vị nào và chỉ định khi nào?",
-    "expected_keywords": ["tứ quân tử", "nhân sâm", "bạch truật", "phục linh", "cam thảo", "tỳ hư"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT002",
-    "category": "bai_thuoc",
-    "question": "Bài thuốc Lục Quân Tử thang điều trị tỳ vị hư như thế nào?",
-    "expected_keywords": ["lục quân tử", "tỳ vị", "hư", "bán hạ", "trần bì"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT003",
-    "category": "bai_thuoc",
-    "question": "Bài Bình Vị tán điều trị đầy bụng thấp trở?",
-    "expected_keywords": ["bình vị", "thương truật", "hậu phác", "trần bì", "thấp"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT004",
-    "category": "bai_thuoc",
-    "question": "Bài Tiêu Dao tán dùng điều trị can khí uất kết?",
-    "expected_keywords": ["tiêu dao", "can", "uất", "sài hồ", "bạch thược", "bạch truật"],
+    "id": "GP036",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can uất hóa hỏa theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "can uất hóa hỏa",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "tình chí  yên"
+    ],
     "expected_tang_phu": "can_dom"
   },
   {
-    "id": "BT005",
-    "category": "bai_thuoc",
-    "question": "Bài thuốc Bổ Trung Ích Khí thang có thành phần và công dụng gì?",
-    "expected_keywords": ["bổ trung ích khí", "hoàng kỳ", "nhân sâm", "đương quy", "thăng ma"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT006",
-    "category": "bai_thuoc",
-    "question": "Sâm Linh Bạch Truật tán dùng chữa bệnh gì?",
-    "expected_keywords": ["sâm linh bạch truật", "tỳ hư", "tiêu chảy", "ý dĩ", "liên nhục"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT007",
-    "category": "bai_thuoc",
-    "question": "Bài Ngọc Nữ tiễn điều trị vị âm hư như thế nào?",
-    "expected_keywords": ["ngọc nữ", "vị", "âm hư", "sinh địa", "tri mẫu"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT008",
-    "category": "bai_thuoc",
-    "question": "Hoàng Liên Giải Độc thang điều trị nhiệt độc?",
-    "expected_keywords": ["hoàng liên giải độc", "nhiệt độc", "hoàng liên", "hoàng cầm", "hoàng bá"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT009",
-    "category": "bai_thuoc",
-    "question": "Bài thuốc Đại Hoàng Cam Thảo thang trị táo bón?",
-    "expected_keywords": ["đại hoàng", "cam thảo", "táo bón", "thông tiện", "công hạ"],
-    "expected_tang_phu": "ty_vi"
-  },
-  {
-    "id": "BT010",
-    "category": "bai_thuoc",
-    "question": "Bài Nhân Trần Cao thang điều trị hoàng đản thấp nhiệt?",
-    "expected_keywords": ["nhân trần cao", "hoàng đản", "thấp nhiệt", "chi tử", "đại hoàng"],
+    "id": "GP037",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Tà uất thiếu dương theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "tà uất thiếu dương",
+      "ngoại nhân",
+      "ngực sườn chướng",
+      "hàn nhiệt vãng lai"
+    ],
     "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP038",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "đau cố định",
+      "đau tăng về đêm"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GP039",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau dây thần kinh liên sườn (Hiếp thống) thể Can đởm thấp nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau dây thần kinh liên sườn",
+      "đau dây thần kinh liên sườn (hiếp thống)",
+      "can đởm thấp nhiệt",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "sườn đau miệng đắng"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP040",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Thể phong hàn thấp theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau thần kinh tọa",
+      "đau thần kinh tọa (yêu cước thống)",
+      "thể phong hàn thấp",
+      "ngoại nhân",
+      "ngoại nhân (phong hàn thấp)",
+      "chưa có teo cơ"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP041",
+    "category": "xuong_khop",
+    "question": "Bệnh Đau thần kinh tọa (Yêu cước thống) thể Phong hàn thấp kết hợp can thận hư có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "đau thần kinh tọa",
+      "đau thần kinh tọa (yêu cước thống)",
+      "phong hàn thấp kết hợp can thận hư",
+      "ngoại nhân + bất nội ngoại nhân",
+      "ngoại nhân + bất nội ngoại nhân (nội thương)",
+      "nặng nề"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP042",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Thấp nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau thần kinh tọa",
+      "đau thần kinh tọa (yêu cước thống)",
+      "thấp nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (thấp nhiệt)",
+      "rêu lưỡi vàng"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP043",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Đau thần kinh tọa (Yêu cước thống) thể Huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "đau thần kinh tọa",
+      "đau thần kinh tọa (yêu cước thống)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (huyết ứ)",
+      "đau đột ngột"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP044",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Can thận âm hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "di chứng nhồi máu não",
+      "di chứng nhồi máu não (bán thân bất hoại)",
+      "can thận âm hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "liệt nửa người)"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP045",
+    "category": "tieu_hoa",
+    "question": "Bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Phong đàm có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "di chứng nhồi máu não",
+      "di chứng nhồi máu não (bán thân bất hoại)",
+      "phong đàm",
+      "bất nội ngoại nhân .",
+      "bất nội ngoại nhân (nội thương, đàm thấp hoá hoả sinh phong).",
+      "chân tay tê dại"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP046",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng nhồi máu não (Bán thân bất hoại) thể Khí hư huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "di chứng nhồi máu não",
+      "di chứng nhồi máu não (bán thân bất hoại)",
+      "khí hư huyết ứ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "liệt nửa người)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP047",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Can thận bất túc theo y học cổ truyền?",
+    "expected_keywords": [
+      "bại não trẻ em",
+      "bại não trẻ em (ngũ trì)",
+      "can thận bất túc",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (tiên thiên bất túc)",
+      "gân xương mềm yếu"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP048",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Tâm tỳ hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "bại não trẻ em",
+      "bại não trẻ em (ngũ trì)",
+      "tâm tỳ hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (tiên thiên bất túc và hậu thiên bất điều)",
+      "chậm nói"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GP049",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bại não trẻ em (Ngũ trì) thể Đàm ứ trở trệ theo y học cổ truyền?",
+    "expected_keywords": [
+      "bại não trẻ em",
+      "bại não trẻ em (ngũ trì)",
+      "đàm ứ trở trệ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (đàm thấp trở trệ kinh lạc)",
+      "thất ngôn"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GP050",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng viêm não do virus (Ôn bệnh) thể Âm hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "di chứng viêm não do virus",
+      "di chứng viêm não do virus (ôn bệnh)",
+      "âm hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đêm nóng"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP051",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Di chứng viêm não do virus (Ôn bệnh) thể Khí âm lưỡng hư (khí huyết hư) theo y học cổ truyền?",
+    "expected_keywords": [
+      "di chứng viêm não do virus",
+      "di chứng viêm não do virus (ôn bệnh)",
+      "khí âm lưỡng hư",
+      "khí âm lưỡng hư (khí huyết hư)",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GP052",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Cam khí (Tỳ hư) theo y học cổ truyền?",
+    "expected_keywords": [
+      "suy dinh dưỡng thể marasmus",
+      "suy dinh dưỡng thể marasmus (cam tích)",
+      "cam khí",
+      "cam khí (tỳ hư)",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP053",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Cam tích theo y học cổ truyền?",
+    "expected_keywords": [
+      "suy dinh dưỡng thể marasmus",
+      "suy dinh dưỡng thể marasmus (cam tích)",
+      "cam tích",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "người gầy"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP054",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Suy dinh dưỡng thể Marasmus (Cam tích) thể Can cam (Khí huyết hư) theo y học cổ truyền?",
+    "expected_keywords": [
+      "suy dinh dưỡng thể marasmus",
+      "suy dinh dưỡng thể marasmus (cam tích)",
+      "can cam",
+      "can cam (khí huyết hư)",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP055",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Khí trệ theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm dạ dày và tá tràng",
+      "viêm dạ dày và tá tràng (vị quản thống)",
+      "khí trệ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "hay ợ chua"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP056",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Hỏa uất theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm dạ dày và tá tràng",
+      "viêm dạ dày và tá tràng (vị quản thống)",
+      "hỏa uất",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đau thượng vị nhiều"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP057",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm dạ dày và tá tràng",
+      "viêm dạ dày và tá tràng (vị quản thống)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "cự án"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP058",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm dạ dày và tá tràng (Vị quản thống) thể Tỳ vị hư hàn theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm dạ dày và tá tràng",
+      "viêm dạ dày và tá tràng (vị quản thống)",
+      "tỳ vị hư hàn",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "đau liên miên"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP059",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Khí ngưng theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm gan virus mạn",
+      "viêm gan virus mạn (hiếp thống)",
+      "khí ngưng",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "ăn uống kém"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP060",
+    "category": "xuong_khop",
+    "question": "Bệnh Viêm gan virus mạn (Hiếp thống) thể Huyết ứ có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "viêm gan virus mạn",
+      "viêm gan virus mạn (hiếp thống)",
+      "huyết ứ",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (huyết ứ)",
+      "di chuyển"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP061",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Can đởm thấp nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm gan virus mạn",
+      "viêm gan virus mạn (hiếp thống)",
+      "can đởm thấp nhiệt",
+      "miệng đắng",
+      "ăn kém",
+      "muốn ăn"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP062",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Viêm gan virus mạn (Hiếp thống) thể Âm hư nội nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "viêm gan virus mạn",
+      "viêm gan virus mạn (hiếp thống)",
+      "âm hư nội nhiệt",
+      "bất nội ngoại nhân",
+      "ăn kém",
+      "nước tiểu vàng"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP063",
+    "category": "ho_hap",
+    "question": "Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Phong nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bệnh phổi tắc nghẽn mạn tính",
+      "bệnh phổi tắc nghẽn mạn tính (copd) (khái suyễn)",
+      "phong nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (phong, nhiệt)",
+      "ho nhiều"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP064",
+    "category": "ho_hap",
+    "question": "Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Phong hàn có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bệnh phổi tắc nghẽn mạn tính",
+      "bệnh phổi tắc nghẽn mạn tính (copd) (khái suyễn)",
+      "phong hàn",
+      "ngoại nhân",
+      "ngoại nhân (phong, hàn)",
+      "người bệnh ho"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP065",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Khí táo theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh phổi tắc nghẽn mạn tính",
+      "bệnh phổi tắc nghẽn mạn tính (copd) (khái suyễn)",
+      "khí táo",
+      "ngoại nhân + bất nội ngoại nhân",
+      "ngoại nhân + bất nội ngoại nhân (nội thương)",
+      "ho khan"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP066",
+    "category": "tieu_hoa",
+    "question": "Bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Đàm thấp có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bệnh phổi tắc nghẽn mạn tính",
+      "bệnh phổi tắc nghẽn mạn tính (copd) (khái suyễn)",
+      "đàm thấp",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "khạc đờm nhiều"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP067",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh phổi tắc nghẽn mạn tính (COPD) (Khái suyễn) thể Thủy ẩm (hàn ẩm) theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh phổi tắc nghẽn mạn tính",
+      "bệnh phổi tắc nghẽn mạn tính (copd) (khái suyễn)",
+      "thủy ẩm",
+      "thủy ẩm (hàn ẩm)",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP068",
+    "category": "tieu_hoa",
+    "question": "Bệnh Màn đay (Ẩn chẳn) thể Phong hàn có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "màn đay",
+      "màn đay (ẩn chẳn)",
+      "phong hàn",
+      "ngoại nhân",
+      "ngoại nhân (phong hàn)",
+      "sẩn phù màu trắng"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP069",
+    "category": "tieu_hoa",
+    "question": "Bệnh Màn đay (Ẩn chẳn) thể Phong nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "màn đay",
+      "màn đay (ẩn chẳn)",
+      "phong nhiệt",
+      "ngoại nhân",
+      "ngoại nhân (phong nhiệt)",
+      "ngứa dữ dội"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP070",
+    "category": "tieu_hoa",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Màn đay (Ẩn chẳn) thể Huyết hư phong táo theo y học cổ truyền?",
+    "expected_keywords": [
+      "màn đay",
+      "màn đay (ẩn chẳn)",
+      "huyết hư phong táo",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "kèm theo mệt mỏi"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GP071",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Bệnh Bí đái cơ năng (Long bế) thể Bàng quang thấp nhiệt có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bí đái cơ năng",
+      "bí đái cơ năng (long bế)",
+      "bàng quang thấp nhiệt",
+      "thấp nhiệt",
+      "tiểu lượng ít",
+      "nhỏ giọt"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP072",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Phế nhiệt theo y học cổ truyền?",
+    "expected_keywords": [
+      "bí đái cơ năng",
+      "bí đái cơ năng (long bế)",
+      "phế nhiệt",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "tiểu tiện nhỏ giọt"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP073",
+    "category": "xuong_khop",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Khí trệ huyết ứ theo y học cổ truyền?",
+    "expected_keywords": [
+      "bí đái cơ năng",
+      "bí đái cơ năng (long bế)",
+      "khí trệ huyết ứ",
+      "nội nhân , bất nội ngoại nhân",
+      "nội nhân (cáu giận), bất nội ngoại nhân (sau phẫu thuật)",
+      "dễ bị xúc động"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GP074",
+    "category": "tiet_nieu_sinh_duc",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bí đái cơ năng (Long bế) thể Thận khí hư theo y học cổ truyền?",
+    "expected_keywords": [
+      "bí đái cơ năng",
+      "bí đái cơ năng (long bế)",
+      "thận khí hư",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)",
+      "người bệnh tiểu ít"
+    ],
+    "expected_tang_phu": "than"
+  },
+  {
+    "id": "GP075",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh trĩ (Hạ trĩ) thể Nhiệt độc (tương ứng với trĩ nội độ 1, 2) theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh trĩ",
+      "bệnh trĩ (hạ trĩ)",
+      "nhiệt độc",
+      "nhiệt độc (tương ứng với trĩ nội độ 1, 2)",
+      "bất nội ngoại nhân",
+      "bất nội ngoại nhân (nội thương)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP076",
+    "category": "ho_hap",
+    "question": "Hãy mô tả nguyên nhân, triệu chứng và phép trị cho bệnh Bệnh trĩ (Hạ trĩ) thể Huyết ứ (tương ứng với trĩ tắc mạch) theo y học cổ truyền?",
+    "expected_keywords": [
+      "bệnh trĩ",
+      "bệnh trĩ (hạ trĩ)",
+      "huyết ứ",
+      "huyết ứ (tương ứng với trĩ tắc mạch)",
+      "bất nội ngoại nhân",
+      "búi trĩ sưng"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP077",
+    "category": "ho_hap",
+    "question": "Bệnh Bệnh trĩ (Hạ trĩ) thể Thấp nhiệt (tương ứng với trĩ viêm, loét) có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bệnh trĩ",
+      "bệnh trĩ (hạ trĩ)",
+      "thấp nhiệt",
+      "thấp nhiệt (tương ứng với trĩ viêm, loét)",
+      "nội nhân + bất nội ngoại nhân",
+      "vùng hậu môn đau"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GP078",
+    "category": "tieu_hoa",
+    "question": "Bệnh Bệnh trĩ (Hạ trĩ) thể Khí huyết lưỡng hư (tương ứng trĩ hỗn hợp độ IV, trĩ lâu ngày gây thiếu máu) có các biểu hiện lâm sàng như thế nào và điều trị bằng bài thuốc gì?",
+    "expected_keywords": [
+      "bệnh trĩ",
+      "bệnh trĩ (hạ trĩ)",
+      "khí huyết lưỡng hư",
+      "khí huyết lưỡng hư (tương ứng trĩ hỗn hợp độ iv, trĩ lâu ngày gây thiếu máu)",
+      "bất nội ngoại nhân",
+      "hoa mắt chóng mặt"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF001",
+    "category": "xuong_khop",
+    "question": "Bài thuốc Ma hoàng thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "ma hoàng thang",
+      "thuốc phát tán phong hàn",
+      "phát tán phong hàn, bình suyễn, chỉ ho",
+      "cảm lạnh",
+      "có cơn hen phế quản"
+    ],
+    "expected_tang_phu": "can_dom"
+  },
+  {
+    "id": "GF002",
+    "category": "ho_hap",
+    "question": "Bài thuốc Quế chi thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "quế chi thang",
+      "thuốc phát tán phong hàn",
+      "phát tán phong hàn, thông kinh lạc",
+      "cảm lạnh có đau thần kinh",
+      "ngoại biên"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF003",
+    "category": "ho_hap",
+    "question": "Bài thuốc Tang cúc ấm thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "tang cúc ấm",
+      "thuốc phát tán phong nhiệt",
+      "phát tán phong nhiệt, chỉ ho",
+      "cảm nhiệt có phát ban",
+      "ho (sởi",
+      "dị ứng"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF004",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Ngân kiều tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "ngân kiều tán",
+      "thuốc thanh nhiệt giải độc",
+      "thanh nhiệt giải độc, trừ phong nhiệt",
+      "nhiệt độc gây ra mụn nhọt",
+      "mẫn ngứa",
+      "dị ứng"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF005",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Ngũ vị tiêu độc ẩm thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "ngũ vị tiêu độc ẩm",
+      "thuốc thanh nhiệt giải độc",
+      "thanh nhiệt giải độc",
+      "nhiệt độc",
+      "huyết nhiệt gây ra mụn nhọt",
+      "mẩn ngứa"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF006",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Long đởm tả can thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "long đởm tả can thang",
+      "thuốc thanh nhiệt táo thấp",
+      "thanh thấp nhiệt can đởm",
+      "thấp nhiệt can",
+      "đởm: viêm gan virus",
+      "viêm túi mật"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF007",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Cát căn cầm liên thang gia vị thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "cát căn cầm liên thang gia vị",
+      "thuốc thanh nhiệt táo thấp",
+      "thanh thấp nhiệt vị tràng",
+      "thấp nhiệt",
+      "vị tràng gây ra tiêu chảy cấp",
+      "vị tràng gây ra tiêu chảy cấp (tiêu chảy do ngộ độc thức ăn)"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF008",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Bạch thược thang gia vị thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "bạch thược thang gia vị",
+      "thuốc thanh nhiệt táo thấp",
+      "thanh thấp nhiệt vị tràng",
+      "thấp nhiệt vị tràng",
+      "hội chứng ly trực khuẩn"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF009",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Tê giác địa hoàng thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "tê giác địa hoàng thang",
+      "thuốc thanh nhiệt lương huyết",
+      "thanh nhiệt lương huyết",
+      "huyết nhiệt gây ra chảy máu",
+      "sốt cao hôn mê"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF010",
+    "category": "ho_hap",
+    "question": "Bài thuốc Tứ nghịch thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "tứ nghịch thang",
+      "thuốc hồi dương cứu nghịch",
+      "hồi dương cứu nghịch",
+      "thoát dương",
+      "thoát dương (truy tim mạch cấp)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF011",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Lý trung thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "lý trung thang",
+      "thuốc ôn trung tán hàn",
+      "ôn trung kiện tỳ",
+      "tỳ dương hư gây ra chán ăn",
+      "đầy bụng",
+      "tiêu chảy mạn tính"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF012",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Tứ thần hoàn thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "tứ thần hoàn",
+      "thuốc ôn trung tán hàn",
+      "ấm thận trừ hàn",
+      "tỳ thận dương hư gây ra tiêu chảy mạn tính",
+      "ngũ canh tả"
+    ],
+    "expected_tang_phu": "ty_vi"
+  },
+  {
+    "id": "GF013",
+    "category": "ho_hap",
+    "question": "Bài thuốc Nhị trần thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "nhị trần thang",
+      "thuốc hóa đờm",
+      "ôn hóa đờm hàn, chỉ ho",
+      "đờm hàn gây ra nôn",
+      "đầy trướng bụng",
+      "ho nhiều"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF014",
+    "category": "ho_hap",
+    "question": "Bài thuốc Thanh nhiệt hóa đàm thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "thanh nhiệt hóa đàm thang",
+      "thuốc hóa đờm",
+      "thanh hóa đởm nhiệt,chỉ ho",
+      "ho có đờm nhiệt (viêm phế quản",
+      "viêm họng"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF015",
+    "category": "ho_hap",
+    "question": "Bài thuốc Chỉ thấu tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "chỉ thấu tán",
+      "thuốc chỉ ho",
+      "thuốc chỉ ho (chỉ khái)",
+      "hóa đờm chỉ ho",
+      "ho có nhiều đờm loãng (viêm phế quản",
+      "viêm họng)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF016",
+    "category": "ho_hap",
+    "question": "Bài thuốc Hạnh tô tán thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "hạnh tô tán",
+      "thuốc chỉ ho",
+      "thuốc chỉ ho (chỉ khái)",
+      "hóa đờm chỉ ho",
+      "ho do phế bàn",
+      "đờm loãng (viêm phế quản"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF017",
+    "category": "ho_hap",
+    "question": "Bài thuốc Bách hợp cố kim thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "bách hợp cố kim thang",
+      "thuốc chỉ ho  / thuốc bổ âm",
+      "thuốc chỉ ho (chỉ khái) / thuốc bổ âm",
+      "bổ phế âm, sinh tân dịch chỉ ho",
+      "ho kéo dài do phế âm hư (ho khan",
+      "ho có đờm đặc)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF018",
+    "category": "ho_hap",
+    "question": "Bài thuốc Lục quân tử thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "lục quân tử thang",
+      "thuốc chỉ ho",
+      "thuốc chỉ ho (chỉ khái)",
+      "bổ khí hóa đờm chỉ ho",
+      "ho do khí hư đờm thấp",
+      "ho do khí hư đờm thấp (viêm phế quản mạn tính)"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF019",
+    "category": "ho_hap",
+    "question": "Bài thuốc Thiên ma cầu đằng thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "thiên ma cầu đằng thang",
+      "thuốc bình can tắt phong",
+      "bình can tắt phong hạ áp",
+      "tăng huyết áp",
+      "can hỏa vượng đau đầu",
+      "chóng mặt"
+    ],
+    "expected_tang_phu": "phe_dai_trang"
+  },
+  {
+    "id": "GF020",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Bài thuốc An thần hoàn thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "an thần hoàn",
+      "thuốc trọng trấn an thần",
+      "trấn tâm an thần, thanh tâm nhiệt",
+      "tâm nhiệt gây ra khó ngủ",
+      "ngủ ít",
+      "hồi hộp"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GF021",
+    "category": "tuan_hoan_than_kinh",
+    "question": "Bài thuốc Thiên vương bổ tâm đan thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "thiên vương bổ tâm đan",
+      "thuốc dưỡng tâm an thần",
+      "dưỡng âm sinh tân dịch an thần",
+      "chứng âm hư nội nhiệt gây ra mất ngủ",
+      "hồi hộp",
+      "nhịp tim nhanh"
+    ],
+    "expected_tang_phu": "tam_tieu_trang"
+  },
+  {
+    "id": "GF022",
+    "category": "tieu_hoa",
+    "question": "Bài thuốc Quy tỳ thang thuộc nhóm nào, có công năng và chủ trị như thế nào trong y học cổ truyền?",
+    "expected_keywords": [
+      "quy tỳ thang",
+      "thuốc trọng trấn an thần / thuốc bổ khí",
+      "kiện tỳ, an thần",
+      "chứng tỳ dương hư gây ra chán ăn",
+      "đầy bụng",
+      "ít ngủ"
+    ],
+    "expected_tang_phu": "ty_vi"
   }
 ]
