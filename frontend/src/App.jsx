@@ -164,7 +164,7 @@ function App() {
   const [changePasswordMessage, setChangePasswordMessage] = useState('');
   const [changePasswordError, setChangePasswordError] = useState('');
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
 
   const chatEndRef = useRef(null);
 
@@ -733,6 +733,14 @@ function App() {
         </div>
       </aside>
 
+      {/* Overlay cho mobile khi sidebar mở */}
+      {sidebarOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Vùng làm việc chính bên phải */}
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
         {page === 'profile' ? (
@@ -950,8 +958,8 @@ function App() {
 
             {/* Đánh giá session ở dưới cùng khi có hội thoại */}
             {activeSessionId && messages.length > 0 && !sessionRating && (
-              <div style={{ backgroundColor: 'hsl(var(--bg-card))', padding: '10px 32px', borderTop: '1px solid hsl(var(--border-light))', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.85rem', color: 'hsl(var(--text-muted))' }}>Bạn có hài lòng với câu trả lời của Trợ lý AI?</span>
+              <div className="feedback-bar">
+                <span className="feedback-text">Bạn có hài lòng với câu trả lời của Trợ lý AI?</span>
                 <div className="feedback-section">
                   <div className="feedback-stars">
                     {[1, 2, 3, 4, 5].map((star) => (

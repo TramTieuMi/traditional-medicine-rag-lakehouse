@@ -30,8 +30,18 @@ def parse_conversation_messages(messages_json_str):
 def write_to_postgres(df_gold: pl.DataFrame, table_name: str, context):
     try:
         import sqlalchemy
+        from sqlalchemy import Date, DateTime
+        
+        dtypes = {}
+        if table_name == "gold_user_engagement":
+            dtypes = {"date": Date}
+        elif table_name == "gold_chat_performance":
+            dtypes = {"session_start_time": DateTime}
+        elif table_name == "gold_medical_insights":
+            dtypes = {"timestamp": DateTime}
+
         engine = sqlalchemy.create_engine(SUPERSET_DB_URI)
-        df_gold.to_pandas().to_sql(name=table_name, con=engine, if_exists="replace", index=False)
+        df_gold.to_pandas().to_sql(name=table_name, con=engine, if_exists="replace", index=False, dtype=dtypes)
         context.log.info(f"✅ Đã ghi {table_name} vào PostgreSQL ({df_gold.shape[0]} rows).")
     except Exception as e:
         context.log.error(f"❌ Lỗi ghi {table_name} vào PostgreSQL: {e}")
