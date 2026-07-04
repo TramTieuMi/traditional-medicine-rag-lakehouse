@@ -340,11 +340,11 @@ function App() {
   };
 
   // Gửi câu hỏi chat
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async (e, directMessage) => {
     e?.preventDefault();
-    if (!inputMessage.trim()) return;
+    const userMessageText = directMessage || inputMessage;
+    if (!userMessageText.trim()) return;
 
-    const userMessageText = inputMessage;
     setInputMessage('');
     setChatLoading(true);
     tracker.trackClick('send_message', { length: userMessageText.length });
@@ -384,7 +384,7 @@ function App() {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           setUser(null);
-          setView('login');
+          setPage('login');
           return;
         }
       }
@@ -858,19 +858,19 @@ function App() {
                   <p>Hệ thống AI sẽ tư vấn các bài thuốc và phương pháp điều trị các căn bệnh thường gặp (tiêu hóa, mất ngủ, xương khớp, cảm mạo...) bằng Y học cổ truyền dựa trên nguồn tài liệu chuẩn y khoa. Hãy thử một số gợi ý dưới đây:</p>
                   
                   <div className="suggestion-box">
-                    <div className="suggestion-card" onClick={() => { setInputMessage('Bài thuốc đông y điều trị đau dạ dày hiệu quả'); tracker.trackClick('click_suggestion', { query: 'Bài thuốc trị đau dạ dày' }); }}>
+                    <div className="suggestion-card" onClick={() => { tracker.trackClick('click_suggestion', { query: 'Bài thuốc trị đau dạ dày' }); handleSendMessage(null, 'Bài thuốc đông y điều trị đau dạ dày hiệu quả'); }}>
                       <h4>🌱 Đau dạ dày (Vị quản thống)</h4>
                       <p>Tìm hiểu các bài thuốc cổ phương kiện tỳ vị, giảm đau và viêm loét thượng vị.</p>
                     </div>
-                    <div className="suggestion-card" onClick={() => { setInputMessage('Các phương pháp đông y trị mất ngủ và suy nhược thần kinh'); tracker.trackClick('click_suggestion', { query: 'Phương pháp trị mất ngủ' }); }}>
+                    <div className="suggestion-card" onClick={() => { tracker.trackClick('click_suggestion', { query: 'Phương pháp trị mất ngủ' }); handleSendMessage(null, 'Các phương pháp đông y trị mất ngủ và suy nhược thần kinh'); }}>
                       <h4>😴 Mất ngủ (Thất miên)</h4>
                       <p>Các vị thuốc an thần, dưỡng tâm bổ tỳ giúp cải thiện giấc ngủ tự nhiên.</p>
                     </div>
-                    <div className="suggestion-card" onClick={() => { setInputMessage('Cách điều trị táo bón và ăn uống không tiêu bằng thảo dược'); tracker.trackClick('click_suggestion', { query: 'Điều trị táo bón khó tiêu' }); }}>
+                    <div className="suggestion-card" onClick={() => { tracker.trackClick('click_suggestion', { query: 'Điều trị táo bón khó tiêu' }); handleSendMessage(null, 'Cách điều trị táo bón và ăn uống không tiêu bằng thảo dược'); }}>
                       <h4>🏥 Táo bón khó tiêu</h4>
                       <p>Các giải pháp nhuận tràng, thông tiện, ích khí kiện tỳ từ dược liệu tự nhiên.</p>
                     </div>
-                    <div className="suggestion-card" onClick={() => { setInputMessage('Bài thuốc đông y trị cảm mạo, ho khan và ho có đờm'); tracker.trackClick('click_suggestion', { query: 'Trị cảm mạo ho khan' }); }}>
+                    <div className="suggestion-card" onClick={() => { tracker.trackClick('click_suggestion', { query: 'Trị cảm mạo ho khan' }); handleSendMessage(null, 'Bài thuốc đông y trị cảm mạo, ho khan và ho có đờm'); }}>
                       <h4>🤧 Cảm mạo & Ho</h4>
                       <p>Tra cứu các bài thuốc tán phong hàn, thanh phong nhiệt và giảm ho thường gặp.</p>
                     </div>
@@ -983,13 +983,15 @@ function App() {
             {/* Input Bar */}
             <div className="input-container">
               <form onSubmit={handleSendMessage} className="input-bar">
-                <input 
-                  type="text" 
-                  className="chat-input-field" 
+                <textarea
+                  className="chat-input-field"
                   value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Hỏi về bài thuốc, dược liệu hoặc các triệu chứng..." 
+                  onChange={(e) => { setInputMessage(e.target.value); e.target.style.height = 'auto'; e.target.style.height = Math.min(e.target.scrollHeight, 160) + 'px'; }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(e); } }}
+                  placeholder="Hỏi về bài thuốc, dược liệu hoặc các triệu chứng..."
                   disabled={chatLoading}
+                  rows={1}
+                  style={{ resize: 'none', overflowY: 'auto' }}
                 />
                 <button type="submit" className="send-message-btn" disabled={chatLoading || !inputMessage.trim()}>
                   <Send size={16} />
