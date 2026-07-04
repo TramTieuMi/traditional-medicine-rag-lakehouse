@@ -899,18 +899,16 @@ with tab_log:
             log_sid = None
 
     with log_right:
-        if log_uid and log_sid and not df_convs_all.is_empty():
-            conv_row = (
-                df_convs_all
-                .filter((pl.col("user_id") == log_uid) & (pl.col("session_id") == log_sid))
-                .row(0, named=True)
-            )
+        filtered_conv = df_convs_all.filter((pl.col("user_id") == log_uid) & (pl.col("session_id") == log_sid)) if log_uid and log_sid and not df_convs_all.is_empty() else pl.DataFrame()
+        if not filtered_conv.is_empty():
+            conv_row = filtered_conv.row(0, named=True)
             try:
                 messages = json.loads(conv_row.get("messages_json", "[]"))
             except Exception:
                 messages = []
 
-            urow  = df_users.filter(pl.col("user_id") == log_uid).row(0, named=True)
+            _udf  = df_users.filter(pl.col("user_id") == log_uid)
+            urow  = _udf.row(0, named=True) if not _udf.is_empty() else {}
             uname = urow.get("full_name", "—")
             stime = conv_row.get("start_time", "")[:16]
             nmsg  = conv_row.get("total_messages", 0)

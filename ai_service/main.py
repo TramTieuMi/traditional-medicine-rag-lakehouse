@@ -226,11 +226,14 @@ def _reformulate_query(question: str, history: List[ChatMessage]) -> str:
 
     prompt = (
         "Bạn là trợ lý ảo chuyên viết lại câu hỏi hội thoại thành câu hỏi tìm kiếm độc lập.\n"
-        "Nhiệm vụ: Dựa vào lịch sử hội thoại và câu hỏi mới nhất, hãy viết lại thành một câu hỏi tìm kiếm "
-        "đầy đủ, rõ ràng và độc lập (không cần đại từ nhân xưng hay từ thay thế như 'nó', 'đó', 'họ', 'ở đây').\n"
+        "Nhiệm vụ: Dựa vào câu hỏi mới nhất của người dùng, hãy viết lại thành một câu hỏi tìm kiếm "
+        "đầy đủ, rõ ràng và độc lập. Chỉ dùng lịch sử hội thoại để hiểu ngữ cảnh khi câu hỏi mới có từ "
+        "thay thế như 'nó', 'đó', 'vậy' — nếu câu hỏi mới đã rõ ràng thì KHÔNG được thêm chủ đề từ lịch sử.\n"
+        "QUAN TRỌNG: Câu hỏi viết lại phải bám sát ĐÚNG CHỦ ĐỀ mà người dùng đang hỏi trong câu hỏi mới nhất, "
+        "không được thay thế hay trộn lẫn với các chủ đề khác trong lịch sử.\n"
         "Yêu cầu: CHỈ trả về câu hỏi đã được viết lại, không giải thích gì thêm.\n\n"
-        f"Lịch sử hội thoại:\n{hist_str}\n"
-        f"Câu hỏi mới nhất: {question}\n\n"
+        f"Lịch sử hội thoại (chỉ dùng khi cần):\n{hist_str}\n"
+        f"Câu hỏi mới nhất của người dùng: {question}\n\n"
         "Câu hỏi viết lại:"
     )
 
