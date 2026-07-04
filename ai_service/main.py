@@ -310,17 +310,25 @@ def api_chat(payload: ChatRequest):
         )
     messages.append({"role": "user", "content": user_content})
 
-    # 4. Gọi LLM sinh câu trả lời
-    try:
-        resp = get_groq().chat.completions.create(
-            model=GROQ_MODEL,
-            messages=messages,
-            temperature=0.3,
-            max_tokens=1024,
-        )
-        answer = resp.choices[0].message.content
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Groq API Error: {str(e)}")
+    # 4. Gọi LLM sinh câu trả lời (retry tối đa 3 lần nếu rate limit)
+    answer = None
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = get_groq().chat.completions.create(
+                model=GROQ_MODEL,
+                messages=messages,
+                temperature=0.3,
+                max_tokens=1024,
+            )
+            answer = resp.choices[0].message.content
+            break
+        except Exception as e:
+            last_err = e
+            if attempt < 2:
+                time.sleep(2 ** attempt)  # 1s, 2s
+    if answer is None:
+        raise HTTPException(status_code=500, detail=f"Groq API Error: {str(last_err)}")
 
     elapsed = int((time.perf_counter() - t0) * 1000)
 
