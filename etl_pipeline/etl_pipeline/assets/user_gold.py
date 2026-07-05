@@ -346,8 +346,10 @@ def gold_medical_insights(
                     "email_hashed": row.get("email_hashed"),
                 }
 
-    # Pre-build geo map by session_id (first valid entry per session)
+    # Pre-build geo map by session_id and user_id (first valid entry per session/user)
     geo_map: dict[str, tuple[str, str]] = {}
+    user_geo_map: dict[str, tuple[str, str]] = {}
+    
     if not silver_mongodb_events.is_empty():
         df_valid = silver_mongodb_events.filter(
             pl.col("country").is_not_null() & (pl.col("country") != "") &
@@ -355,14 +357,25 @@ def gold_medical_insights(
         )
         for row in df_valid.iter_rows(named=True):
             sid = row["session_id"]
-            if sid not in geo_map:
-                geo_map[sid] = (row["country"], row["city"])
+            uid = row.get("user_id", "")
+            loc = (row["country"], row["city"])
+            if sid and sid not in geo_map:
+                geo_map[sid] = loc
+            if uid and uid not in ("None", "null", "") and uid not in user_geo_map:
+                user_geo_map[uid] = loc
 
     rows = []
     for row in silver_mongodb_medical_logs.iter_rows(named=True):
         uid  = row["user_id"] or ""
         info = user_info.get(uid, {}) if uid not in ("None", "null", "") else {}
-        country, city = geo_map.get(row["session_id"], ("Vietnam", "Ho Chi Minh City"))
+        
+        # Try to resolve location by session_id, then by user_id fallback
+        country, city = ("Vietnam", "Ho Chi Minh City")
+        sid = row["session_id"]
+        if sid in geo_map:
+            country, city = geo_map[sid]
+        elif uid and uid not in ("None", "null", "") and uid in user_geo_map:
+            country, city = user_geo_map[uid]
 
         try:
             symptoms   = json.loads(row.get("symptoms_mentioned",   "[]"))

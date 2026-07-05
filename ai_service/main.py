@@ -15,7 +15,7 @@ CHROMA_HOST  = os.getenv("CHROMA_HOST", "chromadb")
 CHROMA_PORT  = int(os.getenv("CHROMA_PORT", "8000"))
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 EMBED_MODEL  = "keepitreal/vietnamese-sbert"
-GROQ_MODEL   = "llama-3.3-70b-versatile"
+GROQ_MODEL   = "llama-3.1-8b-instant"
 COLLECTION   = "yhct_chunks"
 TOP_K        = 5
 MIN_SIM      = 0.30
@@ -80,14 +80,14 @@ def extract_entities(question: str, groq_client: Any) -> Dict[str, List[str]]:
 # ── Obvious Social Chat Classifier ────────────────────────────────────────────
 _OBVIOUS_ACK = re.compile(
     r"^[\s!?.]*"
-    r"(xin\s+chào|chào(\s+(bạn|mọi\s*người|anh|chị|em))?|hello|hi+|hey"
-    r"|oke?|ok+|ừ+|uh+|aha+|à+|ờ+|ôi+"
+    r"(xin\s+chào|chào(\s+(bạn|mọi\s*người|anh|chị|em))?|hello|hi+|hey|ơi"
+    r"|oke?|ok+|okay|okey|o\s*kê|ừ+|uh+|aha+|à+|ờ+|ôi+|ò+"
     r"|vậy\s*(hả|à|ư|thôi|sao)?|thế\s*(à|hả|thôi|sao)?"
     r"|cảm\s*ơn(\s*(bạn|anh|chị|em|nhiều|lắm))?|thank(s|\s+you)?"
     r"|hay\s+(quá|vậy|thế)|tuyệt(\s+vời)?|giỏi(\s+quá)?|ngon(\s+quá)?"
-    r"|được\s+rồi|hiểu\s+rồi|rõ\s+rồi|nhớ\s+rồi"
-    r"|ừm+|umm+|hmm+|haha+|lol"
-    r"|rồi|vâng|dạ(?!\s+\S)|thôi|xong|đúng\s+(rồi|vậy|đó)|ờ\s+thì"
+    r"|được\s*(rồi)?|hiểu\s*(rồi)?|rõ\s*(rồi)?|nhớ\s*(rồi)?"
+    r"|ừm+|umm+|hmm+|haha+|lol|hehe+"
+    r"|rồi|vâng(\s*ạ)?|dạ(?!\s+\S)|thôi|xong|đúng\s+(rồi|vậy|đó)|ờ\s+thì"
     r"|tào\s*lao|vớ\s*vẩn|nhảm\s*nhí|khùng|điên|ngu|dở|hâm|nhảm|bậy\s*bạ|tầm\s*bậy|tào\s*lao\s*mía\s*lao|sai\s*(bét|quá))"
     r"[\s!?.]*$",
     re.IGNORECASE,
@@ -116,20 +116,40 @@ Giải thích nguyên nhân gây bệnh theo lý luận Y học cổ truyền (n
 Đưa ra khuyên về chế độ sinh hoạt và ăn uống riêng biệt, đặc thù cho từng bệnh lý của người dùng. TUYỆT ĐỐI không dùng một khuôn mẫu chung lặp đi lặp lại cho mọi bệnh (ví dụ: cấm khuyên đi bộ, yoga, thiền và ăn rau xanh trái cây cho người đang bị cảm sốt hay say rượu). Người bị cảm sốt phải khuyên nghỉ ngơi giữ ấm, xông lá, uống nước ấm; người đau dạ dày phải khuyên ăn cháo ấm, đồ mềm, không ăn đồ chua cay, không nhịn ăn; người say rượu phải khuyên uống nước ấm, nước gừng chanh, nghỉ ngơi, cấm vận động mạnh; người đau lưng phải khuyên tránh mang vác nặng, chườm ấm, nghỉ ngơi hợp lý. Viết thành đoạn văn khuyến nghị, dùng câu hoàn chỉnh và liên kết ý tế nhị — không dùng kiểu "Nên:" hay "Không nên:" đứng một mình.
 
 **Bài thuốc tham khảo**
-Áp dụng quy trình gợi ý bài thuốc nghiêm ngặt sau:
-- Bước 1 (Ưu tiên hàng đầu): Trích xuất bài thuốc cụ thể trị đúng tình trạng này từ "Tài liệu tham khảo từ kho YHCT" được cung cấp. Bài thuốc được gợi ý phải trị đúng bệnh hoặc tổ hợp các triệu chứng chính của người dùng. Nếu có bài thuốc phù hợp, bạn BẮT BUỘC phải liệt kê đầy đủ các vị thuốc thành phần cụ thể kèm liều lượng định lượng rõ ràng (gam) và cách sắc/uống rõ ràng của bài thuốc đó. Nếu tài liệu tham khảo chỉ ghi tên bài thuốc chung chung (ví dụ: chỉ liệt kê 'Hương nhu tán, Lục nhất tán...') mà không có thành phần vị thuốc và liều lượng cụ thể trong văn bản đó, bạn TUYỆT ĐỐI không được tự ý bịa đặt ra liều lượng cho chúng, cũng không được coi các tên bài thuốc đó là vị thuốc; thay vào đó hãy bỏ qua bài thuốc thiếu chi tiết này và chuyển sang Bước 2.
-- Bước 2 (Kiến thức YHCT chung): Nếu tài liệu tham khảo được cung cấp không có bài thuốc cụ thể, hoặc thiếu công thức/định lượng chi tiết, hoặc các bài thuốc trong tài liệu đã bị loại trừ/lặp lại: Hãy gợi ý một bài thuốc hoặc mẹo dân gian y học cổ truyền an toàn, chính thống và phổ biến từ kiến thức YHCT chung điều trị đúng căn bệnh chính (ví dụ: dùng gừng ấm, cháo hành tía tô cho người cảm lạnh mắc mưa; trà hoa cúc cho người mất ngủ...). TUYỆT ĐỐI KHÔNG ĐƯỢC tự bịa ra các tên gọi Hán-Việt nghe có vẻ cổ trang nhưng không có thực trong thực tế (ví dụ: cấm bịa ra các tên như 'Tỳ Thống Tán', 'Phúc Nguyên', 'Thủy Điệp'). Hãy dùng các tên gọi dân gian quen thuộc, chính thống và an toàn (như Trà gừng, Cháo hành tía tô, Trà hoa cúc, Nước chanh ấm...). Bạn BẮT BUỘC phải cung cấp công thức định lượng cụ thể từ kiến thức chung của bạn (ví dụ: Gừng tươi 10g, lá Tía tô 12g, sắc với 500ml nước còn 200ml uống ấm) và cách dùng rõ ràng, ghi rõ nguồn gốc là "Theo kiến thức Y học cổ truyền chung".
-- Bước 3 (Từ chối nếu không biết): Nếu triệu chứng phức tạp hoặc cả tài liệu và kiến thức chung đều không có cách điều trị an toàn và chi tiết (không có thành phần và liều lượng cụ thể), ghi rõ: "Hiện tại nguồn tài liệu tham khảo và kiến thức chung chưa có bài thuốc cụ thể cho tình trạng này." và tuyệt đối không tự chế bừa ra các vị thuốc khác.
-Yêu cầu bắt buộc: Tuyệt đối không được chỉ liệt kê tên bài thuốc chung chung mà không ghi rõ các vị thuốc thành phần cụ thể, liều lượng và cách uống của từng bài thuốc đó. Khách hàng cần thông tin chi tiết và an toàn để có thể thực hiện được. Nghiêm cấm hướng dẫn bôi ngoài da cho các thuốc uống (ví dụ: các bài thuốc uống dạng sắc thì phải uống ấm, cấm khuyên dùng để bôi vào cơ thể). Tuyệt đối không được viết thêm các gợi ý phụ chung chung không có liều lượng cách dùng (ví dụ: cấm ghi thêm 'ngoài ra có thể uống nước chanh ấm, trà hoa cúc...' nếu không viết rõ công thức pha, định lượng gam và cách uống của trà hoa cúc hay nước chanh đó). Đã khuyên dùng bài thuốc/mẹo nào là bắt buộc phải có đầy đủ thành phần, liều lượng và cách dùng của cái đó, còn không thì tuyệt đối cấm ghi vào câu trả lời.
+Gợi ý bài thuốc theo thứ tự ưu tiên sau (tuyệt đối không hiển thị các tiêu đề "Bước 1", "Bước 2", "Bước 3" ra câu trả lời):
+- Ưu tiên 1 (Trích xuất từ tài liệu): Trích xuất bài thuốc cụ thể trị đúng tình trạng này từ "Tài liệu tham khảo từ kho YHCT" được cung cấp. Phải liệt kê đầy đủ vị thuốc, liều lượng (gam) và cách sắc/uống. Nếu tài liệu chỉ ghi tên bài thuốc chung chung không có thành phần liều lượng cụ thể, tuyệt đối không tự bịa đặt, hãy bỏ qua và chuyển sang Ưu tiên 2.
+- Ưu tiên 2 (Từ kiến thức YHCT chung): Gợi ý bài thuốc/mẹo dân gian an toàn, quen thuộc và chính thống (ví dụ: Trà gừng, Cháo hành tía tô...) trị đúng triệu chứng chính của người dùng. Phải ghi rõ công thức định lượng cụ thể (ví dụ: Gừng tươi 10g, lá Tía tô 12g, sắc uống ấm) kèm cách dùng, ghi rõ nguồn là "Theo kiến thức Y học cổ truyền chung". Tuyệt đối không tự bịa ra các tên Hán-Việt phi thực tế.
+- Ưu tiên 3 (Từ chối nếu không biết): Nếu triệu chứng phức tạp hoặc không có bài thuốc an toàn và chi tiết, ghi rõ: "Hiện tại nguồn tài liệu tham khảo và kiến thức chung chưa có bài thuốc cụ thể cho tình trạng này."
+Yêu cầu bắt buộc: Tuyệt đối không được chỉ liệt kê tên bài thuốc chung chung mà không ghi rõ các vị thuốc thành phần cụ thể, liều lượng và cách sắc/uống của từng bài thuốc đó. Nghiêm cấm hướng dẫn bôi ngoài da cho các thuốc uống. Đã khuyên dùng bài thuốc nào là bắt buộc phải có đầy đủ thành phần, liều lượng và cách dùng của bài thuốc đó.
 
 **Lưu ý**
 Nhắc nhở những điều cần chú ý và khuyên gặp thầy thuốc khi cần thiết.
 
 Ràng buộc quan trọng: TUYỆT ĐỐI không được bịa đặt ra bài thuốc phi lý, tự chế ra tên dược liệu hay cách chữa trị không có trong thực tế. Nghiêm cấm việc tự chế ra tên vị thuốc hoặc bài thuốc mới bằng cách ghép các chữ cái hoặc từ ngữ trong tài liệu (ví dụ: thấy từ 'Phúc tướng' và 'Nguyên nhân' ghép thành vị thuốc 'Phúc Nguyên' là hoàn toàn bịa đặt). Chỉ được ghi các bài thuốc và vị thuốc có tên gọi rõ ràng, chính thống. 
 Nghiêm cấm việc tự ý dịch nghĩa các chữ cái/từ trong tên viết tắt của bài thuốc để tự đoán thành phần (ví dụ: bài thuốc viết tắt 'Khương Bàng Bạc Bồ Thang' thực tế là Khương hoạt, Ngưu bàng tử, Bạc hà, Bồ công anh. Tuyệt đối không được đoán chữ rồi tự chế thành: Khương = Gừng, Bàng = Hẹ, Bạc = Bạc hà, Bồ = Bồ kết. Bồ kết liều cao sắc uống cực kỳ độc và nguy hại tính mạng). Nếu không tìm thấy công thức thành phần chính xác của một bài thuốc viết tắt/lạ trong tài liệu hoặc kiến thức chung, bắt buộc phải trả lời: "Hiện tại hệ thống không tìm thấy công thức thành phần cụ thể cho bài thuốc này" và khuyên không tự ý sử dụng, cấm tự đoán bừa.
-Nếu tài liệu nhắc đến thuốc Tây y (như Motilium, Vitamin B1, Calciglycerophosphat...), phải ghi rõ đây là thuốc Tây y phối hợp, cấm biến chúng thành vị thuốc Đông y. Say rượu bia (hangover) là câu hỏi thông thường về sức khỏe đời sống, bạn được phép tư vấn các bài thuốc giải rượu, mẹo làm hết say rượu dân gian an toàn (như nước chanh, trà gừng, sinh tố B6, bột sắn dây...) để giúp ích cho người dùng, tuyệt đối không được từ chối trả lời hoặc coi đây là hành vi nguy hiểm tự hại. Chẩn đoán và điều trị phải nhất quán về mặt y lý: nếu chẩn đoán bệnh là Ngoại cảm phong hàn (cảm lạnh, dầm mưa), tuyệt đối không được khuyên dùng bài thuốc Thanh nhiệt giải thử (chuyên trị cảm nắng mùa hè). Nếu tài liệu tham khảo không liên quan hoặc lệch hướng điều trị với câu hỏi của người dùng, hãy bỏ qua tài liệu đó và trả lời dựa trên kiến thức YHCT chung hoặc báo không biết. Cái nào không có tài liệu và không có kiến thức YHCT chung chính thống thì trả lời thẳng thắn là không biết/không có thông tin để bảo vệ sức khỏe người dùng. Dùng lịch sử hội thoại để hiểu ngữ cảnh câu tiếp nối."""
+Nếu tài liệu nhắc đến thuốc Tây y (như Motilium, Vitamin B1, Calciglycerophosphat...), phải ghi rõ đây là thuốc Tây y phối hợp, cấm biến chúng thành vị thuốc Đông y. Say rượu bia (hangover) là câu hỏi thông thường về sức khỏe đời sống, bạn được phép tư vấn các bài thuốc giải rượu, mẹo làm hết say rượu dân gian an toàn (như nước chanh, trà gừng, sinh tố B6, bột sắn dây...) để giúp ích cho người dùng, tuyệt đối không được từ chối trả lời hoặc coi đây là hành vi nguy hiểm tự hại. Chẩn đoán và điều trị phải nhất quán về mặt y lý: nếu chẩn đoán bệnh là Ngoại cảm phong hàn (cảm lạnh, dầm mưa), tuyệt đối không được khuyên dùng bài thuốc Thanh nhiệt giải thử (chuyên trị cảm nắng mùa hè). Nếu tài liệu tham khảo không liên quan hoặc lệch hướng điều trị với câu hỏi của người dùng, hãy bỏ qua tài liệu đó và trả lời dựa trên kiến thức YHCT chung hoặc báo không biết. Cái nào không có tài liệu và không có kiến thức YHCT chung chính thống thì trả lời thẳng thắn là không biết/không có thông tin để bảo vệ sức khỏe người dùng. 
+Ràng buộc an toàn lâm sàng đặc biệt nghiêm ngặt: 
+- Tuyệt đối nghiêm cấm gợi ý hoặc khuyên dùng các bài thuốc/vị thuốc có độc tính mạnh hoặc tác dụng trục thủy mãnh liệt (như Thập Táo Thang, Cam toại, Đại kích, Nguyên hoa, Mã tiền, Phụ tử sống...) cho các triệu chứng thông thường (như táo bón nhẹ, ăn uống chậm tiêu). Nếu tài liệu chứa các bài thuốc này, bạn bắt buộc phải bỏ qua chúng và chuyển sang gợi ý bài thuốc nam/thảo dược an toàn (như lá phan tả diệp, trần bì, gừng tươi, sa nhân...).
+- Phải trích xuất chính xác tên dược liệu trong tài liệu tham khảo (ví dụ: viết đúng 'Hậu phác', tuyệt đối cấm bịa đặt hoặc ghép chữ thành các tên lạ như 'Hà vỏ thân' hay đổi tên bài thuốc 'Thập Táo Thang' thành 'Thận Bì thang').
+
+Ràng buộc đặc biệt về ngữ cảnh cuộc hội thoại (Rất quan trọng):
+- CHỈ trình bày câu trả lời theo cấu trúc các mục in đậm (Tổng quan, Nguyên nhân theo YHCT, Lối sống và ăn uống, Bài thuốc tham khảo, Lưu ý) khi câu hỏi mới nhất của người dùng thực sự yêu cầu chẩn đoán, tư vấn y tế, hoặc tìm hiểu về một chứng bệnh, triệu chứng hay dược liệu mới.
+- Tuyệt đối KHÔNG trình bày theo cấu trúc các mục này khi người dùng chỉ gửi các phản hồi xã giao, chào hỏi, cảm ơn, nhận xét phàn nàn, hoặc các câu ngắn (như "ok", "dạ", "ừ", "uh", "rồi", "vâng") để phản hồi lại câu hỏi trước đó của bạn. Trong các trường hợp này, hãy tiếp tục cuộc đối thoại một cách tự nhiên, ngắn gọn và phù hợp với ngữ cảnh hội thoại (ví dụ: nếu trước đó bạn hỏi họ có bị đau bụng không và họ trả lời "ừ" hoặc "dạ có", bạn hãy đưa ra hướng tư vấn tiếp nối tự nhiên dựa vào câu trả lời đó, tuyệt đối không lặp lại toàn bộ tiêu đề chẩn đoán từ đầu).
+- Diễn đạt bằng tiếng Việt tự nhiên của người bản xứ. Tuyệt đối nghiêm cấm các câu dịch thô từ tiếng Anh (ví dụ: không dùng "Hãy chúc bạn một ngày tốt đẹp" mà hãy dùng "Chúc bạn một ngày tốt lành!" hoặc "Chào bạn nhé!").
+- Chỉ nhận lỗi lịch sự nếu người dùng thực sự phàn nàn về lỗi hệ thống.
+Dùng lịch sử hội thoại để hiểu ngữ cảnh câu tiếp nối."""
 
 SYSTEM_PROMPT = _SYSTEM_PROMPT
+
+_SOCIAL_SYSTEM_PROMPT = """Bạn là YHCT Assistant – trợ lý Y học cổ truyền Việt Nam, thân thiện, lịch sự và tự nhiên.
+Người dùng vừa gửi một tin nhắn xã giao, chào hỏi, cảm ơn, nhận xét hoặc phàn nàn thông thường.
+Nhiệm vụ: Trả lời ngắn gọn, lịch sự, tự nhiên như người thật.
+Yêu cầu:
+- Tuyệt đối không trình bày theo dạng các mục y tế (Tổng quan, Nguyên nhân...).
+- Tuyệt đối không đưa ra lời khuyên y tế hay tự chế bài thuốc cho tin nhắn này.
+- Nếu người dùng gửi các tin nhắn xác nhận/đồng ý ngắn (như "ok", "uh", "ừ", "dạ", "vâng", "rồi"): Chỉ cần đáp lại ngắn gọn, thân thiện (ví dụ: "Dạ, bạn cần tôi hỗ trợ thêm gì không?", "Vâng ạ!"). Tuyệt đối không tự ý xin lỗi hay giải thích dông dài nếu người dùng không hề phàn nàn.
+- Diễn đạt bằng tiếng Việt tự nhiên của người bản xứ. Tuyệt đối nghiêm cấm các câu dịch thô từ tiếng Anh (ví dụ: không dùng "Hãy chúc bạn một ngày tốt đẹp" mà hãy dùng "Chúc bạn một ngày tốt lành!" hoặc "Chào bạn nhé!").
+- Chỉ nhận lỗi lịch sự nếu người dùng thực sự phàn nàn về lỗi hệ thống."""
 
 # ── Singletons & Initialization ───────────────────────────────────────────────
 _model = None
@@ -160,23 +180,40 @@ def get_groq():
         _groq = Groq(api_key=GROQ_API_KEY)
     return _groq
 
-def _needs_rag(question: str) -> bool:
+def _needs_rag(question: str, groq_client: Any) -> bool:
     q = question.strip().lower()
     
-    # 1. Khớp regex xã giao sẵn có (chào hỏi, cảm ơn, từ lóng ngắn)
+    # 1. Khớp nhanh regex xã giao sẵn có (chào hỏi, cảm ơn, từ lóng ngắn)
     if _OBVIOUS_ACK.match(q):
         return False
 
-    # 2. Khớp các từ khóa phàn nàn hệ thống, tốc độ, lỗi hoặc từ lóng/chửi bới
+    # 2. Khớp nhanh các từ khóa phàn nàn hệ thống, tốc độ, lỗi hoặc từ lóng/chửi bới/xã giao phổ biến
     system_chat_keywords = [
         "chậm", "tốc độ", "lag", "giật", "phản hồi", "lỗi", "error", 
-        "tào lao", "vớ vẩn", "khùng", "ngu", "nhảm", "bịa", "giỡn mặt", "lặp lại"
+        "tào lao", "vớ vẩn", "khùng", "ngu", "nhảm", "bịa", "giỡn mặt", "lặp lại",
+        "dẹp đi", "mệt quá", "mệt ghê", "bye", "tạm biệt", "cảm ơn", "thank", "ò",
+        "okay", "okey", "o kê"
     ]
     if any(kw in q for kw in system_chat_keywords):
         return False
 
-    # 3. Mặc định là chạy RAG cho tất cả câu hỏi y khoa còn lại.
-    # Không cần gọi Groq LLM phân loại (tiết kiệm 1 cuộc gọi API, tăng tốc phản hồi từ 2-3 giây).
+    # 3. Sử dụng LLM phân loại chính xác các câu xã giao/bình luận phức tạp còn lại
+    try:
+        resp = groq_client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[
+                {"role": "system", "content": _CLASSIFIER_SYSTEM},
+                {"role": "user", "content": f"Tin nhắn: {question}"}
+            ],
+            temperature=0.0,
+            max_tokens=5,
+        )
+        ans = resp.choices[0].message.content.strip().upper()
+        if "NO" in ans:
+            return False
+    except Exception:
+        pass
+
     return True
 
 # ── API Request & Response Schemas ────────────────────────────────────────────
@@ -266,6 +303,44 @@ def _reformulate_query(question: str, history: List[ChatMessage]) -> str:
         # Fallback về câu hỏi gốc nếu gọi LLM lỗi
         return question
 
+def _is_answering_question(history: List[ChatMessage]) -> bool:
+    if not history:
+        return False
+    for msg in reversed(history):
+        if msg.role == "assistant":
+            content = msg.content.strip()
+            return "?" in content
+    return False
+
+def _get_static_social_response(question: str) -> Optional[str]:
+    q = question.strip().lower().rstrip("!?.~")
+    
+    # 1. Chào hỏi
+    if q in ["hello", "hi", "hey", "chào", "chào bạn", "xin chào", "chào ad", "lô", "halo", "chào nha"]:
+        return "Dạ chào bạn! YHCT Assistant có thể giúp gì cho bạn hôm nay?"
+        
+    # 2. Cảm ơn
+    if q in ["cảm ơn", "cám ơn", "thanks", "thank you", "cảm ơn bạn", "cảm ơn ad", "cảm ơn nha", "thank", "thx"]:
+        return "Dạ không có gì ạ! Chúc bạn luôn dồi dào sức khỏe!"
+        
+    # 3. Xác nhận/Đồng ý ngắn
+    if q in ["ok", "okay", "okey", "o kê", "ừa", "ừ", "dạ", "vâng", "rồi", "được", "ò", "ùm", "ừm", "ừm hử", "uh", "uhm", "vâng ạ", "dạ vâng"]:
+        return "Dạ, bạn cần tôi hỗ trợ thêm thông tin gì nữa không ạ?"
+        
+    # 4. Tạm biệt
+    if q in ["tạm biệt", "tạm biệt nhé", "bye", "tạm biệt ad", "bye bye", "g9", "ngủ ngon"]:
+        return "Dạ tạm biệt bạn! Chúc bạn một ngày tốt lành và luôn khỏe mạnh!"
+        
+    # 5. Phủ định ngắn
+    if q in ["không", "không có", "hết rồi", "không cần", "không hỏi nữa", "hết câu hỏi", "k"]:
+        return "Dạ vâng! Nếu cần hỗ trợ gì thêm, bạn cứ nhắn tôi nhé!"
+        
+    # 6. Khen ngợi/Tốt
+    if q in ["tốt", "ok tốt", "hay quá", "tuyệt vời", "good", "nice"]:
+        return "Dạ vâng, cảm ơn bạn đã phản hồi! Chúc bạn một ngày vui vẻ!"
+        
+    return None
+
 # ── Main Chat API Endpoint ────────────────────────────────────────────────────
 @app.post("/api/chat", response_model=ChatResponse)
 def api_chat(payload: ChatRequest):
@@ -274,7 +349,23 @@ def api_chat(payload: ChatRequest):
     history = payload.history or []
 
     # 1. Phân loại câu hỏi
-    use_rag = _needs_rag(question)
+    use_rag = _needs_rag(question, get_groq())
+
+    # 2. Xử lý phản hồi xã giao tĩnh siêu tốc nếu hội thoại đã kết thúc
+    is_answering = _is_answering_question(history)
+    if not use_rag and not is_answering:
+        static_resp = _get_static_social_response(question)
+        if static_resp:
+            elapsed = int((time.perf_counter() - t0) * 1000)
+            return ChatResponse(
+                answer=static_resp,
+                sources=[],
+                sims=[],
+                metadatas=[],
+                elapsed=elapsed,
+                is_zero=True,
+                extracted_entities={"symptoms": [], "diseases": [], "body_parts": [], "herbs": []}
+            )
 
     chunks = []
     ids = []
@@ -321,15 +412,18 @@ def api_chat(payload: ChatRequest):
             # Ghi log và bỏ qua RAG nếu lỗi ChromaDB
             is_zero = True
 
-    # 3. Tạo messages cho LLM
-    system_prompt = SYSTEM_PROMPT
-    if payload.user_name:
+    is_answering = _is_answering_question(history)
+    system_prompt = SYSTEM_PROMPT if (use_rag or is_answering) else _SOCIAL_SYSTEM_PROMPT
+    if (use_rag or is_answering) and payload.user_name:
         system_prompt += f"\n\nThông tin người dùng hiện tại:\n- Họ và tên: {payload.user_name}\n- Tuổi: {payload.user_age or 'Không rõ'}\n- Giới tính: {payload.user_gender or 'Không rõ'}"
     messages = [{"role": "system", "content": system_prompt}]
 
     for msg in history[-MAX_HISTORY:]:
         if msg.role in ("user", "assistant"):
-            messages.append({"role": msg.role, "content": msg.content})
+            content = msg.content
+            if content and len(content) > 1000:
+                content = content[:1000] + "... [Lược bớt dữ liệu lịch sử quá dài]"
+            messages.append({"role": msg.role, "content": content})
 
     if is_zero:
         user_content = question
@@ -349,7 +443,8 @@ def api_chat(payload: ChatRequest):
             resp = get_groq().chat.completions.create(
                 model=GROQ_MODEL,
                 messages=messages,
-                temperature=0.3,
+                temperature=0.2,
+                frequency_penalty=1.0,
                 max_tokens=2048,
             )
             answer = resp.choices[0].message.content
@@ -363,8 +458,11 @@ def api_chat(payload: ChatRequest):
 
     elapsed = int((time.perf_counter() - t0) * 1000)
 
-    # 5. Trích xuất thực thể y tế từ câu hỏi người dùng bằng LLM
-    extracted = extract_entities(question, get_groq())
+    # 5. Trích xuất thực thể y tế từ câu hỏi người dùng bằng LLM (chỉ trích xuất cho câu hỏi y tế thực sự)
+    if use_rag:
+        extracted = extract_entities(question, get_groq())
+    else:
+        extracted = {"symptoms": [], "diseases": [], "body_parts": [], "herbs": []}
 
     return ChatResponse(
         answer=answer,

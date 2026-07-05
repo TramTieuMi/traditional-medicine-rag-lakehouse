@@ -55,13 +55,58 @@ router.post('/event', optionalAuth, async (req, res) => {
     const finalBrowser = browser || agent.toAgent();
     const finalOs = os || agent.os.toString();
 
-    // Mock GeoIP (thực tế sẽ dùng thư viện geoip-lite hoặc maxmind)
+    // GeoIP lookup based on real IP address
     let country = 'Vietnam';
-    let city = 'Hanoi';
-    if (clientIp && clientIp !== '127.0.0.1' && clientIp !== '::1' && clientIp !== '::ffff:127.0.0.1') {
-      // Phân tích IP thật ở đây nếu cần, tạm thời gán mặc định cho localhost/local network
-      city = 'Ho Chi Minh City';
+    let city = 'Ho Chi Minh City';
+
+    const isPrivateIp = (ip) => {
+      if (!ip) return true;
+      const clean = ip.trim();
+      return clean === '127.0.0.1' || 
+             clean === '::1' || 
+             clean.startsWith('10.') || 
+             clean.startsWith('192.168.') || 
+             clean.startsWith('172.') || 
+             clean.startsWith('::ffff:172.') ||
+             clean.startsWith('::ffff:192.168.') ||
+             clean.startsWith('::ffff:10.');
+    };
+
+    const queryIp = clientIp ? clientIp.split(',')[0].trim() : '';
+
+    if (queryIp && !isPrivateIp(queryIp)) {
+      try {
+        // Fetch location details from ip-api.com with 3-second timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        const geoResponse = await fetch(`http://ip-api.com/json/${queryIp}?fields=status,country,city`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (geoResponse.ok) {
+          const geoData = await geoResponse.json();
+          if (geoData.status === 'success') {
+            country = geoData.country || 'Vietnam';
+            city = geoData.city || 'Ho Chi Minh City';
+          }
+        }
+      } catch (err) {
+        console.error('[GeoIP Error] Failed to resolve IP:', queryIp, err.message);
+      }
+    } else {
+      // Localhost/Private Network fallback
+      city = 'Hanoi';
     }
+
+    console.log('[DEBUG GEOIP]', {
+      clientIp,
+      queryIp,
+      isPrivate: isPrivateIp(queryIp),
+      country,
+      city
+    });
 
     const userId = req.user ? req.user.id : null;
 
