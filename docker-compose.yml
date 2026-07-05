@@ -265,6 +265,9 @@ services:
       CHROMA_HOST: chromadb
       CHROMA_PORT: "8000"
       GROQ_API_KEY: ${GROQ_API_KEY}
+    volumes:
+      - ./ai_service:/app
+      - C:/Users/DELL/.cache/huggingface:/root/.cache/huggingface
     depends_on:
       - chromadb
     networks:
@@ -303,6 +306,9 @@ services:
     environment:
       VITE_BACKEND_URL: https://smirk-video-attest.ngrok-free.dev
       VITE_MINIO_PUBLIC_URL: https://smirk-video-attest.ngrok-free.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     networks:
       - yhct_network
     restart: unless-stopped
