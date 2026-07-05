@@ -30,7 +30,7 @@ def parse_conversation_messages(messages_json_str):
 def write_to_postgres(df_gold: pl.DataFrame, table_name: str, context):
     try:
         import sqlalchemy
-        from sqlalchemy import Date, DateTime
+        from sqlalchemy import Date, DateTime, text
         
         dtypes = {}
         if table_name == "gold_user_engagement":
@@ -41,8 +41,18 @@ def write_to_postgres(df_gold: pl.DataFrame, table_name: str, context):
             dtypes = {"timestamp": DateTime}
 
         engine = sqlalchemy.create_engine(SUPERSET_DB_URI)
-        df_gold.to_pandas().to_sql(name=table_name, con=engine, if_exists="replace", index=False, dtype=dtypes)
-        context.log.info(f"✅ Đã ghi {table_name} vào PostgreSQL ({df_gold.shape[0]} rows).")
+        
+        # Thử Truncate bảng trước để tránh lỗi Drop Table khi có View phụ thuộc
+        try:
+            with engine.begin() as conn:
+                conn.execute(text(f"TRUNCATE TABLE {table_name}"))
+            df_gold.to_pandas().to_sql(name=table_name, con=engine, if_exists="append", index=False, dtype=dtypes)
+            context.log.info(f"✅ Đã ghi {table_name} (TRUNCATE + APPEND) vào PostgreSQL ({df_gold.shape[0]} rows).")
+        except Exception as truncate_err:
+            context.log.warning(f"⚠️ Truncate thất bại ({truncate_err}), chuyển sang replace...")
+            df_gold.to_pandas().to_sql(name=table_name, con=engine, if_exists="replace", index=False, dtype=dtypes)
+            context.log.info(f"✅ Đã ghi {table_name} (REPLACE) vào PostgreSQL ({df_gold.shape[0]} rows).")
+            
     except Exception as e:
         context.log.error(f"❌ Lỗi ghi {table_name} vào PostgreSQL: {e}")
 
