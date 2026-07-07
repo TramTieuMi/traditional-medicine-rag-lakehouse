@@ -2,6 +2,7 @@ import json
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
@@ -15,7 +16,8 @@ CHROMA_HOST  = os.getenv("CHROMA_HOST", "chromadb")
 CHROMA_PORT  = int(os.getenv("CHROMA_PORT", "8000"))
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 EMBED_MODEL  = "keepitreal/vietnamese-sbert"
-GROQ_MODEL   = "llama-3.1-8b-instant"
+GROQ_MODEL   = "llama-3.3-70b-versatile"   # model trả lời chính, cần đủ mạnh để không lẫn chủ đề trong tài liệu RAG
+FAST_MODEL   = "llama-3.1-8b-instant"      # model nhỏ cho các bước phụ (phân loại, viết lại câu hỏi, trích xuất thực thể)
 COLLECTION   = "yhct_chunks"
 TOP_K        = 5
 MIN_SIM      = 0.30
@@ -55,7 +57,7 @@ def extract_entities(question: str, groq_client: Any) -> Dict[str, List[str]]:
         return _empty
     try:
         resp = groq_client.chat.completions.create(
-            model=GROQ_MODEL,
+            model=FAST_MODEL,
             messages=[{
                 "role": "user",
                 "content": _ENTITY_EXTRACT_PROMPT.format(question=question.strip()),
@@ -155,6 +157,7 @@ Yêu cầu:
 _model = None
 _col   = None
 _groq  = None
+_executor = ThreadPoolExecutor(max_workers=8)  # chạy song song các lệnh gọi Groq độc lập, giảm độ trễ
 
 def get_model():
     global _model
@@ -200,7 +203,7 @@ def _needs_rag(question: str, groq_client: Any) -> bool:
     # 3. Sử dụng LLM phân loại chính xác các câu xã giao/bình luận phức tạp còn lại
     try:
         resp = groq_client.chat.completions.create(
-            model=GROQ_MODEL,
+            model=FAST_MODEL,
             messages=[
                 {"role": "system", "content": _CLASSIFIER_SYSTEM},
                 {"role": "user", "content": f"Tin nhắn: {question}"}
@@ -242,6 +245,11 @@ class ChatResponse(BaseModel):
     elapsed: int
     is_zero: bool
     extracted_entities: ExtractedEntities
+
+# ── Startup: nạp trước model embedding để request đầu tiên không bị chờ lâu ────
+@app.on_event("startup")
+def _preload_model():
+    _executor.submit(get_model)
 
 # ── Health Endpoint ───────────────────────────────────────────────────────────
 @app.get("/health")
@@ -288,7 +296,7 @@ def _reformulate_query(question: str, history: List[ChatMessage]) -> str:
 
     try:
         resp = get_groq().chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model=FAST_MODEL,
             messages=[
                 {"role": "system", "content": "You are a query rewriter."},
                 {"role": "user", "content": prompt}
@@ -348,8 +356,11 @@ def api_chat(payload: ChatRequest):
     question = payload.query
     history = payload.history or []
 
-    # 1. Phân loại câu hỏi
-    use_rag = _needs_rag(question, get_groq())
+    # 1. Phân loại câu hỏi + viết lại câu tìm kiếm song song (2 lệnh gọi Groq độc lập,
+    # chạy song song thay vì tuần tự để giảm độ trễ; nếu không cần RAG thì kết quả viết lại bị bỏ qua)
+    fut_use_rag = _executor.submit(_needs_rag, question, get_groq())
+    fut_search_query = _executor.submit(_reformulate_query, question, history)
+    use_rag = fut_use_rag.result()
 
     # 2. Xử lý phản hồi xã giao tĩnh siêu tốc nếu hội thoại đã kết thúc
     is_answering = _is_answering_question(history)
@@ -377,8 +388,8 @@ def api_chat(payload: ChatRequest):
     # 2. Truy vấn RAG nếu cần thiết
     if use_rag:
         try:
-            # Viết lại câu hỏi thành câu tìm kiếm độc lập dựa trên ngữ cảnh lịch sử
-            search_query = _reformulate_query(question, history)
+            # Lấy kết quả viết lại câu hỏi đã chạy song song ở bước 1
+            search_query = fut_search_query.result()
             q_vec = get_model().encode([search_query])[0].tolist()
             results = get_collection().query(
                 query_embeddings=[q_vec],
@@ -435,7 +446,11 @@ def api_chat(payload: ChatRequest):
         )
     messages.append({"role": "user", "content": user_content})
 
-    # 4. Gọi LLM sinh câu trả lời (retry tối đa 3 lần nếu rate limit)
+    # 4. Trích xuất thực thể y tế chạy song song với bước sinh câu trả lời chính (không phụ thuộc vào
+    # câu trả lời nên không cần chờ tuần tự), chỉ trích xuất cho câu hỏi y tế thực sự
+    fut_entities = _executor.submit(extract_entities, question, get_groq()) if use_rag else None
+
+    # 5. Gọi LLM sinh câu trả lời (retry tối đa 3 lần nếu rate limit)
     answer = None
     last_err = None
     for attempt in range(3):
@@ -458,11 +473,7 @@ def api_chat(payload: ChatRequest):
 
     elapsed = int((time.perf_counter() - t0) * 1000)
 
-    # 5. Trích xuất thực thể y tế từ câu hỏi người dùng bằng LLM (chỉ trích xuất cho câu hỏi y tế thực sự)
-    if use_rag:
-        extracted = extract_entities(question, get_groq())
-    else:
-        extracted = {"symptoms": [], "diseases": [], "body_parts": [], "herbs": []}
+    extracted = fut_entities.result() if fut_entities else {"symptoms": [], "diseases": [], "body_parts": [], "herbs": []}
 
     return ChatResponse(
         answer=answer,
